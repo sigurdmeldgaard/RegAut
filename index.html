@@ -1,0 +1,261 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<title>EVU RegAut</title>
+<link rel="shortcut icon" href="http://www.daimi.au.dk/~amoeller/au/favicon.ico"/>
+<link href="http://www.daimi.au.dk/~amoeller/au/au.css" rel="stylesheet" type="text/css"/>
+<link href="http://www.daimi.au.dk/~amoeller/au/au-print.css" rel="stylesheet" type="text/css" media="print"/>
+<script type="text/javascript">
+<!--
+var deadline1 = new Date("June 9, 2008 9:00:00");
+function setContent(name, value) {
+  var d;  
+  if (document.all) { 
+    d = document.all[name];
+  } else {
+    d = document.getElementById(name);
+  }       
+  d.innerHTML = value;    
+}
+function countdown() {
+  d = new Date();
+  count = Math.floor((deadline1.getTime()-d.getTime())/1000);
+  if(count<=0) {
+    setContent("TIMER", "");
+  } else {
+    setContent("SECONDS", count%60);
+    count = Math.floor(count/60);
+    setContent("MINUTES", count%60);
+    count = Math.floor(count/60);
+    setContent("HOURS", count%24);
+    count = Math.floor(count/24);
+    setContent("DAYS", count);
+  }
+  setTimeout("countdown()", 1000);
+}
+-->
+</script>
+</head>
+<body><!-- onload="countdown()" -->
+<div id="border">
+<div id="header"></div>
+<div id="header-bar"></div>
+<div id="navigation">
+
+<a href="http://www.daimi.au.dk/">Datalogisk Institut</a> » <a href="http://www.daimi.au.dk/courses">Kurser</a> » EVU RegAut
+</div>
+
+<div id="menu">
+<h3>EVU RegAut</h3>
+<ul>
+<li class="selected">Kursusforside</li>
+<li><a href="http://services.brics.dk/java/courseadmin/dRegAut/students.html">Studerende</a></li>
+
+<!-- <li><a href="https://services.brics.dk/java/courseadmin/dRegAut/webboard/">Webboard</a></li> -->
+<!-- <li><a href="https://services.brics.dk/java/courseadmin/dRegAut/login/">Log ind</a></li> -->
+</ul>
+</div>
+
+<div id="main">
+<h1>EVU - Regularitet &amp; Automater</h1>
+
+<p>
+  <i>Forår 2009, 5 ECTS</i>
+
+</p>
+<h2>Indhold</h2>
+<p>Kurset vil dække følgende emner:</p>
+<ul>
+  <li>endelige automater, regulære udtryk og regulære grammatikker</li>
+  <li>egenskaber ved disse, bl.a. ækvivalens og begrænsninger</li>
+  <li>relation til mere generelle beregningsmodeller som kontekst-fri grammatikker og Turingmaskiner</li>
+  <li>bevisteknikker</li>
+  <li>eksempler på praktiske anvendelser</li>
+</ul>
+<h3>Læringsmål</h3>
+<p>Deltagerne skal ved afslutningen af kurset kunne:</p>
+<ul>
+  <li>
+<b>definere</b> den basale terminologi (strenge, sprog, klasser af sprog, samt basale operationer på
+disse).
+  </li>
+  <li>
+  <b>beskrive</b> basale abstrakte sprogformalismer (regulære udtryk, endelige automater, regulære
+grammatikker, kontekstfri grammatikker) - fra intuitivt niveau og konkrete eksempler til formel
+notation og generelle definitioner.
+  </li>
+  <li>
+<b>beskrive</b> egenskaber ved formalismerne, bl.a. ækvivalens, begrænsninger og
+beslutningsprocedurer.
+  </li>
+  <li>
+<b>forklare</b> og <b>udføre</b> algoritmer, der oversætter mellem formalismerne eller afgør
+beslutningsproblemer - fra konkrete eksempler til generelle og formelle beskrivelser.
+  </li>
+  <li>
+<b>bevise</b> og <b>analysere</b> egenskaber ved formalismerne (ved hjælp af konstruktive beviser og
+induktionsbeviser) - fra intuitivt niveau til formelle detaljer.
+  </li>
+</ul>
+<p>Eksamen vil vurdere i hvor høj grad kursisten besidder disse kompetencer. </p>
+<h3>Forudsætning</h3>
+<p>Enkeltfaget forudsætter at kursisten har fulgt faget ”Diskret matematik”.</p>
+
+<h2>Tid og sted</h2>
+<h3>Seminarer</h3>
+<p>
+  Undervisningen vil foregå som heldagsseminarer som vil indeholde en
+  blanding af forelæsning, opgaveløsning og diskussion.
+</p>
+<ul>
+  <li>
+    Lørdag 24/1 2009 kl. 9-16 
+  </li>
+  <li>
+    Lørdag 7/2 2009 9-16
+  </li>
+  <li>
+    Lørdag 28/2 2009 9-16
+  </li>
+</ul>
+<p>
+  Desuden vil der blive stillet en ugentlig opgave.
+</p>
+<p>
+Alle gange i <a href="http://alex.daimi.au.dk:8080/ereception/browser.jsp?s=shannon+157">Shannon 157</a>.
+</p>
+<h3>Forelæser</h3>
+
+<p>
+
+<a href="http://www.daimi.au.dk/~amoeller">Sigurd Meldgaard</a>
+&lt;<a href="mailto:stm@cs.au.dk">stm@cs.au.dk</a>&gt;
+</p>
+
+<h3>Kursusplan</h3>
+
+<table class="schedule"> 
+<tr><th>Uge</th><th>Dato</th><th>Seminar</th><th>Emner, slides og opgaver</th></tr> 
+
+<tr>
+  <td class="entry">4</td> 
+  <td class="entry">24/1 2009</td> 
+  <td><b>Introduktion, Regulære udtryk</b> [Martin, kap. 1.5, 3.1-3.5] <br/> 
+  (Læs desuden [Martin kap. 1-2] efter behov i løbet af de første uger af kurset.)<br/> 
+  <!--
+      <a href="1-regexp.pdf">Slides</a> (<a href="1-regexp-4up.pdf">til print</a>)<br/>
+      <a href="uge16.html">Opgaver</a><br/>
+      <a href="induction.pdf">Supplerende note om strukturel induktion</a>
+      --> 
+ 
+  </td>
+  <td>Slides....</td>
+</tr>
+<tr>
+  <td class="entry">5</td>
+  <td></td><td></td><td></td>
+</tr>
+<tr>
+  <td class="entry">6</td> 
+  <td class="entry">07/2 2009</td> 
+<td><b>XXX</b> [Martin, kap. XXX] <br/> 
+XXX<br/> 
+</td>
+<td>Slides....</td>
+</tr>
+<tr>
+  <td class="entry">7</td>
+  <td></td><td></td><td></td>
+</tr>
+<tr>
+  <td class="entry">8</td>
+  <td></td><td></td><td></td>
+</tr>
+
+<tr>
+  <td class="entry">9</td> 
+  <td class="entry">28/2 2009</td> 
+  <td><b>XXX</b> [Martin, kap. XXX] <br/> 
+XXX<br/> 
+ 
+</td>
+<td>Slides....</td>
+</tr> 
+ 
+</table> 
+<p> 
+
+Opgaver og forelæsnings-slides vil løbende blive tilgængelige ovenfor.
+</p>
+ 
+<h3>Materiale</h3> 
+ 
+<p>
+Kurset tager udgangspunkt i bogen
+</p>
+<table border="0" cellspacing="2" cellpadding="2"> 
+<tr> 
+ <td valign="top" rowspan="4"><a href="http://books.mcgraw-hill.com/cgi-bin/pbg/0072322004"><img src="http://www.daimi.au.dk/dRegAut/martin.jpg" height="93" width="75" border="0" alt=""/></a></td> 
+ <td>John Martin</td> 
+</tr> 
+<tr><td><a href="http://books.mcgraw-hill.com/cgi-bin/pbg/0072322004"><i>Introduction to Languages and the Theory of Computation</i></a></td></tr> 
+<tr><td>3. udgave, McGraw-Hill, 2002</td></tr> 
+
+<tr><td>ISBN: 0071198547 eller 0072322004</td></tr> 
+</table> 
+ 
+<p>En liste af <a href="errata.html">trykfejl</a>.</p>
+ 
+<p>Bogen kan købes i
+<a href="http://www.stakbogladen.com/">Stakbogladen Naturfag</a> (kr. 650,- minus 10% studierabat).
+<!--, <a href="http://books.mcgraw-hill.com/cgi-bin/pbg/0072322004">McGraw-Hill</a>, <a href="http://search.barnesandnoble.com/textbooks/booksearch/isbninquiry.asp?ISBN=0072322004">Barnes&amp;Noble</a>, <a href="http://www.amazon.com/exec/obidos/tg/detail/-/0072322004/">Amazon</a>--> 
+</p> 
+
+<p> 
+ Vi vil i løbet af kurset udvikle en 
+<a href="doc/index.html">software-pakke</a> i Java. Pakken stiller en samling
+operationer til rådighed, som er begrundet af praktiske
+anvendelser og samtidig baseret på de teoretiske resultater, der
+præsenteres på kurset.
+
+</p>
+ 
+<p> 
+<a href="https://www.daimi.au.dk/dRegAut/staff.html">Information til instruktorer.</a> 
+</p>
+ 
+<h3>Nyheder</h3> 
+
+<p> 
+Nyheder om kurset annonceres på <a href="https://services.brics.dk/java/courseadmin/login/init">webboard'et</a>,
+som også kan benyttes til diskussioner om opgaver og lignende.
+</p>
+ 
+<a name="eksamen"></a> 
+ 
+<h3>Eksamen</h3>
+<p>
+Mundtlig, ekstern censur, 7-trinsskala, 20 min. per person, uden forberedelsestid.
+</p>
+<p> 
+For at kunne indstilles til eksamen skal man have godkendt besvarelser
+af de obligatoriske opgaver.
+<!--
+Studerende kan se status af deres obligatoriske opgaver ved "Log in" øverst på denne side.
+--> 
+</p>
+<p> 
+<a href="eksamen.html">Pensum og eksamensspørgsmål.</a> 
+</p> 
+
+</div>
+
+<div id="footer">
+
+Sidst opdateret: 05. januar 2009, <a href="mailto:stm@cs.au.dk">stm@cs.au.dk</a>
+</div>
+
+</div>
+</body>
+</html>
