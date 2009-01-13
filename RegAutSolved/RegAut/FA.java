@@ -333,14 +333,14 @@ public class FA implements Cloneable {
 	if(! f1.alphabet.equals(f2.alphabet)){
 	    throw new IllegalArgumentException("Cannot do product construction of automata with different alphabets.");
 	}
-	FA product = new FA(f1.alphabet);
+	FA product = new FA();
+	product.alphabet = f1.alphabet;
+	Map<StatePair, State> newStates = new HashMap<StatePair, State>();
 	for(State i : f1.states){
 	    for(State j : f2.states){
 		State newState = new State("[" + i.name + ", " + j.name + "]");
-		if(i == f1.initial && j == f2.initial) {
-		    product.initial = newState;
-		}
 		product.states.add(newState);
+		newStates.put(new StatePair(i,j), newState);
 		switch(whatConstruct) {
 		case DIFFERENCE:
 		    if(f1.accept.contains(i) && !f2.accept.contains(j))
@@ -357,6 +357,14 @@ public class FA implements Cloneable {
 		}
 	    }
 	}
+	for(StatePair p : newStates.keySet()){
+	    for(Character c : f1. alphabet.symbols){
+		product.transitions.put(new StateSymbolPair(newStates.get(p), c),
+					newStates.get(new StatePair(f1.delta(p.s1, c),
+								    f2.delta(p.s2, c))));
+	    }
+	}
+	product.initial = newStates.get(new StatePair(f1.initial, f2.initial));
 	return product;
     }
 	    
