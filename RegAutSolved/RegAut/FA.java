@@ -189,7 +189,9 @@ public class FA implements Cloneable {
      * @exception IllegalArgumentException if <tt>c</tt> is not in the alphabet
      */
     public State delta(State q, char c) throws IllegalArgumentException {
-        throw new UnsupportedOperationException("method not implemented yet!");
+        if (!alphabet.symbols.contains(c))
+            throw new IllegalArgumentException("symbol '"+c+"' not in alphabet");
+        return transitions.get(new StateSymbolPair(q, c));
     }
     
     /**
@@ -198,7 +200,11 @@ public class FA implements Cloneable {
      * @exception IllegalArgumentException if a symbol in <tt>s</tt> is not in the alphabet
      */
     public State deltaStar(State q, String s) throws IllegalArgumentException {
-        throw new UnsupportedOperationException("method not implemented yet!");
+        // (Using recursion instead of iteration would have been closer to 
+        // the mathematical definition, but this code is simpler...)
+        for (char c : s.toCharArray()) 
+            q = delta(q,c);
+        return q;
     }
     
     /**
@@ -208,7 +214,8 @@ public class FA implements Cloneable {
      * @exception IllegalArgumentException if a symbol in <tt>s</tt> is not in the alphabet
      */
     public boolean accepts(String s) throws IllegalArgumentException {
-        throw new UnsupportedOperationException("method not implemented yet!");
+	State q = deltaStar(initial, s);
+	return accept.contains(q);
     }
     
     /** Pair of states. Used in product construction and in construction of regular expression. */
@@ -240,7 +247,7 @@ public class FA implements Cloneable {
     
     /** Converts this automaton into an equivalent {@link RegExp} regular expression. [Martin, Th. 4.5] */
     public RegExp toRegExp() {
-        throw new UnsupportedOperationException("method not implemented yet!");
+	throw new UnsupportedOperationException("method not implemented yet!");
     }
     
     /** 
@@ -248,7 +255,12 @@ public class FA implements Cloneable {
      * The input automaton is unmodified.
      */
     public FA complement() {
-        throw new UnsupportedOperationException("method not implemented yet!");
+        FA f = (FA) clone();
+        Set<State> s = new HashSet<State>();
+        s.addAll(f.states);
+        s.removeAll(f.accept);
+        f.accept = s;
+        return f;
     }
     
     /** Finds the set of states that are reachable from the initial state. */
@@ -257,8 +269,9 @@ public class FA implements Cloneable {
     }
     
     /** 
-     * Constructs a new automaton with the same language as this automaton but without unreachable states. [Martin, Exercise 3.29] 
-     * The input automaton is unmodified.
+     * Constructs a new automaton with the same language as this
+     * automaton but without unreachable states. [Martin, Exercise
+     * 3.29] The input automaton is unmodified.
      */
     public FA removeUnreachableStates() {
         throw new UnsupportedOperationException("method not implemented yet!");
@@ -311,6 +324,42 @@ public class FA implements Cloneable {
     public String getAShortestExample() { 
         throw new UnsupportedOperationException("method not implemented yet!");
     }
+
+    private enum Construct {DIFFERENCE, UNION, INTERSECTION}
+    
+    private FA product(FA other, Construct whatConstruct) throws IllegalArgumentException {
+	FA f1 = this;
+	FA f2 = other;
+	if(! f1.alphabet.equals(f2.alphabet)){
+	    throw new IllegalArgumentException("Cannot do product construction of automata with different alphabets.");
+	}
+	FA product = new FA(f1.alphabet);
+	for(State i : f1.states){
+	    for(State j : f2.states){
+		State newState = new State("[" + i.name + ", " + j.name + "]");
+		if(i == f1.initial && j == f2.initial) {
+		    product.initial = newState;
+		}
+		product.states.add(newState);
+		switch(whatConstruct) {
+		case DIFFERENCE:
+		    if(f1.accept.contains(i) && !f2.accept.contains(j))
+			product.accept.add(newState);
+		    break;
+		case UNION:
+		    if(f1.accept.contains(i) || f2.accept.contains(j))
+			product.accept.add(newState);
+		    break;
+		case INTERSECTION:
+		    if(f1.accept.contains(i) && f2.accept.contains(j))
+			product.accept.add(newState);
+		    break;
+		}
+	    }
+	}
+	return product;
+    }
+	    
     
     /**
      * Constructs a new automaton whose language is the intersection of the language of this automaton
@@ -319,7 +368,7 @@ public class FA implements Cloneable {
      * @exception IllegalArgumentException if the alphabets of <tt>f</tt> and this automaton are not the same
      */
     public FA intersection(FA f) throws IllegalArgumentException {
-        throw new UnsupportedOperationException("method not implemented yet!");
+	return product(f, Construct.INTERSECTION);
     }
     
     /**
@@ -330,7 +379,7 @@ public class FA implements Cloneable {
      * @see NFALambda#union
      */
     public FA union(FA f) throws IllegalArgumentException {
-        throw new UnsupportedOperationException("method not implemented yet!");
+	return product(f, Construct.UNION);
     }
     
     /**
@@ -340,6 +389,6 @@ public class FA implements Cloneable {
      * @exception IllegalArgumentException if the alphabets of <tt>f</tt> and this automaton are not the same
      */
     public FA minus(FA f) throws IllegalArgumentException {
-        throw new UnsupportedOperationException("method not implemented yet!");
+	return product(f, Construct.DIFFERENCE);
     }
 }
