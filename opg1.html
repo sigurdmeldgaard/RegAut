@@ -124,9 +124,9 @@ href="http://www.daimi.au.dk/~besen/RegAut/java/AutomatonNotWellDefinedException
 fundamentet for de kommende Java-opgaver.
 <p>
 Ovenstående dele refererer til følgende klasser, som gennemgåes i uge 8: 
-<tt><a href="http://www.daimi.au.dk/~besen/RegAut/java/NFA.java">NFA.java</a></tt>, 
-<tt><a href="http://www.daimi.au.dk/~besen/RegAut/java/NFALambda.java">NFALambda.java</a></tt>,
-<tt><a href="http://www.daimi.au.dk/~besen/RegAut/java/RegExp.java">RegExp.java</a></tt>
+<tt><a href="RegAut/NFA.java" type="text/x-java-source">NFA.java</a></tt>, 
+<tt><a href="RegAut/NFALambda.java" type="text/x-java-source">NFALambda.java</a></tt>,
+<tt><a href="RegAut/RegExp.java" type="text/x-java-source">RegExp.java</a></tt>
 </p>
 
 <p>
@@ -154,27 +154,34 @@ Implementer flg. metoder (ialt. ca. 80 linjers programkode):
 Bemærk at de sidste tre bygger på produktkonstruktionen, som derfor passende kan implementeres som en separat metode, 
 der anvender <tt>StatePair</tt> klassen i <tt>FA.java</tt>.
 <p>
-</p></li><li><b>J3</b>: Skriv en stump Java-kode, der gør som følger.
-  <ol> <li>bygger de to FA'er, der er vist i [Martin] Fig. 3.1 (b) og
-  (c), </li><li>laver <tt>union</tt>-automaten af de to FA'er - vi
-  kalder resultatet <i>M</i>, </li><li>checker med <tt>accepts</tt> at
-  strengene <tt>101001</tt> og <tt>1101</tt> bliver accepteret af
-  <i>M</i>, og at <img src="Lambda.gif" alt="Lambda"> og
-  <tt>1010</tt> <i>ikke</i> bliver accepteret, og </li><li>udskriver
-  <i>M</i> med <tt>toDot</tt>-metoden.  </li></ol> Resultatet fra
-  <tt>toDot</tt> kan oversættes til en postscript-fil med
-  "<tt>/users/btools/GraphViz/Linux/bin/dot -Tps input.dot -o
-  output.ps</tt>" (på en Linux-maskine på DAIMI) og derefter vises med
+</p>
+</li>
+<li>
+  <b>J3</b>: Skriv en stump Java-kode, der gør som følger.
+  <ol>
+    <li>bygger de to FA'er, der er vist i [Martin] Fig. 3.1 (b) og (c), </li>
+    <li>laver <tt>union</tt>-automaten af de to FA'er - vi
+    kalder resultatet <i>M</i>, </li>
+    <li>checker med <tt>accepts</tt> at strengene <tt>101001</tt> og <tt>1101</tt> bliver accepteret af
+    <i>M</i>, og at <img src="Lambda.gif" alt="Lambda"> og
+    <tt>1010</tt> <i>ikke</i> bliver accepteret, og </li>
+    <li>udskriver
+    <i>M</i> med <tt>toDot</tt>-metoden.</li>
+  </ol>
+  Resultatet fra
+  <tt>toDot</tt> kan oversættes til en png-fil med
+  "<tt>/users/btools/GraphViz/Linux/bin/dot -Tpng input.dot -o
+  output.png</tt>" (på en Linux-maskine på DAIMI) og derefter vises med
   "<tt>gv output.ps</tt>". Automaten skulle gerne se <a
   href="http://www.daimi.au.dk/dRegAut/J3.gif">sådan</a> ud (modulo
   ordning af tilstandene). Alternativt kan Graphviz værktøjet hentes
-  fra <a
-  href="http://www.graphviz.org/">AT&T</a> i
-  versioner til både Linux, Mac, og Windows.  </li> </ul>
+  fra <a href="http://www.graphviz.org/">AT&T</a> i
+  versioner til både Linux, Mac, og Windows.  </li>
+</ul>
 
 <h3>Obligatoriske afleveringsopgaver</h3>
 
-Der vil i løbet af kurset blive stillet 6 obligatoriske
+Der vil i løbet af kurset blive stillet 3 obligatoriske
 afleveringsopgaver i forbindelse med programmeringsprojektet. Det er
 tilladt at aflevere opgaverne i grupper af op til 3 personer.
 
@@ -188,15 +195,22 @@ Afleveringsfristen for første delopgave er
   årskortnummer!) 
 
 <p>
-<b>Første delopgave:</b>
+<b>Første afleveringsopgave:</b>
 </p>
 
-Lav en automatiseret løsning af [Martin, opg. 3.33 (e)] (s.117)
-vha. din egen <tt>FA.java</tt> implementation.  Skriv et
-veldokumenteret Java-program der konstruerer den ønskede automat ved
-hjælp af dRegAut-pakken. Vedlæg output som en tegning af automaten
-lavet med <tt>dot</tt>-værktøjet. (Husk også at vedlægge din løsning
-af opgave J2.)
+<p>
+  Lav en automatiseret løsning af [Martin, opg. 3.33 (e)] (s.117)
+  vha. din egen <tt>FA.java</tt> implementation.  Skriv et
+  veldokumenteret Java-program der konstruerer den ønskede automat ved
+  hjælp af dRegAut-pakken.
+</p>
+<p>Afleveringen skal bestå af:</p>
+<ul>
+  <li><tt>drawing.png</tt> Output som en tegning af automaten
+  lavet med <tt>dot</tt>-værktøjet. </li>
+<li><tt>FA.java</tt> Din løsning på opgave J2.</li>
+
+</ul>
 
 </div>
 
