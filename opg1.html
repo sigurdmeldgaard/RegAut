@@ -1,0 +1,203 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<title>EVU RegAut</title>
+<link rel="shortcut icon" href="http://www.daimi.au.dk/~amoeller/au/favicon.ico"/>
+<link href="http://www.daimi.au.dk/~amoeller/au/au.css" rel="stylesheet" type="text/css"/>
+<link href="http://www.daimi.au.dk/~amoeller/au/au-print.css" rel="stylesheet" type="text/css" media="print"/>
+</head>
+<body>
+<div id="border">
+<div id="header"></div>
+<div id="header-bar"></div>
+<div id="navigation">
+
+<h1>Uge 4, 5</h1>
+<!--
+<h3>Gennemgået materiale den 25. august 2007</h3>
+
+<h4>Regulære udtryk</h4> 
+
+[Martin, kap. 1.5, 3.1]  (Der forventes kendskab til resten af kap. 1 samt kap. 2.)
+
+<ul>
+
+<li>specifikation og genkendelse af tekststrenge (eksempel: PowerForms)
+</li><li>strenge, sprog, rekursive definitioner, induktionsbeviser 
+</li><li>regulære udtryk, regulære sprog
+</li><li>Java: <tt><a href="http://www.daimi.au.dk/~besen/RegAut2007/doc/dRegAut/RegExp.html">dRegAut.RegExp</a></tt> klassen
+</li></ul>
+
+<h4>Endelige automater</h4> 
+
+[Martin, kap. 3.2-3.5]
+
+<ul>
+<li>definition af endelige automater og deres sprog
+</li><li>skelnelighed
+</li><li>produkt-konstruktionen (<img src="union.gif" alt="union">, <img src="inter.gif" alt="intersection">, -, <img src="complement.gif" alt="complement">)
+
+</li><li>Java: klassen <tt><a href="http://www.brics.dk/~besen/RegAut/doc/dRegAut/FA.html">dRegAut.FA</a></tt> og metoderne <tt><a href="http://www.brics.dk/~besen/RegAut/doc/dRegAut/FA.html#accepts%28java.lang.String%29">accepts</a></tt>, <tt><a href="http://www.brics.dk/~besen/RegAut/doc/dRegAut/FA.html#intersection%28dRegAut.FA%29">intersection</a></tt>, <tt><a href="http://www.brics.dk/~besen/RegAut/doc/dRegAut/FA.html#minus%28dRegAut.FA%29">minus</a></tt>, og <tt><a href="http://www.brics.dk/~besen/RegAut/doc/dRegAut/FA.html#complement%28%29">complement</a></tt>
+</li><li>eksempel på brug af automater: modellering og verifikation af systemer
+</li></ul>
+-->
+<h3>Opgaver</h3>
+
+<h4>[Martin]:</h4>
+<ul>
+<!-- regulære udtryk -->
+<li>3.2 (s.112)
+</li><li>3.9 (a-e) (s.113)
+</li><li>3.10 (a-b) (s.113)
+</li><li>3.12 (s.114)
+<!-- endelige automater -->
+<li>3.17 (e) (s.115)
+</li><li>3.18 (s.115)
+</li><li>3.19 (a-c) (s.116)
+</li><li>3.33 (a-c) (s.117) (brug produktkonstruktionen)
+</li></ul>
+
+<h4>Perspektiverende opgaver:</h4>
+
+(Brug max 20 min. på disse opgaver.)
+
+<ul>
+<li>Syntaksen for URL'er er formelt specificeret i <a href="http://www.ietf.org/rfc/rfc1738.txt">RFC 1738, Uniform Resource Locators (URL)</a> (se afsnit <i>5. BNF for specific URL schemes</i>). Der anvendes en speciel notation:  
+<ul>
+<li>alfabetsymboler står i "..." og specielle ASCII tegn skrives med hexcode %xx
+</li><li><tt>|</tt> bruges i stedet for  <tt>+</tt>
+</li><li><tt>*X</tt> bruges i stedet for <tt>X*</tt>
+
+</li><li><tt>1*X</tt> betyder <tt>X*X</tt>
+</li><li><tt>[X]</tt> betyder <tt>(X+<img src="Lambda.gif" alt="Lambda">)</tt>
+</li></ul>
+Hvis man f.eks. "optrævler" definitionen af <tt>httpurl</tt>, så ender man med et regulært udtryk for HTTP URL'er. Undersøg om følgende strenge er lovlige HTTP URL'er (dvs. matcher <tt>httpurl</tt>):
+ <ol>
+
+ <li>http://130.225.16.54:80
+ </li><li>http://com
+ </li><li>http://x//%CA%FE%
+ </li></ol>
+<p>
+</p></li><li>Syntaksen for email-adresser er formelt specificeret i <a href="http://www.ietf.org/rfc/rfc2822.txt">RFC 2822, Internet Message Format</a> (se afsnit <i>3.4 Address Specification</i>). Hvis man f.eks. optrævler definitionen af <tt>addr-spec</tt>,
+så ender man med et (stort) regulært udtryk - forudsat at man (f.eks.)
+ikke tillader kommentarer inden i kommentarer (dvs. at en <tt>ccomment</tt> kan være en <tt>comment</tt>). Undersøg om følgende strenge er lovlige email-adresser (dvs. matcher <tt>addr-spec</tt>):
+
+<ol>
+<li>a@b.c
+</li><li>"@"@[1.2.3.4]
+</li><li>#*!@!*#
+</li></ol>
+</li></ul>
+
+<h3>Programmeringsprojekt</h3>
+
+I de kommende uger skal I - baseret på en udleveret kode-skabelon -
+opbygge jeres egen dRegAut pakke i Java.
+
+<ul>
+<li><a href="http://www.daimi.au.dk/~besen/RegAut/doc/index.html">Dokumentation</a> for hele dRegAut pakken
+</li><li><a name="impl"></a><tt><a href="http://www.daimi.au.dk/~besen/RegAut/java/dRegAut.jar">dRegAut.jar</a></tt> - forelæserens samlede dRegAut pakke (uden kildekode)
+
+</li></ul>
+
+Dokumentationen ovenfor kan bruges til at slå op hvad de enkelte
+klasser og metoder skal gøre, og forelæserens implementation kan
+bruges til afprøvning af funktionaliteten.
+
+<p>
+
+Udleverede programdele til dRegAut pakken: <ul> <li><tt><a
+href="http://www.daimi.au.dk/~besen/RegAut/java/FA.java">FA.java</a></tt>
+(skabelon hvor de interessante metoder ikke er implementeret)
+</li><li><tt><a
+href="http://www.daimi.au.dk/~besen/RegAut/java/Alphabet.java">Alphabet.java</a></tt>
+</li><li><tt><a
+href="http://www.daimi.au.dk/~besen/RegAut/java/State.java">State.java</a></tt>
+</li><li><tt><a
+href="http://www.daimi.au.dk/~besen/RegAut/java/StateSymbolPair.java">StateSymbolPair.java</a></tt>
+</li><li><tt><a
+href="http://www.daimi.au.dk/~besen/RegAut/java/AutomatonNotWellDefinedException.java">AutomatonNotWellDefinedException.java</a></tt>
+
+</li></ul> Du bør kigge disse dele grundigt igennem, da de udgør
+fundamentet for de kommende Java-opgaver.
+<p>
+Ovenstående dele refererer til følgende klasser, som gennemgåes i uge 8: 
+<tt><a href="http://www.daimi.au.dk/~besen/RegAut/java/NFA.java">NFA.java</a></tt>, 
+<tt><a href="http://www.daimi.au.dk/~besen/RegAut/java/NFALambda.java">NFALambda.java</a></tt>,
+<tt><a href="http://www.daimi.au.dk/~besen/RegAut/java/RegExp.java">RegExp.java</a></tt>
+</p>
+
+<p>
+Opgaver: 
+</p>
+<ul>
+<li><b>J1</b>:
+Gennemlæs disse programstumper, overbevis dig om at de gør det ønskede, og udvid programpakken med dem:
+
+<ul>
+<li><tt><a href="http://www.daimi.au.dk/dRegAut/java/FA.delta" type="text/x-java-source">FA.delta</a></tt>
+</li><li><tt><a href="http://www.daimi.au.dk/dRegAut/java/FA.deltaStar" type="text/x-java-source">FA.deltaStar</a></tt>
+</li><li><tt><a href="http://www.daimi.au.dk/dRegAut/java/FA.complement" type="text/x-java-source">FA.complement</a></tt>
+</li></ul>
+<p>
+  </p></li><li><b>J2</b>:
+Implementer flg. metoder (ialt. ca. 80 linjers programkode):
+<ul>
+<li><tt>FA.accepts</tt>
+</li><li><tt>FA.intersection</tt>
+</li><li><tt>FA.union</tt>
+
+</li><li><tt>FA.minus</tt>
+</li></ul>
+Bemærk at de sidste tre bygger på produktkonstruktionen, som derfor passende kan implementeres som en separat metode, 
+der anvender <tt>StatePair</tt> klassen i <tt>FA.java</tt>.
+<p>
+</p></li><li><b>J3</b>: Skriv en stump Java-kode, der gør som følger.
+  <ol> <li>bygger de to FA'er, der er vist i [Martin] Fig. 3.1 (b) og
+  (c), </li><li>laver <tt>union</tt>-automaten af de to FA'er - vi
+  kalder resultatet <i>M</i>, </li><li>checker med <tt>accepts</tt> at
+  strengene <tt>101001</tt> og <tt>1101</tt> bliver accepteret af
+  <i>M</i>, og at <img src="Lambda.gif" alt="Lambda"> og
+  <tt>1010</tt> <i>ikke</i> bliver accepteret, og </li><li>udskriver
+  <i>M</i> med <tt>toDot</tt>-metoden.  </li></ol> Resultatet fra
+  <tt>toDot</tt> kan oversættes til en postscript-fil med
+  "<tt>/users/btools/GraphViz/Linux/bin/dot -Tps input.dot -o
+  output.ps</tt>" (på en Linux-maskine på DAIMI) og derefter vises med
+  "<tt>gv output.ps</tt>". Automaten skulle gerne se <a
+  href="http://www.daimi.au.dk/dRegAut/J3.gif">sådan</a> ud (modulo
+  ordning af tilstandene). Alternativt kan Graphviz værktøjet hentes
+  fra <a
+  href="http://www.graphviz.org/">AT&T</a> i
+  versioner til både Linux, Mac, og Windows.  </li> </ul>
+
+<h3>Obligatoriske afleveringsopgaver</h3>
+
+Der vil i løbet af kurset blive stillet 6 obligatoriske
+afleveringsopgaver i forbindelse med programmeringsprojektet. Det er
+tilladt at aflevere opgaverne i grupper af op til 3 personer.
+
+Afleveringsfristen for første delopgave er
+<p>
+<b>Søndag den 1. februar 2009, kl. 18:00</b>. 
+<p>
+
+  Du skal aflevere opgaven via kursussystem
+  (Aflever venligst PDF filer, samt at angive navn og
+  årskortnummer!) 
+
+<p>
+<b>Første delopgave:</b>
+</p>
+
+Lav en automatiseret løsning af [Martin, opg. 3.33 (e)] (s.117)
+vha. din egen <tt>FA.java</tt> implementation.  Skriv et
+veldokumenteret Java-program der konstruerer den ønskede automat ved
+hjælp af dRegAut-pakken. Vedlæg output som en tegning af automaten
+lavet med <tt>dot</tt>-værktøjet. (Husk også at vedlægge din løsning
+af opgave J2.)
+
+</div>
+
+</body></html>
