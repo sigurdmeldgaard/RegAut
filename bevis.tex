@@ -1,0 +1,133 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage{ucs}
+\usepackage[utf8x]{inputenc}
+\usepackage[danish]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\usepackage{url}
+
+\title{Gennemgang af et induktionsbevis for de regulære sprogs lukkethed under reverse}
+\author{Sigurd Meldgaard}
+\date{24. Januar 2009}
+\begin{document}
+\maketitle
+Bemærk at i dette dokument er alle detaljer penslet helt ud, så selvom
+det ser langt ud, så skulle der kun ske een ting per skridt.
+\section{Definitioner}
+\subsection{Reverse funktionen}
+Reverse af en streng er defineret rekursivt i strukturen af strengen:
+\[rev(\Lambda) = \Lambda\]
+\[rev(x\cdot a) = a\cdot rev(x), \text{ hvor } x\in \Sigma^*, a \in Sigma \]
+Reverse af et sprog er defineret rekursivt som reverse af hvert enkelt element:
+\[rev_L(L) = \{x | rev_s(x) \in L \} \]
+\section{Hvad skal vi bevise}
+Vi vil bevise at \emph{de regulære sprog er lukkede under $rev_L$}, d.v.s. hvis $L$ er regulært, så er $rev_L(x)$ også regulært.
+
+Vi gør det ved at lave et konstruktivt bevis, d.v.s. at vi viser
+hvordan man kan konstruere et regulært udtryk for $rev_L(L)$ hvis man
+har et regulært udtryk for $L$.
+
+Vi laver beviset som et induktionsbevis. D.v.s. vi viser at det gælder
+for alle de måder som et regulært udtryk kan være skrevet på.
+\section{Konstruktion}
+Vi definerer en funktion $rev_r$ på regulære udtryk:
+\subsection{Basistilfældet}
+\[rev_r(\emptyset) = \emptyset\]
+\[rev_r(\Lambda) = \Lambda\]
+\[rev_r(a) = a, a\in\Sigma\]
+\subsection{Det rekursive tilfælde}
+\[rev_r(r_1 + r_2) = rev_r(r_1) + rev_r(r_2)\]
+\[rev_r(r_1 \cdot r_2) = rev_r(r_2) \cdot rev_r(r_1)\]
+\[rev_r(r_1^*) = rev_r(r_1)^*\]
+\section{Korrekthed}
+Nu har vi vist hvordan vi vil konstruere $rev_r(r)$ for alle regulære
+udtryk, så skal vi bevise korrekthed, d.v.s. vise at $L(rev_r(r)) =
+rev_L(L(r))$. Dette viser vi i alle 6 tilfælde.
+\section{Basistilfældet}
+De tre basistilfælde er nærmest trivielle:
+\begin{itemize}
+\item $r = \emptyset$
+\[rev_r(\emptyset) = \emptyset\]
+
+Dette er korrekt fordi
+\[L(rev_r(r)) = L(rev_r(\emptyset)) = L(\emptyset) = rev_L(\emptyset) = rev_L(L(r)) \] 
+
+Her
+benytter vi at hvis vi tager $rev$ på alle elementer i den tomme
+mængde har vi stadig den tomme mængde.
+\item $r = \Lambda$
+\[rev(\Lambda) = \Lambda\]
+Dette er korrekt fordi
+\[L(rev_r(r)) = L(rev_r(\Lambda)) = L(\Lambda) = \{\Lambda\} =rev_L(\{\Lambda\})
+ = rev_L(L(r)) \]
+ Her bruger vi definitionen på $rev(\Lambda)=\Lambda$.
+\item $r = a$
+\[rev(a) = a,a\in\Sigma\]
+Dette er korrekt fordi (her er det skrevet helt ud i alle detaljer:
+\[L(rev_r(r)) = L(rev_r(a)) = L(a) = \{a\cdot\Lambda\} \]
+\[= \{a \cdot rev(\Lambda)\} = 
+\{rev(\Lambda \cdot a)\} =
+rev_L(\{a\})
+ = rev_L(L(r)) \]
+Her folder vi definitionen på $rev()$ ud en enkelt gang.
+\end{itemize}
+Før vi kan bevise induktionsskridtet får vi brug for to lemmaer (små
+underbeviser).
+\subsection{Lemma 1}
+Lemmaet siger:
+\[\forall x,y \in \Sigma^*: rev(xy) = rev(y)rev(x)\]
+Vi beviser dette ved induktion i strukturen af $y$
+\subsubsection{Basis: $y=\Lambda$}
+Vi bruger definitionen af $rev$.
+\[rev(xy) = rev(x\Lambda) = rev(x) = \Lambda rev(x) = rev(\Lambda)rev(x) = rev(y)rev(x)\]
+\subsubsection{Induktionsskridt: $y = y'\cdot a$ hvor $y'\in \Sigma^*, a\in \Sigma$}
+Vores induktionshypotese siger: $\forall x: rev(xy') = rev(y')rev(y)$
+
+Vi bruger igen definitionen af $rev$:
+\[rev(xy) = rev(xy'a) = a\cdot rev(xy')\]
+Her kan vi bruge induktionshypotesen:
+\[... = a\cdot rev(y')rev(x) = rev(y'a)rev(x) = rev(y)rev(x)\]
+\subsection{Lemma 2}
+Lemmaet siger:
+\[\forall i\geq 0: rev_L(L^i) = rev_L(L)^i\]
+Vi bruger induktion i $i$:
+\subsubsection{Basis: $i=0$}
+Alting følger her helt simpelt ved at ``pakke definitionerne ud''.
+\[rev_L(L^i)=rev_L(L^0)=rev_L({\Lambda})=\{rev(\Lambda)\}=\{\Lambda\}=
+rev_L(L)^0\]
+I det sidste skridt skal man huske at alle sprog i nul'te er sproget med den tomme streng.
+\subsubsection{Induktionsskridt: $i = i'+1$}
+Induktionshypotesen: $rev_L(L^{i'}) = rev_L(L)^{i'}$. Vi kan genbruge lemma 1 her:
+\[rev_L(L^i)=rev_L(L\cdot L^{i'}) = rev(L^{i'})\cdot rev(L) = rev(L)^{i'}rev(L)=
+rev(L)^{i'+1} = rev(L^{i})\]
+\subsection{Induktionsskridtet}
+Så er vi tilbage ved hovedbeviset. Vi har tre tilfælde, og
+induktionshypotesen er hver gang at: $L(rev_r(r_1)) = rev_L(L(r_1))$
+og tilsvarende for $r_2$
+\begin{itemize}
+\item $r = r_1 + r_2$
+\[rev_r(r_1 + r_2) = rev_r(r_1) + rev_r(r_2)\]
+Dette tilfælde er relativt simpelt.
+\[L(rev_r(r))=L(rev_r(r_1+r_2))=L(rev_r(r_1)+rev_r(r_2)) = L(rev_r(r_1))\cup L(rev_r(r2))\]
+Her bruger vi induktionshypotesen:
+\[\ldots = rev_L(L(r_1)) \cup rev_L(L(r_2))\]
+$rev_L$ er en elementvis operation, så vi kan flytte $\cup$ indenfor parantesen:
+\[\ldots = rev_L(L(r_1)\cup L(r_2)) = rev_L(L(r_1+r_2)) = rev_L(L(r))\]
+\item $r = r_1\cdot r_2$
+\[rev_r(r_1 \cdot r_2) = rev_r(r_2) \cdot rev_r(r_1)\]
+\[L(rev_r(r)) = L(rev_r(r_2)\cdot rev_r(r_1)) = L(rev_r(r_2)) \cdot L(rev_r(r_1))\]
+induktionshypotese:
+\[\ldots = rev_L(L(r_2))\cdot rev_L(L(r_1)) = \{x\cdot y | xy \in rev_L(L(r_2))\cdot rev_L(L(r_1))\} \]
+\[= \{rev(x)\cdot rev(y) | xy \in  L(r_2)L(r_1)\}\]
+og her kan vi bruge lemma 1:
+\[\ldots = \{rev(y\cdot x) | x\in L(r_2), y \in  L(r_1)\} = rev_L(L(r_2)L(r_1)) = rev_L(L(r))\]
+\item $r = r_1^*$
+  \[rev_r(r_1^*) = rev_r(r_1)^*\] Dette tilfælde overlades til læseren!
+  Husk at bruge definitionen for $L(r^*)=\bigcup_{i=0}^{\infty}L(r)^i$
+  og så lemma 2.
+\end{itemize}
+
+\end{document}
