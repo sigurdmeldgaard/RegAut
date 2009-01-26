@@ -1,0 +1,15 @@
+digraph G {
+	graph [rankdir=LR fontsize=20];
+	node [shape=doublecircle] q3;
+	node [shape=circle];
+	edge [fontsize=20 labelfloat=true fontcolor=red];
+	in [shape=plaintext label=""];
+	in -> q0;
+	q0 [shape=circle];
+	q0 -> q1  [label="0\n " len=1.0];
+	q1 -> q1  [label="1\n "];
+	q1 -> q2  [label="Λ\n "];
+	q2 -> q2  [label="0\n "];
+	q2 -> q3  [label="1\n "];
+	
+} 

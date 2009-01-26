@@ -1,0 +1,159 @@
+\documentclass{beamer}
+
+\usepackage{beamerthemesplit}
+\usepackage[utf8]{inputenc}
+% \usepackage[danish]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{hyperref}
+\usepackage{enumerate}
+\usepackage{url}
+
+
+\title{2. Seminar EVU RegAut}
+\author{Sigurd Meldgaard}
+\date{26. January 2009}
+
+\AtBeginSection[]
+{
+   \begin{frame}
+       \frametitle{Plan}
+       \tableofcontents[currentsection]
+   \end{frame}
+}
+
+\begin{document}
+\maketitle
+
+%\include{nondet}
+\section{NFA-$\Lambda$’er}
+\begin{frame}
+  \frametitle{NFA'er med $\Lambda$-transitioner}
+\begin{itemize}[<+->]
+\item For nemt at kunne oversætte regulære udtryk til automater
+  generaliserer vi automaterne yderligere
+\item En $\Lambda$-transition er en transition, der ikke læser et
+  symbol fra input-strengen
+\item Eksempel på en NFA-$\Lambda$:
+\includegraphics[scale=0.4]{images/2_seminar_nfalambda}
+\item Automaten “bestemmer selv” om den vil følge 
+$\Lambda$-transitionen
+Eksempel: strengen 011 accepteres
+\end{itemize}
+\end{frame}
+\begin{frame}
+\frametitle{Formel definition af NFA-$\Lambda$}
+En nondeterministisk endelig automat 
+med $\Lambda$-transitioner (NFA-$\Lambda$) er 
+et 5-tupel $(Q, \Sigma, q_0, A, \delta)$ hvor
+
+\begin{itemize}[<+->]
+\item $Q$ er en endelig mængde af tilstande
+\item $\Sigma$ er et alfabet
+\item $q_0\in Q$ er en starttilstand
+\item $A\subseteq Q$ er accepttilstande
+\item $\delta: Q\times (\Sigma \cup {\Lambda})\rightarrow 2^Q$ er en
+  transitionsfunktion
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{$\Lambda$-lukning af en tilstandsmængde ($\Lambda$-closure}
+\begin{itemize}[<+->]
+\item Hvor kan man komme til ved kun at bruge 
+$\Lambda$-transitioner?
+\item Givet en mængde $S\subseteq Q$, definer $\Lambda$-lukningen
+  $\Lambda(S)$ som den mindste mængde der opfylder flg.: 
+\item $S \in \Lambda(S)$
+\item $\forall q\in \Lambda(S): \delta(q, \Lambda) \in \Lambda(S)$
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Sproget for en NFA-$\Lambda$}
+\begin{itemize}[<+->]
+\item Givet en NFA-$\Lambda$  $M=(Q, \Sigma , q_0, A, \delta )$, definer 
+den udvidede transitionsfunktion $\delta^*: Q\times \Sigma^*\rightarrow  2^Q$ ved
+\item \[\delta^*(q,x) =
+  \begin{cases}
+    \Lambda(q) & \text{ hvis } x=\Lambda \\
+    \Lambda(\bigcup_{r\in \delta^*(q, y)}\delta(r, a)) & \text{ hvis } x=y\cdot a
+  \end{cases}
+\]
+\end{itemize}
+\end{frame}
+\begin{frame}
+\frametitle{Quiz}
+\begin{itemize}[<+->]
+\item Hvad er $\delta^*(q_0, 01)$ for denne NFA-$\Lambda$?
+\includegraphics[scale=0.4]{images/2_seminar_quiz_nfa_lambda}
+\item $\delta^*(q_0, \Lambda) = \Lambda(q_0) = \{q_0\}$
+\item $\delta^*(q_0, \Lambda \cdot 0) = \Lambda(\bigcup_{r\in \delta^*(q_0, \Lambda)} \delta(r, 0)) =
+ \{q_1, q_2\}$
+\item $\delta^*(q_0, \Lambda \cdot 0 \cdot 1) = 
+\Lambda(\bigcup_{r\in \delta^*(q_0, \Lambda\cdot 0)} \delta(r, 1)) = \Lambda(\{q_1, q_2\}\cup\{q_3\}) = \{q_1, q_2, q_3\}$
+\item - d.v.s. strengen 01 bliver accepteret af automaten.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Enhver NFA kan oversættes til en NFA-$\Lambda $}
+\begin{itemize}[<+->]
+\item Med den grafiske repræsentation er det trivielt
+
+\item Med de formelle definitioner:
+
+Givet en NFA $M=(Q, \Sigma , q_0, A, \delta_M)$, 
+
+definer en NFA-$\Lambda $ $N=(Q, \Sigma , q_0, A, \delta_N)$ hvor 
+$\delta_N(q, a) = \delta M(q, a)$  for alle $q\in Q$ og $a\in \Sigma$
+$\delta_N(q, \Lambda) = Ø$ for alle $q\in Q$
+
+Bevis for at $L(N) = L(M)$: induktion...
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Enhver NFA-$\Lambda $ kan oversættes til en NFA
+($\Lambda $-eliminering)}
+\begin{itemize}[<+->]
+\item Givet en NFA-$\Lambda $ $M=(Q, \Sigma , q_0, A, \delta )$, 
+\item definer en NFA $M_1=(Q, \Sigma , q_0, A_1, \delta _1)$ ved
+\item $\delta _1(q, a) =  \delta ^*(q, a)$
+\item $A_1 =
+  \begin{cases}
+    A \cup \{ q_0\} & \text{ hvis } \Lambda(\{q_0\})\cap A \neq \emptyset \\
+    A & \text{ ellers }
+  \end{cases}
+$
+\item Der gælder nu: $L(M1) = L(M)$
+\end{itemize}
+\end{frame}
+\begin{frame}
+\frametitle{Eksempel}
+\begin{itemize}[<+->]
+\item NFA-$\Lambda$:
+  \includegraphics[scale=0.4]{images/2_seminar_lambdaelim}
+\item Find $\delta^*(q,a)$ for alle $q\in Q$ og $a\in \Sigma$
+\item Se om $\Lambda(\{q_0\})\cap A \neq \emptyset$
+\item
+  \begin{tabular}{|c|ccc|cc|}
+    \hline
+    $q$ & $\delta(q,\Lambda)$ & $\delta(q, 0)$ & $\delta(q, 1)$ & $\delta^*(q,0)$ & $\delta^*(q,1)$\\
+    \hline
+    A & $\{B\}$ & $\{A\}$ & $\{\}$ & \{A,B,C,D\} & \{\} \\
+    B & $\{D\}$ & $\{C\}$ & $\{\}$ & \{C,D\} & \{\} \\
+    C & $\{\}$ & $\{\}$ & $\{B\}$ & \{\} & \{B,D\} \\
+    D & $\{\}$ & $\{D\}$ & $\{\}$ & \{D\} & \{\} \\
+
+    \hline
+  \end{tabular}
+
+\end{itemize}
+\end{frame}
+\section{Kleenes sætning}
+\section{Frokost}
+\section{Minimering}
+\section{Java projekt}
+\end{document}
