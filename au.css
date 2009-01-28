@@ -1,209 +1,176 @@
-body {
-    font-family: 'Trebuchet MS', 'Futura Light', Verdana, sans-serif;
-    background: rgb( 102, 102, 102 );
-    padding: 10px;
-    margin: 0px;
-    min-width: 850px;
+body{
+font-family: 'Trebuchet MS', 'Futura Light', Verdana, sans-serif;
+background: rgb(102, 102, 102);
+padding: 10px;
+margin: 0px;
+min-width: 850px;
 }
 
 h1 {
-    border-bottom: 1px solid rgb( 197, 197, 197 );
-    border-top: 1px solid rgb( 197, 197, 197 );
-    color: rgb( 0, 61, 133 );
-    font-family: 'Trebuchet MS', 'Futura Light', Verdana, sans-serif;
-    font-size: 25px;
-    font-weight: normal;
-    height: 34px;
-    line-height: 34px;
-    padding: 8px 12px 8px 12px;
-    text-transform: uppercase;
+border-bottom: 1px solid rgb(197, 197, 197);
+border-top: 1px solid rgb(197, 197, 197);
+color: rgb(0, 61, 133);
+font-family: 'Trebuchet MS', 'Futura Light', Verdana, sans-serif;
+font-size: 25px;
+font-weight: normal;
+height: 34px;
+line-height: 34px;
+padding: 8px 12px 8px 12px;
+text-transform: uppercase;
 }
 
 #border {
-    background: white;
-    padding: 10px;
-    min-width: 550px;
+background: white;
+padding: 10px;
+min-width: 550px;
 }
 
 #header {
-    background: url( 5000_screen_da_DK.png ) no-repeat;
-    height: 100px;
-    margin: 0px 0px 10px 15px;
+background: url(5000_screen_da_DK.png) no-repeat;
+height: 100px;
+margin: 0px 0px 10px 15px;
+}
+
+#header-en {
+background: url(5000_screen_en_GB.png) no-repeat;
+height: 100px;
+margin: 0px 0px 10px 15px;
 }
 
 #header-bar {
-    background: url( section_header_bg.jpg ) repeat-x;
-    height: 60px;
-    margin-bottom: 10px;
+background: url(section_header_bg.jpg) repeat-x;
+height: 60px;
+margin-bottom: 10px;
 }
 
 #navigation {
-    color: rgb( 0, 61, 133 );
-    padding-bottom: 10px;
-    font-size: 12px;
+color: rgb(0, 61, 133);
+padding-bottom: 10px;
+font-size: 12px;
 }
 
 #navigation a {
-    color: rgb( 0, 61, 133 );
-    text-decoration: none;
+color: rgb(0, 61, 133);
+text-decoration: none;
 }
 
 #navigation a:hover {
-    text-decoration: underline;
+text-decoration: underline;
 }
 
+
 #menu {
-    background: url( section_nav_bg.gif ) repeat-x 0% 0%;
-    margin: 0px 12px 16px 16px;
-    min-height: 522px;
-    overflow: hidden;
-    padding: 12px;
-    float: left;
-    width: 175px;
-    font-size: 11pt;
+background: url(section_nav_bg.gif) repeat-x 0% 0%;
+margin: 0px 12px 16px 16px;
+min-height: 522px;
+overflow: hidden;
+padding: 12px;
+float: left;
+width: 175px;
+font-size: 11pt;
 }
 
 #menu ul {
-    padding: 0px 0px 0px 0px;
-    margin: 0px 0px 0px 0px;
+padding: 0px 0px 0px 0px;
+margin: 0px 0px 0px 0px;
 }
 
 #menu li {
-    background: url( bullet.gif ) no-repeat 0px 0.4em;
-    line-height: 2.0em;
-    list-style: none;
-    margin-bottom: 0.75em;
-    padding-left: 20px;
-    margin: 0px;
-    font-size: 12px;
+background: url(bullet.gif) no-repeat 0px 0.4em;
+line-height: 2.0em;
+list-style: none;
+margin-bottom: 0.75em;
+padding-left: 20px;
+margin: 0px;
+font-size: 12px;
 }
 
 #menu a {
-    text-decoration: none;
-    color: rgb( 51, 51, 51 );
+text-decoration: none;
+color: rgb(51, 51, 51);
 }
 
 #menu a:hover {
-    text-decoration: underline;
+text-decoration: underline;
 }
 
 #menu li.selected {
-    background: url( bullet_selected.gif ) no-repeat 0px 0.4em;
-    color: rgb( 0, 61, 133 );
-    font-weight: bold;
+background: url(bullet_selected.gif) no-repeat 0px 0.4em;
+color: rgb(0, 61, 133);
+font-weight: bold;
 }
 
 #menu h3 {
-    font-size: 11pt;
-    color: rgb( 0, 61, 133 );
-    margin: 0px 0px 0px 0px;
-    padding: 8px 0px 8px 0px;
-    width: 175px;
+font-size: 11pt;
+color: rgb(0, 61, 133);
+margin: 0px 0px 0px 0px;
+padding: 8px 0px 8px 0px;
+width: 175px;
 }
 
 #main {
-    min-height: 600px;
-    margin-left: 240px;
-    font-family: Verdana;
-    font-size: 11px;
-    line-height: 16px;
-    padding-bottom: 15px;
+min-height: 600px;
+margin-left: 240px;
+font-family: Verdana;
+font-size: 12px;
+line-height: 16px;
+padding-bottom: 15px;
 }
 
-#main p, #main h3, #main table {
-    margin-left: 13px;
+#main p, #main h3, #main h4, #main table {
+margin-left: 13px;
 }
 
 a {
-    color: rgb( 0, 61, 133 );
+color: rgb(0, 61, 133);
 }
 
 .schedule {
-    border: 1px solid black;
-    border-collapse: collapse;
+border: 1px solid black;
+border-collapse: collapse;
 
 }
 
 .schedule th {
-    border: 1px solid black;
-    background-color: rgb( 240, 240, 240 );
-    padding: 10px;
+border: 1px solid black;
+background-color: rgb(240,240,240);
+padding: 10px;
 }
 
 .schedule tr {
-    border: 0px;
-    overflow: scroll;
+border: 0px;
+overflow: scroll;
 }
 
 .schedule td {
-    border: 1px solid black;
-    padding: 5px;
+border: 1px solid black;
+padding: 5px;
 }
 
 .schedule .entry {
-    white-space: nowrap;
-    text-align: center;
+white-space: nowrap;
+text-align: center;
 }
 
 #footer {
-    background: url( footer_bg.jpg ) repeat-x 0% 100%;
-    border-bottom: 8px solid rgb( 0, 61, 133 );
-    border-top: 1px solid rgb( 197, 197, 197 );
-    padding: 1em 1em 10px 20px;
-    color: rgb( 51, 51, 51 );
-    font-size: 12px;
-    text-align: right;
-}
-
-tr.header {
-    color: rgb( 0, 61, 133 );
-}
-
-table.overview {
-    border: 1px solid gray;
-    border-spacing: 0;
-    border-collapse: separate;
-* border-collapse : collapse; /* hack is needed for IE7 also */
-}
-
-table.overview th, table.overview td {
-    padding-left: 25px;
-    padding-right: 25px;
-}
-
-table.overview th.reducedpadding, table.overview td.reducedpadding {
-    padding-left: 10px;
-    padding-right: 10px;
-}
-
-table.overview tr {
-    border-bottom: 1px solid gray;
-}
-
-table.overview tr.odd {
-    background-color: #f0f0f0;
-}
-
-table.overview tr.even {
-    background-color: #fafafa;
-}
-
-table.overview td.multiple {
-    border-top: 1px dotted black;
-    border-bottom: 1px dotted black;
+background: url(footer_bg.jpg) repeat-x 0% 100%;
+border-bottom: 8px solid rgb(0, 61, 133);
+border-top: 1px solid rgb(197, 197, 197);
+padding: 1em 1em 10px 20px;
+color: rgb(51, 51, 51);
+font-size: 12px;
+text-align: right;
 }
 
 @media print {
-    #menu, #navigation, #header, #header-bar, #footer {
-        display: none;
-    }
-
-    #main {
-        margin-left: 0px;
-    }
-
-    h1 {
-        border: 0px;
-    }
+  #menu, #navigation,#header,#header-bar,#footer {
+  display: none;
+  }
+  #main{
+  margin-left: 0px;
+  }
+  h1 {
+  border: 0px;
+  }
 }
 
