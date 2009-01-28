@@ -1,0 +1,12 @@
+#menu {
+    display:none;
+}
+
+table.overview {
+    border: 1px solid black;
+}
+
+table.overview td {
+    border-top: 1px solid black;
+    border-left: 1px solid black;
+}
