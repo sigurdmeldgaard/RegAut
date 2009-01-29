@@ -1,0 +1,330 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<title>EVU RegAut</title>
+<link rel="shortcut icon" href="http://www.daimi.au.dk/~amoeller/au/favicon.ico"/>
+<link href="au.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="border">
+<div id="header"></div>
+<div id="header-bar"></div>
+<div id="navigation"></div>
+
+<div id="main">
+
+<h1>Uge 36 og 37</h1>
+
+<h3>Materiale til den 8. september 2007</h3>
+
+<h4>Nondeterminisme og Kleenes sætning</h4> 
+
+[Martin, kap. 4.1-4.3]
+
+<ul>
+  <li>definition af NFA'er og deres sprog</li>
+  <li>delmængde-konstruktionen (determinisering)</li>
+
+  <li>definition af NFA-Λ'er og deres sprog</li>
+  <li>eliminering af Λ-transitioner</li>
+  <li>fra regulært udtryk til NFA-Λ</li>
+  <li>fra FA til regulært udtryk</li>
+  <li>
+    Java: klasserne 
+    <tt><a href="http://www.brics.dk/~besen/RegAut/doc/dRegAut/NFA.html">dRegAut.NFA</a></tt> og 
+    <tt><a href="http://www.brics.dk/~besen/RegAut/doc/dRegAut/NFALambda.html">dRegAut.NFALambda</a></tt> 
+    og metoderne
+    <tt><a href="http://www.brics.dk/~besen/RegAut/doc/dRegAut/NFA.html#determinize()">determinize</a></tt>, 
+    <tt><a href="http://www.brics.dk/~besen/RegAut/doc/dRegAut/NFALambda.html#removeLambdas()">removeLambdas</a></tt>, 
+    <tt><a href="http://www.brics.dk/~besen/RegAut/doc/dRegAut/NFALambda.html#makeSingleton(dRegAut.Alphabet,char)">makeSingleton</a></tt>, 
+    <tt><a href="http://www.brics.dk/~besen/RegAut/doc/dRegAut/NFALambda.html#makeEmptyString(dRegAut.Alphabet)">makeEmptyString</a></tt>, 
+    <tt><a href="http://www.brics.dk/~besen/RegAut/doc/dRegAut/NFALambda.html#makeEmptyLanguage(dRegAut.Alphabet)">makeEmptyLanguage</a></tt>, 
+    <tt><a href="http://www.brics.dk/~besen/RegAut/doc/dRegAut/NFALambda.html#union(dRegAut.NFALambda)">union</a></tt>, 
+    <tt><a href="http://www.brics.dk/~besen/RegAut/doc/dRegAut/NFALambda.html#kleene()">kleene</a></tt>, og 
+    <tt><a href="http://www.brics.dk/~besen/RegAut/doc/dRegAut/NFALambda.html#concat(dRegAut.NFALambda)">concat</a></tt>, 
+    samt metoden
+    <tt><a href="http://www.brics.dk/~besen/RegAut/doc/dRegAut/RegExp.html#toNFALambda()">toNFALambda</a></tt> i 
+    <tt>dRegAut.RegExp</tt> og <tt><a href="http://www.brics.dk/~besen/RegAut/doc/dRegAut/FA.html#toRegExp()">toRegExp</a></tt> i 
+    <tt>dRegAut.FA</tt>
+
+  </li>
+</ul>
+
+<h4>Minimering af automater</h4> 
+
+[Martin, kap. 5.1-5.2]
+
+<ul>
+  <li>Myhill-Nerode sætningen</li>
+  <li>en minimeringssalgoritme </li>
+  <li>
+    Java: 
+    <tt><a href="http://www.brics.dk/~besen/RegAut/doc/dRegAut/FA.html#minimize()">minimize</a></tt> metoden i 
+    <tt>dRegAut.FA</tt></li>
+
+  <li>regulære udtryk i <a href="http://java.sun.com/j2se/1.5.0/docs/api/java/util/regex/package-summary.html">Java SDK 5.0</a> 
+      og <a href="http://regex.info/">Unix</a></li>
+</ul>
+
+<h3>Opgaver</h3>
+
+<h4>[Martin]:</h4>
+<ul>
+<!-- nondeterminisme -->
+<li> 4.2 (s.156)</li>
+
+<li> 4.10 (a+e) (s.157)</li>
+<li> 4.13 (s.158)</li>
+<li> 4.28 (e) (s.162)</li>
+<li> 4.35 (a) (s.163)</li>
+<li> 4.38 (b) (s.164)</li>
+<!-- minimering -->
+<li>5.2 (s.191)</li>
+<li>5.7 (s.191)</li>
+<li>5.16 (a+b) (s.192) </li>
+</ul>
+
+<h4>Perspektiverende opgave:</h4>
+<ul>
+<li>
+  Lad M<sub>1</sub> og M<sub>2</sub> være FA'er defineret ved
+  <center>
+  M<sub>1</sub> = ({1,2,3,4,5,6,7},{a,b},1,{1,2},δ<sub>1</sub>)<br/>
+
+  M<sub>2</sub> = ({1,2,3,4,5,6,7},{a,b},1,{2,4,6},δ<sub>2</sub>)<br/>
+  </center>
+  hvor δ<sub>1</sub> og δ<sub>2</sub>
+
+  er defineret ved:
+  <center>
+  <table border="0" cellspacing="10"><tr><td>
+  <table border="1" cellspacing="0" cellpadding="5">
+  <tr><td>δ<sub>1</sub></td><th>a</th><th>b</th></tr>
+  <tr><th>1</th><td>2</td><td>6</td></tr>
+  <tr><th>2</th><td>1</td><td>7</td></tr>
+  <tr><th>3</th><td>5</td><td>2</td></tr>
+  <tr><th>4</th><td>2</td><td>3</td></tr>
+  <tr><th>5</th><td>3</td><td>1</td></tr>
+
+  <tr><th>6</th><td>7</td><td>3</td></tr>
+  <tr><th>7</th><td>6</td><td>5</td></tr>
+  </table></td>
+  <td></td>
+  <td>
+  <table border="1" cellspacing="0" cellpadding="5">
+
+  <tr><td>δ<sub>2</sub></td><th>a</th><th>b</th></tr>
+  <tr><th>1</th><td>1</td><td>3</td></tr>
+  <tr><th>2</th><td>6</td><td>3</td></tr>
+  <tr><th>3</th><td>5</td><td>7</td></tr>
+
+  <tr><th>4</th><td>6</td><td>1</td></tr>
+  <tr><th>5</th><td>1</td><td>7</td></tr>
+  <tr><th>6</th><td>2</td><td>7</td></tr>
+  <tr><th>7</th><td>5</td><td>3</td></tr>
+
+  </table></td></tr>
+  </table>
+  </center>
+  Find for hver automat en minimal automat, der accepterer samme sprog.
+</li>
+<li>Virker minimeringsalgoritmen fra [Martin] også på NFA'er? Argumenter for din påstand.</li>
+<li>Vis at minimale <font color="red">N</font>FA'er ikke er unikke. (Dvs. find to forskellige NFA'er der accepterer samme sprog og begge har et minimalt antal tilstande.)</li>
+<li>Vi har set en (meget simpel) algoritme til, givet en FA M, at finde en komplementær FA M' hvor L(M')=(L(M))'.
+Virker den algoritme også på NFA'er? Argumenter for din påstand.</li>
+<!--
+<li>
+  <i>Generaliserede regulære udtryk</i> er en udvidelse af regulære udtryk, hvor vi tillader følgende ekstra konstruktioner:
+  <p/>
+  <ul>
+  <li>
+    <b><i>R</i><sub>1</sub> &amp; <i>R</i><sub>2</sub></b> &nbsp; 
+    hvis sprog er defineret ved 
+    L(<i>R</i><sub>1</sub> &amp; <i>R</i><sub>2</sub>)=L(<i>R</i><sub>1</sub>)<img src="inter.gif" alt="intersection">L(<i>R</i><sub>2</sub>)
+  <li>
+    <b>~ <i>R</i></b> &nbsp; 
+    hvis sprog er defineret ved L(~ <i>R</i>)=<img src="complement.gif" alt="complement">L(<i>R</i>)
+  <li>
+    <b><i>R</i> {<i>n</i>}</b>&nbsp; 
+    hvis sprog er defineret ved L(<i>R</i> {<i>n</i>})=L(<i>R</i>)L(<i>R</i>)...L(<i>R</i>) (<i>n</i> gange)
+  </ul>
+  <p/>
+  hvor <i>R</i><sub>1</sub>, <i>R</i><sub>2</sub>, og <i>R</i> selv er generaliserede regulære udtryk og <i>n</i> er et naturligt tal.
+  <p/> 
+  <ol>
+    <li>Generaliserede regulære udtryk kan ofte være mere bekvemme at
+    bruge end almindelige regulære udtryk.  Skriv et generaliseret
+    regulært udtryk, hvis sprog er det i [Martin, Example 3.4]. (En
+    triviel løsning er naturligvis at bruge det regulære udtryk, der
+    gives i eksemplet, men prøv at udnytte de nye konstruktioner.)</li>
+    <li>Vis at generaliserede regulære udtryk ikke giver ekstra
+    udtrykskraft i forhold til almindelige regulære udtryk, dvs.  at
+    ethvert generaliseret regulært udtryk kan oversættes til et
+    ækvivalent almindeligt regulært udtryk.</li>
+  </ol>
+</li>
+-->
+
+</ul>
+
+<h3>Programmeringsprojekt</h3>
+
+Udleverede programdele til dRegAut pakken:
+
+<ul>
+  <li><tt><a href="dRegAut/NFA.java">NFA.java</a></tt></li>
+  <li><tt><a href="dRegAut/NFALambda.java">NFALambda.java</a></tt></li>
+  <li><tt><a href="dRegAut/RegExp.java">RegExp.java</a></tt></li>
+  <li><tt><a href="dRegAut/FA.toNFA" type="text/x-java-source">FA.toNFA</a></tt></li>
+
+</ul>
+
+<tt>NFA.java</tt> og <tt>NFALambda.java</tt> er skabeloner hvor de
+interessante metoder ikke er implementeret. Det er nødvendigt at have
+forstået disse to dele for at kunne løse de kommende Java-opgaver.
+<tt>RegExp.java</tt> indeholder en parser for regulære udtryk - der
+forventes ikke kendskab til implementationen af denne klasse. Metoden
+<tt>FA.toNFA</tt> kan oversætte en FA til en NFA.
+
+<p>
+Opgaver:
+</p>
+<ul>
+
+<li><b>J4</b>:
+Gennemlæs disse programstumper, overbevis dig om at de gør det ønskede, og udvid programpakken med dem:
+<ul>
+<li><tt><a href="dRegAut/NFA.delta" type="text/x-java-source">NFA.delta</a></tt></li>
+<li><tt><a href="dRegAut/NFA.deltaStar" type="text/x-java-source">NFA.deltaStar</a></tt></li>
+<li><tt><a href="dRegAut/NFA.accepts" type="text/x-java-source">NFA.accepts</a></tt></li>
+<li><tt><a href="dRegAut/NFALambda.delta" type="text/x-java-source">NFALambda.delta</a></tt></li>
+<li><tt><a href="dRegAut/NFALambda.deltaStar" type="text/x-java-source">NFALambda.deltaStar</a></tt></li>
+<li><tt><a href="dRegAut/NFALambda.accepts" type="text/x-java-source">NFALambda.accepts</a></tt></li>
+<li><tt><a href="dRegAut/NFALambda.makeEmptyString" type="text/x-java-source">NFALambda.makeEmptyString</a></tt></li>
+<li><tt><a href="dRegAut/NFALambda.concat" type="text/x-java-source">NFALambda.concat</a></tt></li>
+<li><tt><a href="dRegAut/NFALambda.removeLambdas" type="text/x-java-source">NFALambda.removeLambdas</a></tt></li>
+</ul>
+</li>
+<li><b>J5</b>:
+Implementer flg. metoder (ialt. ca. 80 linjers programkode):
+<ul>
+<li><tt>NFALambda.makeEmptyLanguage</tt></li>
+<li><tt>NFALambda.makeSingleton</tt></li>
+<li><tt>NFALambda.union</tt></li>
+<li><tt>NFALambda.kleene</tt></li>
+
+<li><tt>NFA.determinize</tt></li>
+</ul></li>
+<li><b>J6</b>: Vi er nu i stand til at reproducere en essentiel del af funktionaliten af PowerForms-værktøjet,
+der blev omtalt i introduktionsforelæsningen i uge 34.
+<ol>
+<li>En <i>crash-tilstand</i> er en FA-tilstand, som ikke er en accept-tilstand og hvorfra der ikke eksisterer en
+sti af transitioner til en accept-tilstand. Lav en metode, der givet en FA returnerer mængden af dens crash-tilstande.</li>
+<li>Lav ved hjælp af dRegAut-pakken og metoden fra opg. 1 et program, der som input tager 
+1) et alfabet <i>Σ</i> (givet som mængden af tegn i en tekst-streng), 
+2) et regulært udtryk <i>r</i> (i form af en tekst-streng) over <i>Σ</i>, og 
+3) en streng <i>s</i> over <i>Σ</i>. Programmet oversætter først <i>r</i>
+
+til en ækvivalent FA <i>A</i> og "kører" derefter <i>s</i> på <i>A</i>. Før første tegn og efter 
+hvert tegn i <i>s</i> udskrives
+"<tt>GRØN</tt>", hvis <i>A</i> er i en accept-tilstand, "<tt>RØD</tt>", hvis den er i en crash-tilstand, og 
+"<tt>GUL</tt>" ellers.
+</li>
+</ol>
+<ul>
+<li><b>J7</b>:
+Gennemlæs denne programstump, overbevis dig om at den gør det ønskede, og udvid programpakken med den:
+<ul>
+<li><tt><a href="dRegAut/FA.toRegExp">FA.toRegExp</a></tt></li></ul>
+Denne metode er (i modsætning til de andre) mindre anvendelig i praksis. At den eksisterer er dog en vigtig del
+af det teoretiske resultat, at regulære udtryk og endelige automater er konstruktivt ækvivalente i udtrykskraft.
+</li>
+<li><b>J8</b>:
+Gennemlæs disse programstumper, overbevis dig om at de gør det ønskede, og udvid programpakken med dem:
+<ul>
+<li><tt><a href="dRegAut/FA.findReachableStates" type="text/x-java-source">FA.findReachableStates</a></tt></li>
+<li><tt><a href="dRegAut/FA.removeUnreachableStates" type="text/x-java-source">FA.removeUnreachableStates</a></tt></li>
+
+<li><tt><a href="dRegAut/FA.minimize" type="text/x-java-source">FA.minimize</a></tt></li>
+</ul>
+<p>
+Løs herefter [Martin, opg. 5.16 (a+b)] igen, denne gang med Java-koden.</p></li>
+</ul>
+
+<h3>Obligatoriske afleveringsopgaver</h3>
+
+Afleveringsfristen for anden delopgave er
+<p>
+<b>Endnu ikke angivet</b>.
+</p>
+<p>
+(Husk at aflevere PDF filer, samt at
+angive navn og årskortnummer!)
+</p>
+<p>
+
+<b>Anden delopgave:</b>
+Lad M være NFA-Λ'en i [Martin, Fig. 4.24 (c), s.162].
+Løs følgende vha. din egen <tt>NFA.determinize</tt> implementation: 
+</p>
+
+<ol>
+<li>Oversæt M til en NFA M<sub>1</sub> ved hjælp af Λ-elimineringsalgoritmen.</li>
+<li>Oversæt M<sub>1</sub> til en FA M<sub>2</sub> ved hjælp af determiniseringsalgoritmen.</li>
+</ol>
+<p>
+Skriv et (veldokumenteret) Java-program, der konstruerer de ønskede
+automater ved hjælp af dRegAut-pakken, og vedlæg output som en tegning
+af automaterne lavet med <tt>dot</tt>-værktøjet. (Husk også at
+vedlægge din implementation af <tt>NFA.determinize</tt>). 
+</p></li></ul>
+</div>
+</div>
+</body>
+</html>
+
+
+<!--
+<li><b>J9</b>: Et <a
+href="http://www.cpr.dk/publikationer/pnr-notat%20ny%20skrift.htm#Opbygning">CPR
+nummer</a> består af 10 cifre,
+<i>c</i><sub>1</sub>-<i>c</i><sub>10</sub>, hvor: <ul>
+<li><i>c</i><sub>1</sub>-<i>c</i><sub>6</sub> er en dato på form
+<i>ddmmåÂå</i>. Bemærk at der her kun er 2 cifre til årstallet.
+<li><i>c</i><sub>7</sub>-<i>c</i><sub>9</sub> er en kode, som blandt
+andet identificerer århundredet ud fra følgende regler: <ul>
+<li>Datoen hører til 1800-tallet hvis <i>c</i><sub>7</sub><img
+src="in.gif" alt="in">{5,6,7,8} og <i>åÂå</i><img src="greatereq.gif"
+alt="greaterorequals">58 <li>Datoen hører til 1900-tallet hvis
+<i>c</i><sub>7</sub><img src="in.gif" alt="in">{0,1,2,3} eller
+(<i>c</i><sub>7</sub><img src="in.gif" alt="in">{4,9} og <i>åÂå</i><img
+src="greatereq.gif" alt="greaterorequals">37) <li>Datoen hører til
+2000-tallet hvis <i>c</i><sub>7</sub><img src="in.gif"
+alt="in">{4,5,6,7,8,9} og <i>åÂå</i>&lt;37 </ul> Hvis ingen af disse
+tre passer, så er CPR-nummeret ugyldigt.  <li><i>c</i><sub>10</sub> er
+en checksum, som skal opfylde følgende: <center>
+(<i>c</i><sub>1</sub>*4+ <i>c</i><sub>2</sub>*3 +
+<i>c</i><sub>3</sub>*2 + <i>c</i><sub>4</sub>*7 +
+<i>c</i><sub>5</sub>*6 + <i>c</i><sub>6</sub>*5 +
+<i>c</i><sub>7</sub>*4 + <i>c</i><sub>8</sub>*3 +
+<i>c</i><sub>9</sub>*2 + <i>c</i><sub>10</sub>*1) % 11 = 0 </center>
+</ul> Vi vil nu lave en minimal FA, der accepterer mængden af strenge,
+der er gyldige CPR-numre.  <ol> <li>Lav et Java metode, der bygger en
+<tt>FA</tt> <i>checksum</i>, som accepterer strenge bestående af 10
+cifre hvor checksumscifferet er korrekt.  (Hint: lav tilstande der
+repræsenterer den vægtede delsum modulo 11 for hvert præfix af den
+læste streng.)  <li>Skriv tre regulære udtryk, <i>r18</i>, <i>r19</i>,
+og <i>r20</i>, der svarer til strenge bestående af 10 cifre, og hvor
+<i>c</i><sub>5</sub>-<i>c</i><sub>7</sub> identificerer henholdsvis
+1800-, 1900-, og 2000-tallet, som beskrevet ovenfor.  <li>Opbyg tre
+<tt>FA</tt>'er, <i>h18</i>, <i>h19</i>, og <i>h20</i>, der accepterer
+strenge bestående af 10 cifre, hvor de første 6 svarer til en
+eksisterende dato (på formen <i>ddmmåÂå</i>), for henholdsvis 1800-,
+1900-, og 2000-tallet.  (Hint: Brug en kombination af regulære udtryk
+og automatoperationer.  Et år er skudår hvis det er deleligt med 4
+medmindre det er deleligt med 100 - medmindre det er deleligt med
+400.)  <li>Brug de implementerede automatoperationer til at kombinere
+<i>checksum</i>, <i>r18</i>, <i>r19</i>, <i>r20</i>, <i>h18</i>,
+<i>h19</i>, og <i>h20</i> så den resulterende automat genkender præcis
+de strenge, der er gyldige CPR-numre.  <li>Hvor mange tilstande har
+den resulterende automat efter minimering?  -->
