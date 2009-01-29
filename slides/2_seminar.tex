@@ -1,4 +1,4 @@
-\documentclass{beamer}
+\documentclass[]{beamer}
 
 \usepackage{beamerthemesplit}
 \usepackage[utf8]{inputenc}
@@ -27,7 +27,7 @@
 \maketitle
 
 \include{nondet}
-%\include{kleene}
+\include{kleene}
 \section{Frokost}
 \begin{frame}
   \begin{center}
@@ -177,9 +177,13 @@ Vi kan definere en FA, hvor tilstandene er ækvivalensklasserne af $I_L$
 \[X:  \{\Lambda , 0\} \cup \{0,1\}*\{00\} = [\Lambda ]\]
 \[Y:  \{0,1\}*\{1\} = [1]\]
 \[Z:  \{0,1\}*\{10\} = [10]\]
+\begin{columns}
+\column{5cm}
 \includegraphics[scale=0.4]{images/2_seminar_equivclassessigma}
-\item
+\pause
+\column{5cm}
 $M_L$:\includegraphics[scale=0.4]{images/2_seminar_myhillfa}
+\end{columns}
 \end{itemize}
 \end{frame}
 
@@ -208,9 +212,12 @@ og $111\in L$
 
 Lav en FA, der accepterer L
 \item
+\begin{columns}
+\column{5cm}
 \includegraphics[scale=0.4]{images/2_seminar_equivclassesodd}
-\item
+\column{5cm}\pause
 \includegraphics[scale=0.4]{images/2_seminar_odd1}
+\end{columns}
 \end{itemize}
 \end{frame}
 
@@ -465,7 +472,7 @@ nyttig efter FA.toRegExp() (Kleene’s sætning del 2)
 \end{frame}
 
 \begin{frame}
-\frametitle{Ugens opgave, minimering i dRegAut java-pakken}
+\frametitle{Minimering i dRegAut java-pakken}
 \begin{itemize}[<+->]
 \item ”pseudo-kode”:\\
   uformel mellemting mellem 
