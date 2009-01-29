@@ -32,13 +32,13 @@ margin: 0px 0px 10px 15px;
 }
 
 #header-en {
-background: url(5000_screen_en_GB.png) no-repeat;
+background: url(5000_screen_en_GB.png) No-repeat;
 height: 100px;
 margin: 0px 0px 10px 15px;
 }
 
 #header-bar {
-background: url(section_header_bg.jpg) repeat-x;
+background: url(section_header_bg.jpg) Repeat-x;
 height: 60px;
 margin-bottom: 10px;
 }
@@ -76,7 +76,7 @@ margin: 0px 0px 0px 0px;
 }
 
 #menu li {
-background: url(bullet.gif) no-repeat 0px 0.4em;
+background: url(bullet.gif) No-repeat 0px 0.4em;
 line-height: 2.0em;
 list-style: none;
 margin-bottom: 0.75em;
