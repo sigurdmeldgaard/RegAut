@@ -1,0 +1,24 @@
+    /**
+     * Constructs a new automaton whose language is the concatenation of the language of this automaton
+     * and the language of the given automaton.  [Martin, Th. 4.4]
+     * The input automata are unmodified.
+     * @exception IllegalArgumentException if the alphabets of <tt>f</tt> and this automaton are not the same
+     */
+    public NFALambda concat(NFALambda f) throws IllegalArgumentException {
+        if (!alphabet.equals(f.alphabet))
+            throw new IllegalArgumentException("alphabets are different");
+        NFALambda f1 = (NFALambda) this.clone();
+        NFALambda f2 = (NFALambda) f.clone();
+        NFALambda n = new NFALambda();
+        n.alphabet = alphabet;
+        n.states.addAll(f1.states);
+        n.states.addAll(f2.states);
+        n.accept.addAll(f2.accept);
+        n.initial = f1.initial;
+        n.transitions.putAll(f1.transitions);
+        n.transitions.putAll(f2.transitions);
+        for (State s : f1.accept)
+            n.addLambda(s, f2.initial);
+        return n;
+    }
+

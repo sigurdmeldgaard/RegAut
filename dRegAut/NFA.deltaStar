@@ -1,0 +1,18 @@
+    /**
+     * Performs transitions in extended transition function. [Martin, Def. 4.2]
+     * @return <img src="http://www.brics.dk/~amoeller/dRegAut/delta.gif" alt="delta">*(q,s) 
+     *         (the result is never null)
+     * @exception IllegalArgumentException if a symbol in <tt>s</tt> is not in the alphabet
+     */
+    public Set<State> deltaStar(State q, String s) throws IllegalArgumentException {
+        Set<State> set = new HashSet<State>();
+        set.add(q);
+        for (char c : s.toCharArray()) {
+            Set<State> nset = new HashSet<State>();
+            for (State p : set) 
+                nset.addAll(delta(p, c));
+            set = nset;
+        }
+        return set;
+    }
+

@@ -1,0 +1,9 @@
+    /** Checks whether the language of this automaton is equal to the language of the given automaton. [Martin, Sec. 5.4] */
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof FA))
+            return false;
+        FA f = (FA) obj;
+        return this.subsetOf(f) && f.subsetOf(this); 
+    }
+

@@ -1,0 +1,48 @@
+    /** Finds the set of states among <tt>s</tt> that can reach an accept state. */
+    private Set<State> findLiveStates(Set<State> s) {
+        Map<State,HashSet<State>> back = new HashMap<State,HashSet<State>>(); // back(q) contains p iff delta(p,c)=q for some c
+        for (State p : s)
+            back.put(p, new HashSet<State>());
+        for (State p : s) 
+            for (char c : alphabet.symbols) {
+                State q = delta(p, c);
+                if (s.contains(q))
+                    back.get(q).add(p);
+            }
+        Set<State> live = new HashSet<State>(accept);
+        Set<State> pending = new HashSet<State>(accept);
+        while (!pending.isEmpty()) {
+            State q = pending.iterator().next();
+            pending.remove(q);
+            for (State p : back.get(q)) 	
+                if (!live.contains(p)) {
+                    live.add(p);
+                    pending.add(p);
+                }
+        }
+        return live;
+    }
+
+    /** 
+     * Checks whether there is a loop among <tt>s</tt> reachable from <tt>p</tt> 
+     * through the states in <tt>path</tt>. 
+     */
+    private boolean containsLoop(State p, Set s, Set<State> path) {
+        path.add(p);
+        for (char c : alphabet.symbols) { // find the states that are reachable from p in one step and are in s
+            State q = delta(p, c);
+            if (s.contains(q) && (path.contains(q) || containsLoop(q, s, path)))
+                return true;
+        }
+        path.remove(p);
+        return false;
+    }
+
+    /** Checks whether the language of this automaton is finite. [Martin, Sec. 5.4] */
+    public boolean isFinite() { 
+        // We use an alternative algorithm exploiting the fact that the language is infinite iff 
+        // there is a reachable loop with a path to an accept state.
+        Set<State> live = findLiveStates(findReachableStates());
+        return !containsLoop(initial, live, new HashSet<State>());
+    }
+

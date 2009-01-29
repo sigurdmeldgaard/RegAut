@@ -1,0 +1,43 @@
+    /** Finds regular expression in table or computes it if not there yet. (Used by {@link #toRegExp}.) */
+    private RegExp.Node tableLookup(State p, State q, int k, Map<StatePair,RegExp.Node[]> table, Map<Integer,State> statemap) {
+        RegExp.Node x = table.get(new StatePair(p, q))[k];
+        if (x==null) {
+            if (k==0) {
+                x = new RegExp.EmptyLanguageNode();
+                for (char c : alphabet.symbols)
+                    if (delta(p,c)==q)
+                        x = new RegExp.UnionNode(x, new RegExp.SymbolNode(c));
+                if (p==q)
+                    x = new RegExp.UnionNode(x, new RegExp.EmptyStringNode());
+            } else {
+                State r = statemap.get(k);
+                RegExp.Node x1 = tableLookup(p, q, k-1, table, statemap);
+                RegExp.Node x2 = tableLookup(p, r, k-1, table, statemap);
+                RegExp.Node x3 = tableLookup(r, r, k-1, table, statemap);
+                RegExp.Node x4 = tableLookup(r, q, k-1, table, statemap);
+                x = new RegExp.UnionNode(x1, new RegExp.ConcatNode(x2, new RegExp.ConcatNode(new RegExp.StarNode(x3), x4)));
+                
+            }
+            table.get(new StatePair(p, q))[k] = x;
+        }
+        return x;
+    }
+
+    /** Converts this automaton into an equivalent {@link RegExp} regular expression. [Martin, Th. 4.5] */
+    public RegExp toRegExp() {
+        Map<Integer,State> statemap = new HashMap<Integer,State>(); 
+        Map<StatePair,RegExp.Node[]> table = new HashMap<StatePair,RegExp.Node[]>(); // fill out this table lazily
+        // initialize
+        int n = 0;
+        for (State p : states) {
+            statemap.put(++n, p); // states are numbered from 1 to states.size()
+            for (State q : states)
+                table.put(new StatePair(p, q), new RegExp.Node[states.size()+1]);
+        }
+        // construct the abstract syntax tree for the regular expression (see [Martin, p. 154])
+        RegExp.Node x = new RegExp.EmptyLanguageNode();
+        for (State p : accept) 
+            x = new RegExp.UnionNode(x, tableLookup(initial, p, states.size(), table, statemap));
+        return new RegExp(x, alphabet);
+    }
+

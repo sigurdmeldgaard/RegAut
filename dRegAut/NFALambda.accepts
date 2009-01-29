@@ -1,0 +1,12 @@
+    /**
+     * Runs the given string on this automaton. [Martin, Def. 4.5b]
+     * @param s a string
+     * @return true iff the string is accepted
+     * @exception IllegalArgumentException if a symbol in <tt>s</tt> is not in the alphabet
+     */
+    public boolean accepts(String s) throws IllegalArgumentException {
+        Set<State> set = deltaStar(initial, s);
+        set.retainAll(accept);
+        return !set.isEmpty();
+    }
+

@@ -1,0 +1,18 @@
+    /** Finds the set of states that are reachable from the initial state. */
+    public Set<State> findReachableStates() { 
+        Set<State> reachable = new HashSet<State>(); // contains the states that are reachable and have been visited
+        Set<State> pending = new HashSet<State>(); // contains the states that are reachable but have not yet been visited
+        pending.add(initial);
+        while (!pending.isEmpty()) {
+            State q = pending.iterator().next();
+            pending.remove(q);
+            reachable.add(q);
+            for (char c : alphabet.symbols) {
+                State p = delta(q, c);
+                if (!reachable.contains(p))
+                    pending.add(p);
+            }
+        }
+        return reachable;
+    }
+

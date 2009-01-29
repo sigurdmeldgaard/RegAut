@@ -1,0 +1,40 @@
+    /**
+     * Computes the <img src="http://www.brics.dk/~amoeller/dRegAut/Lambda.gif" alt="Lambda">-closure
+     * of the given state set. [Martin, Def. 4.6]
+     * @param set set of {@link State} objects
+     * @return set of {@link State} objects (the input set is unmodified)
+     */
+    public Set<State> lambdaClosure(Set<State> set) {
+        Set<State> res = new HashSet<State>(); // contains the states that are in the closure and have been visited
+        Set<State> pending = new HashSet<State>(); // contains the states that are in the closure but have not yet been visited
+        pending.addAll(set);
+        while (!pending.isEmpty()) {
+            State q = pending.iterator().next();
+            pending.remove(q);
+            res.add(q);
+            Set<State> s = new HashSet<State>(delta(q, LAMBDA));
+            s.removeAll(res);
+            pending.addAll(s);
+        }
+        return res;
+    }
+
+    /**
+     * Performs transitions in extended transition function. [Martin, Def. 4.5]
+     * @return <img src="http://www.brics.dk/~amoeller/dRegAut/delta.gif" alt="delta">*(q,s) 
+     *         (the result is never null)
+     * @exception IllegalArgumentException if a symbol in <tt>s</tt> is not in the alphabet
+     */
+    public Set<State> deltaStar(State q, String s) throws IllegalArgumentException {
+        Set<State> set = new HashSet<State>();
+        set.add(q);
+        set = lambdaClosure(set);
+        for (char c : s.toCharArray()) {
+            Set<State> nset = new HashSet<State>();
+            for (State p : set)
+                nset.addAll(delta(p, c));
+            set = lambdaClosure(nset);
+        }
+        return set;
+    }
+

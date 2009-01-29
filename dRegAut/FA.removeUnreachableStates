@@ -1,0 +1,16 @@
+    /** 
+     * Constructs a new automaton with the same language as this automaton but without unreachable states. [Martin, Exercise 3.29] 
+     * The input automaton is unmodified.
+     */
+    public FA removeUnreachableStates() {
+        FA f = (FA) clone();
+        Set reachable = f.findReachableStates();
+        f.states.retainAll(reachable);
+        f.accept.retainAll(reachable);
+        for (StateSymbolPair sp : new HashSet<StateSymbolPair>(f.transitions.keySet())) {
+            if (!f.states.contains(sp.state))
+                f.transitions.remove(sp);
+        }
+        return f;
+    }
+

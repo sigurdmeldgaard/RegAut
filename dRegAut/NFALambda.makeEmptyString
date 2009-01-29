@@ -1,0 +1,14 @@
+    /** 
+     * Constructs a new NFALambda that accepts the language containing only the empty string. [Martin, Th. 4.4]
+     * @param a automaton alphabet
+     */
+    public static NFALambda makeEmptyString(Alphabet a) {
+        NFALambda f = new NFALambda();
+        f.alphabet = a;
+        State s = new State();
+        f.states.add(s);
+        f.initial = s;
+        f.accept.add(s);
+        return f;
+    }
+

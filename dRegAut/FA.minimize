@@ -1,0 +1,90 @@
+    /** Sets a mark in the minimization table. */
+    private void setMark(State r, State s, Map<State,Set<State>> marks) {
+        marks.get(r).add(s);
+    }
+
+    /** Checks whether there is a mark in the minimization table. */
+    private boolean isMarked(State r, State s, Map<State,Set<State>> marks) {
+        return marks.get(r).contains(s) || marks.get(s).contains(r); // pairs are unordered
+    }
+
+    /** 
+     * Constructs a new minimal automaton with the same language as this automaton. [Martin, Sec. 5.2] 
+     * The input automaton is unmodified.
+     * Note: this textbook algorithm is simple to understand but not very efficient 
+     * compared to other existing algorithms.
+     */
+    public FA minimize() { 
+        FA f = removeUnreachableStates();
+        State[] statearray = f.states.toArray(new State[0]); // it's a little easier to work with an array here
+        Map<State,Set<State>> marks = new HashMap<State,Set<State>>(); // the table of pairs
+        for (int i=0; i<statearray.length; i++) 
+            marks.put(statearray[i], new HashSet<State>()); // no marks, initially
+        // first pass, divide into accept/reject states
+        for (int i=0; i<statearray.length; i++)
+            for (int j=0; j<i; j++) {
+                State r = statearray[i];
+                State s = statearray[j];
+                if (f.accept.contains(r)!=f.accept.contains(s)) 
+                    setMark(r, s, marks);
+            }
+        // iteratively perform marking passes until nothing more happens
+        boolean done = false;
+        while (!done) { // (this could be made more efficient with a worklist)
+            done = true;
+            for (int i=0; i<statearray.length; i++) {
+                State r = statearray[i];
+                for (int j=0; j<i; j++) {
+                    State s = statearray[j];
+                    if (!isMarked(r, s, marks)) {
+                        for (char c : f.alphabet.symbols) {
+                            State p = f.delta(r, c);
+                            State q = f.delta(s, c);
+                            if (isMarked(p, q, marks)) {
+                                setMark(r, s, marks);
+                                done = false;
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        // start building the new automaton
+        FA n = new FA();
+        n.alphabet = alphabet;
+        Map<State,State> old2new = new HashMap<State,State>(); // map from old states to new states
+        Map<State,State> new2old = new HashMap<State,State>(); // map from new states to representatives in old states
+        // make new states
+        for (int i=0; i<statearray.length; i++) {
+            State r = statearray[i];
+            boolean repr = true; // true if r is representative for its equivalence class
+            for (int j=0; j<i; j++) {
+                State s = statearray[j];
+                if (!isMarked(r, s, marks)) {
+                    old2new.put(r, old2new.get(s));
+                    repr = false;
+                    break;
+                }
+            }
+            if (repr) {
+                State p = new State();
+                n.states.add(p);
+                if (f.accept.contains(r))
+                    n.accept.add(p);
+                old2new.put(r, p);
+                new2old.put(p, r);
+            }
+            if (r==f.initial)
+                n.initial = old2new.get(r);
+        }
+        // make new transitions
+        for (State p : n.states) {
+            State r = new2old.get(p);
+            for (char c : n.alphabet.symbols) {
+                n.transitions.put(new StateSymbolPair(p, c), old2new.get(f.delta(r, c)));
+            }
+        }
+        return n;
+    }
+

@@ -1,0 +1,28 @@
+    /** 
+     * Converts this FA into an equivalent {@link NFA}. 
+     * Note: this is trivial since an FA is just a special kind of NFA, except for the different representation
+     * (see [Martin, Th. 4.3]).
+     */
+    public NFA toNFA() {
+        NFA f = new NFA();
+        f.alphabet = alphabet;
+        Map<State,State> m = new HashMap<State,State>(); // map from old states to new states
+        for (State p : states) {
+            State s = (State) p.clone();
+            f.states.add(s);
+            m.put(p, s);
+            if (accept.contains(p))
+                f.accept.add(s);
+            if (p==initial)
+                f.initial = s;
+        }
+        for (Map.Entry<StateSymbolPair,State> e : transitions.entrySet()) {
+            StateSymbolPair ssp = e.getKey();
+            State q = e.getValue();
+            Set<State> ns = new HashSet<State>();
+            ns.add(m.get(q));
+            f.transitions.put(new StateSymbolPair(m.get(ssp.state), ssp.symbol), ns);
+        }
+        return f;
+    }
+
