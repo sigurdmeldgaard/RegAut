@@ -1,0 +1,3 @@
+| Navn                 |  Årskort | 1. opgave | 2. opgave | 3. opgave |
+| Jens Klinting        | 20070538 | √         |           |           |
+| Henrik M. Kristensen | 20070632 |           |           |           |
