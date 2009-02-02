@@ -20,4 +20,4 @@
 | Sune Riedel          |          | √         |           |           |
 | Anders Bloch         |          | √         |           |           |
 | Brian Jacobsen       |          | √         |           |           |
-|                      |          |           |           |           |
+| Morten Poulsen       |          | √         |           |           |
