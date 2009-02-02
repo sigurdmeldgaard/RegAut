@@ -1,4 +1,4 @@
-package RegAut;
+package dRegAut;
 
 /** An automaton state. */
 public class State implements Cloneable {

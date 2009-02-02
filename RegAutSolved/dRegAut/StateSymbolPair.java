@@ -1,4 +1,4 @@
-package RegAut;
+package dRegAut;
 
 /** 
  * A pair of a state and an alphabet symbol. 
