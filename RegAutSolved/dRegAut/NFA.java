@@ -248,28 +248,28 @@ public class NFA implements Cloneable {
     }
 
 
-    private State dfs(Set<State> from, Map<Set<State>, <State>> newStates, FA r){
-	State s = newStates.get(from);
-	if(s!=null){
-	    return s;
-	}
-	s = new State();
-	newStates.put(from, s);
-	r.states.add(s);
-	Set<State> fromClone = from.clone();
-	fromClone.retainAll(this.accept);
-        if(!set.isEmpty()){
-	    r.accept.add(s);
-	}
+    private State dfs(Set<State> from, Map<Set<State>, State> newStates, FA r){
+        State s = newStates.get(from);
+        if(s!=null){
+            return s;
+        }
+        s = new State();
+        newStates.put(from, s);
+        r.states.add(s);
+        Set<State> fromClone = new HashSet<State>(from);
+        fromClone.retainAll(this.accept);
+        if(!fromClone.isEmpty()){
+            r.accept.add(s);
+        }
 
-	for(char c : alphabet.symbols()){
-	    Set<State> to = new HashSet<State>();
-	    for(State f : from){
-		to.addAll(this.delta(f,c))
-	    }
-	    a.transitions.put(new StateSymbolPair(s, c), dfs(to, newStates, r));
-	}
-	return s;
+        for(char c : alphabet.symbols){
+            Set<State> to = new HashSet<State>();
+            for(State f : from){
+                to.addAll(this.delta(f,c));
+            }
+            r.transitions.put(new StateSymbolPair(s, c), dfs(to, newStates, r));
+        }
+        return s;
     }
     
     /** 
@@ -278,12 +278,13 @@ public class NFA implements Cloneable {
      * This implementation only constructs the reachable part of the subset state space.
      */
     public FA determinize() {
-	Map<Set<State>, State> newStates = new HashMap<Set<State>, State>();
-	Set<State> initial = new HashSet<State>();
-	initial.add(this.initial);
+        Map<Set<State>, State> newStates = new HashMap<Set<State>, State>();
+        Set<State> initial = new HashSet<State>();
+        initial.add(this.initial);
 
-	FA r = new FA();
-	r.alphabet = this.alphabet;
-	r.initial = dfs(initial, newStates, r);
+        FA r = new FA();
+        r.alphabet = this.alphabet;
+        r.initial = dfs(initial, newStates, r);
+        return r;
     }
 }

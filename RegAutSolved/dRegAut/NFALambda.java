@@ -154,7 +154,9 @@ public class NFALambda implements Cloneable {
         f.states.add(s);
         f.states.add(s1);
         f.initial = s;
-	f.transitions.put(new StateSymbolPair(s, a));
+        Set<State> toSet = new HashSet<State>();
+        toSet.add(s1);
+	f.transitions.put(new StateSymbolPair(s, c), toSet);
         f.accept.add(s1);
         return f;
     }
