@@ -145,9 +145,9 @@ Beskriv ækvivalensklasserne for $I_L$
   fra både $\Lambda$ og 1...
 \end{itemize}
 \pause
-\[X:  \{\Lambda , 0\} \cup \{0,1\}*\{00\} = [\Lambda ]\]
-\[Y:  \{0,1\}*\{1\} = [1]\]
-\[Z:  \{0,1\}*\{10\} = [10]\]
+\[X:  \{\Lambda , 0\} \cup \{0,1\}^*\{00\} = [\Lambda ]\]
+\[Y:  \{0,1\}^*\{1\} = [1]\]
+\[Z:  \{0,1\}^*\{10\} = [10]\]
 \end{frame}
 
 \begin{frame}
@@ -174,9 +174,9 @@ Vi kan definere en FA, hvor tilstandene er ækvivalensklasserne af $I_L$
 \frametitle{Eksempel}
 \begin{itemize}[<+->]
 \item Ækvivalensklasserne for $I_L$ når $L = \{0,1\}^*\{10\}$ :
-\[X:  \{\Lambda , 0\} \cup \{0,1\}*\{00\} = [\Lambda ]\]
-\[Y:  \{0,1\}*\{1\} = [1]\]
-\[Z:  \{0,1\}*\{10\} = [10]\]
+\[X:  \{\Lambda , 0\} \cup \{0,1\}^*\{00\} = [\Lambda ]\]
+\[Y:  \{0,1\}^*\{1\} = [1]\]
+\[Z:  \{0,1\}^*\{10\} = [10]\]
 \begin{columns}
 \column{5cm}
 \includegraphics[scale=0.4]{images/2_seminar_equivclassessigma}
@@ -306,7 +306,7 @@ Vi kan derfor antage at $Lq \neq  \emptyset$ for alle $q\in Q$
 \item $q_0\in R$
 \item $\forall q\in R, a\in \Sigma :  \delta (q, a)\in R$
 \item $R$ er mængden af opnåelige tilstande i $M$
-\item (minder om def. af $\Lambda-lukning$
+\item (minder om def. af $\Lambda-lukning$)
 \end{itemize}
 \end{frame}
 
@@ -404,7 +404,7 @@ Lemma:  Følgende udsagn er ækvivalente:
 \begin{frame}
 \frametitle{Bevis for korrekthed, fortsat}
 \begin{itemize}[<+->]
-\item Påstand:  $p \equiv q$ hvis og kun hvis $(p, q)\in S$
+\item Påstand:  $p \equiv q$ hvis og kun hvis $(p, q)\not\in S$
 \item
 Iflg. lemmaet:\\
 $p \not\equiv q \Leftrightarrow (\exists z\in \Sigma^*:  (\delta^*(p, z)\in A \wedge \delta^*(q, z)\not\in A) 
@@ -558,6 +558,7 @@ while not done do\\
 
 \begin{frame}
 \frametitle{FA.minimize(), phase 3}
+\small{
 FA n = new FA with same alphabet as f
        but with no states or transitions yet\\
 initialize empty maps old2new: $f.Q \rightarrow  n.Q$  and new2old: $n.Q \rightarrow  f.Q$\\
@@ -571,6 +572,7 @@ for each $r\in f.Q$ in order do\\
 \ \ if $r = f.q_0$  then set $n.q_0 = old2new(r)$\\
 \ \ for each state $p \in n$ do\\
 \ \ \ \ add $n.\delta(p,c) = old2new(f.\delta (new2old(p),c))$  for each $c\in \Sigma$ 
+}
 \end{frame}
 
 \begin{frame}[fragile]
