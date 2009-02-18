@@ -1,0 +1,292 @@
+\documentclass{beamer}
+
+\usepackage{beamerthemesplit}
+\usepackage[utf8]{inputenc}
+% \usepackage[danish]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{hyperref}
+\usepackage{enumerate}
+\usepackage{url}
+
+
+\title{3. Seminar EVU RegAut}
+\author{Sigurd Meldgaard}
+\date{28. februar 2009}
+
+\AtBeginSection[]
+{
+   \begin{frame}
+       \frametitle{Plan}
+       \tableofcontents[currentsection]
+   \end{frame}
+}
+
+\begin{document}
+\maketitle
+\section{Lukketheds- og afgørlighedsegenskaber}
+\begin{frame}
+  \frametitle{Lukketheds og afgørlighedsegenskaber}
+  \begin{itemize}
+  \item Lukkethed under $\cup, \cap, ', \cdot, *$ 
+  \item Lukkethed under homomorfi og invers 
+    homomorfi 
+  \item ``Pumping''-lemmaet 
+  \item Beslutningsproblemer: membership,  
+    emptiness,finiteness subset, equality 
+  \item Beslutningsprocedurer i Java-pakken
+  \end{itemize}
+\end{frame}
+\begin{frame}
+\frametitle{Lukkethedsegenskaber}
+Givet to regulære sprog $L_1, L_2$
+\begin{itemize}[<+->]
+\item er $L_1 \cap L_2$ regulært
+\item er $L_1 \cup L_2$ regulært
+\item er $L_1'$ regulært
+\item er $L_1L_2$ regulært
+\item er $L_1*$ regulært
+\end{itemize}
+Ja, det beviste vi første seminar (produktkonstruktionen)
+\end{frame}
+\begin{frame}
+\frametitle{Kontraponering, (Contraposition)}
+\begin{itemize}[<+->]
+\item Lukkethedsegenskaber kan vise at sprog \emph{ikke} er regulære.
+\item Fx: Klassen af regulære sprog er lukket under $\cap$
+\item Antag vi har bevist, at sproget S ikke er  
+regulært 
+\item Hvis $S = P \cap R$ og $R$ er regulært, så kan  
+$P$ ikke være regulært.
+\end{itemize}
+\end{frame}
+\begin{frame}
+\frametitle{Homomorfier}
+\begin{itemize}[<+->]
+\item Antag $g: \Sigma_1 \rightarrow \Sigma_2^*$ hvor $\Sigma_1$ og
+  $\Sigma_2$ er alfabeter
+\item  Definer  $h: \Sigma_1^* \rightarrow \Sigma_2^*$ ved 
+   \[
+   h(x) = \begin{cases}\Lambda &\text{ hvis }x=\Lambda \\
+     h(y)g(a)  & \text{ hvis }x=ya, y\in\Sigma_1^*, a\in\Sigma_1
+\end{cases}
+   \]
+\item  h opfylder at h(xy)=h(x)h(y) og kaldes en  
+homomorfi 
+\item  Definer  $h(L) = \{ h(x) | x\in L \}$  for alle $L\subseteq\Sigma_1^*$
+\item  og $h-1(L) = \{ x | h(x)\in L \}$  for alle $L\subseteq\Sigma_2^*$ 
+\item Se opg. [Martin, opg.4.46] p. 166.
+\end{itemize}
+\end{frame}
+\begin{frame}
+\frametitle{Regularitet og homomorphier}
+\begin{itemize}[<+->]
+\item Hvis $h: \Sigma_1^* \rightarrow \Sigma_2^*$ er en homomorphi og
+  $L\subseteq \Sigma_1^*$ er et regulært sprog, så er $h(L)$ også regulært.
+\item Hvis $h: \Sigma_1^* \rightarrow \Sigma_2^*$ er en homomorphi og
+  $L\subseteq \Sigma_2^*$ er et regulært sprog, så er $h^{-1}(L)$ også regulært.
+\end{itemize}
+Dvs. klassen af regulære sprog er lukket både under homomorfi og
+invers homomorfi.
+\end{frame}
+
+\begin{frame}
+\frametitle{Eksempel}
+\begin{itemize}[<+->]
+\item Er følgende sprog over alfabetet $\Sigma=\{0,1,2\}$ regulært?  
+   $L = \{ x2y | y=reverse(x), x,y\in\{0,1\}^* \}$ 
+\item  Vi ved (fra første seminar) at sproget  
+   $pal = \{ x\in\{0,1\}^* | x=reverse(x) \}$  
+ikke er regulært 
+\item  En (utilstrækkelig) intuition: 
+$L$ minder om $pal$, men måske symbolet $2$, der markerer  
+midten af strengen, gør, at vi kan lave en FA for $L$?
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Eksempel, fortsat}
+\begin{itemize}[<+->]
+\item  Definer tre funktioner  $g1,g2,g3:  \{0,1,2\}\rightarrow\{0,1\}^*$  ved 
+\[g_1(0)=0,\ g_2(0)=0,\ g_3(0)=0 \]
+\[g_1(1)=1,\ g_2(1)=1,\ g_3(1)=1 \]
+\[g_1(2)=\alert{\Lambda},\ g_2(2)=\alert{0},\ g_3(2)=\alert{1} \]
+\item  Og lad $h1,h2,h3$ være de tilhørende homomorfier 
+\item  $h1(L) \cup h2(L) \cup h3(L) = pal$ 
+\item  Så L er \emph{ikke} regulært, idet pal ikke er regulært og klassen  
+af regulære sprog er lukket under forening og homomorfi
+\end{itemize}
+\end{frame}
+\begin{frame}
+\frametitle{Bevis, del 1 (Øvelse)}
+\begin{itemize}[<+->]
+\item Hvis h: $\Sigma_1^*\rightarrow\Sigma_2^*$ er en homomorfi og
+  $L\subseteq\Sigma_1^*$ er et regulært sprog, så er $h(L)$ også regulært
+  \item Bevis: Strukturel induktion i regulære udtryk...
+    (erstat hver $a\in\Sigma_1$ i udtrykket med $h(a)$).
+\end{itemize}
+\end{frame}
+\begin{frame}
+\frametitle{Bevis, del 2}
+\begin{itemize}[<+->]
+\item Hvis h: $\Sigma_1^*\rightarrow\Sigma_2^*$ er en homomorfi og
+  $L\subseteq\Sigma_2^*$ er et regulært sprog, så er $h^{-1}(L)$ også regulært
+  \item Bevis: givet en FA $M=(Q, \Sigma_2, q_0, A, \delta)$ så $L(M)=L$.
+
+    Definer en ny FA $M' = (Q, \Sigma_1, q_0, A, \delta ')$ hvor
+    $\delta '(q,a) = \delta^*(q,h(a))$
+
+  \item Bevis nu at $L(M')=h^{-1}(L)=h^{-1}(L(M))$.
+
+  \item Brug induktion i en
+    streng $x\in L(M)$ og vis at $\delta^*(q_0,x) =
+    \delta^*(q_0,h(x))$.
+\end{itemize}
+\end{frame}
+\section{Pumping lemmaet}
+\begin{frame}
+\frametitle{Endnu en egenskab ved regulære sprog}
+\begin{itemize}[<+->]
+\item Antag $M=(Q, \Sigma, q_0, A, \delta)$ er en FA og $\exists x\in L(M): |x| \geq |Q|$
+\item Ved en kørsel af $x$ på $M$ vil mindst én af tilstandene blive
+  besøgt mere end en gang.
+    \begin{center}
+    \includegraphics[scale=.40]{images/pumping}
+    \end{center}
+\item Se på den første af disse tilstande, nu kan vi se at:
+  $\exists u,v,w\in \Sigma^*: x=uvw \wedge |uv| \leq |Q| \wedge |v|>0 \wedge
+  \delta^*(q_0,u)=\delta^*(q_0,uv)$
+\end{itemize}
+\end{frame}
+\begin{frame}
+\frametitle{``Pumping''-lemmaet for regulære sprog}
+Hvis $L$ er et regulært sprog så gælder:
+
+\hspace{1cm}$\exists n>0:$\\
+\pause
+\hspace{2cm}$\forall x\in L \text{ hvor } |x| \geq n:$\\
+\pause
+\hspace{3cm}$\exists u,v,w\in \Sigma^*:$\\
+\pause
+\hspace{4cm}$(x = uvw) \pause \wedge (|uv|\leq n) \pause \wedge (|v| > 0) \wedge$\\
+\pause
+\hspace{4cm}$(\forall m\geq 0: uv^mw\in L)$\\
+\pause
+\end{frame}
+
+\begin{frame}
+\frametitle{``Pumping''-lemmaet for \alert{ikke}-regulære sprog}
+Dette resultat kan kontraponeres:
+\pause
+\setbeamercolor{lowercol}{fg=black,bg=green}% 
+\begin{beamerboxesrounded}[lower=lowercol,shadow=true]{}
+  Hvis det gælder om $L$\\
+\pause
+\hspace{1cm}$\forall n>0:$\\
+\pause
+\hspace{2cm}$\exists x\in L \text{ hvor } |x| \geq n:$\\
+\pause
+\hspace{3cm}$\forall u,v,w\in \Sigma^*:$\\
+\pause
+\hspace{4cm}$(x = uvw) \wedge (|uv|\leq n) \wedge (|v| > 0) \wedge$\\
+\pause
+\hspace{4cm}$(\exists m\geq 0: uv^mw\not\in L)$\\
+\pause
+Så kan $L$ ikke være regulært.
+\end{beamerboxesrounded}
+\end{frame}
+\xdefinecolor{dg}{rgb}{0.2,.6,.2}
+\xdefinecolor{dr}{rgb}{0.6,.2,.2}
+
+\begin{frame}
+\frametitle{Pumping-lemmaet som ``kvantor-spil''}
+\begin{itemize}[<+->]
+\item  Antag vi prøver at vise, at L er ikke-regulært 
+\item  Vi skal vise noget på form 
+ $\forall n\ldots:   \exists x\ldots:  \forall u,v,w \ldots:  \exists m\ldots:  \ldots$ 
+\item  ``Fjenden'' vil prøve at modarbejde os
+  \begin{enumerate}
+  \item Fjenden vælger {\color{dr}$n$}
+  \item Vi vælger {\color{dg}$x$}   (efter reglerne, dvs. så $x\in L$ og $|x|\geq n$) 
+  \item Fjenden vælger {\color{dr}$u,v,w$}   (efter reglerne\ldots) 
+  \item Vi vælger \color{dg}{$m$}
+  \end{enumerate}
+\item
+Hvis vi uanset fjendens valg kan opnå at $uv^mw\not\in L$, 
+så har vi vundet, dvs. bevist at $L$ er ikke-regulært.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Eksempel 1}
+Lad $L = \{o^i1^i | i \geq 0 \}$
+
+V.h.a. pumping-lemmaet vil vi vise at $L$ ikke er regulært.
+\begin{itemize}[<+->]
+\item Fjenden vælger et ${\color{dr}n}> 0$
+\item Vi vælger  ${\color{dg}x=0^n1^n}$ som opfylder $x\in L$ og $|x|\geq n$
+\item Fjenden vælger ${\color{dr}u,v,w}$ så $x=uvw, |uv|\leq n \text{ og } |v| > 0$
+\item Vi vælger ${\color{dg}m=2}$
+\item Da $x = uvw=0^n1^n, |uv|\leq n$ og $|v|>0$ så gælder at $v=0^k$ for et $k>0$
+\item D.v.s. $uv^mw = uv^2w=0^{n+k}1^n \not\in L$
+\item Så $L$ er \alert{ikke} regulært.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Eksempel 2}
+Lad $L = pal = \{x\in\Sigma^* | x=reverse(x) \}$
+
+V.h.a. pumping-lemmaet vil vi vise at $pal$ ikke er regulært.
+
+\begin{itemize}[<+->]
+\item Fjenden vælger et ${\color{dr}n}> 0$
+\item Vi vælger  ${\color{dg}x=0^n10^n}$ som opfylder $x\in pal$ og $|x|\geq n$
+\item Fjenden vælger ${\color{dr}u,v,w}$ så $x=uvw, |uv|\leq n \text{ og } |v| > 0$
+\item Vi vælger ${\color{dg}m=2}$
+\item Da $x = uvw=0^n10^n, |uv|\leq n$ og $|v|>0$ så gælder at $v=0^k$ for et $k>0$
+\item D.v.s. $uv^mw = uv^2w=0^{n+k}10^n \not\in pal$
+\item Så $pal$ er \alert{ikke} regulært.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Eksempel 3}
+Lad $L = \{o^p | p $ er et primtal $ \}$
+
+V.h.a. pumping-lemmaet vil vi vise at $L$ ikke er regulært.
+
+\begin{itemize}[<+->]
+\item Fjenden vælger et ${\color{dr}n}> 0$
+\item Vi finder et primtal $>n+1$ og vælger ${\color{dg}x=0^p}$
+\item Fjenden vælger ${\color{dr}u,v,w}$ så $x=uvw, |uv|\leq n \text{ og } |v| > 0$
+\item Vi vælger ${\color{dg}m=p-|v|}$
+\item $|uv^mw| = |uv^{p-|v|}w|=|uw|+(p-|v|)\cdot |v| = (p-|v|) + (p-|v|)\cdot |v|
+  =(p-|v|)\cdot(p-|v|)$ Begge disse led $>1$, dvs. $|uv^mw|$ ikke er et primtal
+\item Så $L$ er \alert{ikke} regulært.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Advarsel}
+\begin{itemize}[<+->]
+\item  Pumping-lemmaet kan \alert{ikke} bruges til at vise, at  
+et givet regulært sprog er regulært 
+\item Eksempel: 
+ $L = \{ a^ib^jc^j | i\geq 1\text{ og }j\geq 0 \} \cup \{ b^jc^k | j,k\geq 0 \}$
+\item L er ikke regulært, men L har pumping-egenskaben
+(dvs. $\exists n\ldots:  \forall x\ldots:  \exists u,v,w\ldots:  \forall m\geq 0: uv^mw \in L$)
+\end{itemize}
+\end{frame}
+\begin{frame}
+\frametitle{Øvelser}
+\begin{itemize}
+\item [Martin] 5.23 (a+b+e)
+\end{itemize}
+\end{frame}
+\section{Afgørlighedsegenskaber}
+
+\section{Kontekstfrie Grammatikker}
+\section{Afrunding, og om eksamen}
+\end{document}
