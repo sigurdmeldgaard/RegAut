@@ -1,23 +1,24 @@
-| Navn                 |  Årskort | 1. opgave | 2. opgave | 3. opgave |
-| Jens Klinting        | 20070538 | √         |           |           |
-| Henrik M. Kristensen | 20070632 | ()        |           |           |
-| Peter Finch          |          | √         |           |           |
-| Andy Lannie          | 20080685 | √         |           |           |
-| Jan Duelund          |          | √         |           |           |
-| Kenneth Egholm       | 20074838 | √         |           |           |
-| Torben Riis          |          | √         |           |           |
-| Michael Pedersen     | 19970920 | √         |           |           |
-| Muharem Karabegovic  |          | √         |           |           |
-| Søren Trudsø Mahon   |          | √         |           |           |
-| Morten Hammer Jensen |          | √         |           |           |
-| Anders Monrad        | 20080719 | √         |           |           |
-| Jesper Nielsen       |          | √         |           |           |
-| Kasper Bo Larsen     |          | √         |           |           |
-| Martin Skov Nielsen  |          | √         |           |           |
-| Allan Noe            |          | X         |           |           |
-| Brian Kvisgaard      |          | √         |           |           |
-| Robin Peters         |          | √         |           |           |
-| Sune Riedel          |          | √         |           |           |
-| Anders Bloch         |          | √         |           |           |
-| Brian Jacobsen       |          | √         |           |           |
-| Morten Poulsen       |          | √         |           |           |
+| Navn                 |  Årskort | 1. opgave | 2. opgave | 3. opgave | 25. marts | 26. marts | 27. marts |
+| Jens Klinting        | 20070538 | √         |           |           |           |           |           |
+| Henrik M. Kristensen | 20070632 | ()        |           |           |           |           |           |
+| Peter Finch          |          | √         |           |           | √         |           |           |
+| Andy Lannie          | 20080685 | √         |           |           |           |           |           |
+| Jan Duelund          |          | √         |           |           | √         |           |           |
+| Kenneth Egholm       | 20074838 | √         |           |           |           |           |           |
+| Torben Riis          |          | √         |           |           |           |           |           |
+| Michael Pedersen     | 19970920 | √         |           |           |           |           |           |
+| Muharem Karabegovic  |          | √         |           |           |           |           |           |
+| Søren Trudsø Mahon   |          | √         |           |           |           |           |           |
+| Morten Hammer Jensen |          | √         |           |           |           |           |           |
+| Anders Monrad        | 20080719 | √         |           |           |           |           |           |
+| Jesper Nielsen       |          | √         |           |           |           |           |           |
+| Kasper Bo Larsen     |          | √         |           |           | √         |           |           |
+| Martin Skov Nielsen  |          | √         |           |           | √         |           |           |
+| Allan Noe            |          | X         |           |           |           |           |           |
+| Brian Kvisgaard      |          | √         |           |           |           |           |           |
+| Robin Peters         |          | √         |           |           | √         |           |           |
+| Sune Riedel          |          | √         |           |           |           |           |           |
+| Anders Bloch         |          | √         |           |           |           |           |           |
+| Brian Jakobsen       |          | √         |           |           | √         |           |           |
+| Morten Poulsen       |          | √         |           |           | √         |           |           |
+
