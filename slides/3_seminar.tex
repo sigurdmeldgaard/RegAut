@@ -2,7 +2,7 @@
 
 \usepackage{beamerthemesplit}
 \usepackage[utf8]{inputenc}
-% \usepackage[danish]{babel}
+\usepackage[danish]{babel}
 \usepackage[T1]{fontenc}
 \usepackage{graphicx}
 \usepackage{amsmath}
@@ -25,7 +25,8 @@
 
 \begin{document}
 \maketitle
-\section{Lukketheds- og afgørlighedsegenskaber}
+\section{Lukketheds- og afgorlighedsegenskaber}
+
 \begin{frame}
   \frametitle{Lukketheds og afgørlighedsegenskaber}
   \begin{itemize}
@@ -38,6 +39,7 @@
   \item Beslutningsprocedurer i Java-pakken
   \end{itemize}
 \end{frame}
+
 \begin{frame}
 \frametitle{Lukkethedsegenskaber}
 Givet to regulære sprog $L_1, L_2$
@@ -50,6 +52,7 @@ Givet to regulære sprog $L_1, L_2$
 \end{itemize}
 Ja, det beviste vi første seminar (produktkonstruktionen)
 \end{frame}
+
 \begin{frame}
 \frametitle{Kontraponering, (Contraposition)}
 \begin{itemize}[<+->]
@@ -61,6 +64,7 @@ regulært
 $P$ ikke være regulært.
 \end{itemize}
 \end{frame}
+
 \begin{frame}
 \frametitle{Homomorfier}
 \begin{itemize}[<+->]
@@ -79,6 +83,7 @@ homomorfi
 \item Se opg. [Martin, opg.4.46] p. 166.
 \end{itemize}
 \end{frame}
+
 \begin{frame}
 \frametitle{Regularitet og homomorphier}
 \begin{itemize}[<+->]
@@ -118,6 +123,7 @@ midten af strengen, gør, at vi kan lave en FA for $L$?
 af regulære sprog er lukket under forening og homomorfi
 \end{itemize}
 \end{frame}
+
 \begin{frame}
 \frametitle{Bevis, del 1 (Øvelse)}
 \begin{itemize}[<+->]
@@ -127,24 +133,24 @@ af regulære sprog er lukket under forening og homomorfi
     (erstat hver $a\in\Sigma_1$ i udtrykket med $h(a)$).
 \end{itemize}
 \end{frame}
+
 \begin{frame}
 \frametitle{Bevis, del 2}
 \begin{itemize}[<+->]
 \item Hvis h: $\Sigma_1^*\rightarrow\Sigma_2^*$ er en homomorfi og
   $L\subseteq\Sigma_2^*$ er et regulært sprog, så er $h^{-1}(L)$ også regulært
   \item Bevis: givet en FA $M=(Q, \Sigma_2, q_0, A, \delta)$ så $L(M)=L$.
-
     Definer en ny FA $M' = (Q, \Sigma_1, q_0, A, \delta ')$ hvor
     $\delta '(q,a) = \delta^*(q,h(a))$
-
   \item Bevis nu at $L(M')=h^{-1}(L)=h^{-1}(L(M))$.
-
   \item Brug induktion i en
     streng $x\in L(M)$ og vis at $\delta^*(q_0,x) =
     \delta^*(q_0,h(x))$.
 \end{itemize}
 \end{frame}
+
 \section{Pumping lemmaet}
+
 \begin{frame}
 \frametitle{Endnu en egenskab ved regulære sprog}
 \begin{itemize}[<+->]
@@ -159,6 +165,7 @@ af regulære sprog er lukket under forening og homomorfi
   \delta^*(q_0,u)=\delta^*(q_0,uv)$
 \end{itemize}
 \end{frame}
+
 \begin{frame}
 \frametitle{``Pumping''-lemmaet for regulære sprog}
 Hvis $L$ er et regulært sprog så gælder:
@@ -275,18 +282,160 @@ V.h.a. pumping-lemmaet vil vi vise at $L$ ikke er regulært.
 et givet regulært sprog er regulært 
 \item Eksempel: 
  $L = \{ a^ib^jc^j | i\geq 1\text{ og }j\geq 0 \} \cup \{ b^jc^k | j,k\geq 0 \}$
-\item L er ikke regulært, men L har pumping-egenskaben
+\item L er ikke regulært, men L har pumping-egenskaben (bevis p. 185).
 (dvs. $\exists n\ldots:  \forall x\ldots:  \exists u,v,w\ldots:  \forall m\geq 0: uv^mw \in L$)
 \end{itemize}
 \end{frame}
 \begin{frame}
 \frametitle{Øvelser}
 \begin{itemize}
-\item [Martin] 5.23 (a+b+e)
+\item [Martin] 5.23 (a+b+e) p. 195.
 \end{itemize}
 \end{frame}
 \section{Afgørlighedsegenskaber}
 
+\begin{frame}
+\frametitle{Beslutningsproblemer}
+\begin{itemize}[<+->]
+\item  Membership: Givet en FA $M$ og en streng $x$, tilhører $x$  
+    sproget af M? 
+\item  Emptiness:  Givet en FA $M$, er sproget for $M$ tomt? 
+\item  Finiteness:  Givet en FA $M$, er sproget for $M$ endeligt? 
+\item  Subset:  Givet to FA’er, $M_1$ og $M_2$, er sproget for $M_1$ en  
+       delmængde af sproget for $M_2$? 
+\item  Equality:  Givet to FA’er, $M_1$ og $M_2$, er sprogene for $M_1$  
+                og $M_2$ ens? 
+\item  Alle disse problemer er afgørlige!
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Membership-problemet}
+Givet en FA $M$ og en streng $x$, tilhører $x$ sproget af M? 
+(Dvs. er $x\in L(M)$?)
+\pause
+
+Algoritme: 
+Kør x på M, startende i starttilstanden, og se om den  
+ender i en accepttilstand
+\end{frame}
+
+\begin{frame}
+\frametitle{Emptyness-problemet}
+\begin{itemize}[<+->]
+\item Givet en FA M, er sproget for M tomt? 
+(Dvs. er $L(M)=\emptyset$?) 
+\item Algoritme 1:
+  Afprøv for alle $x\in \Sigma^*$ om $x\in L(M)$ ved hjælp af  
+  algoritmen fra membership-problemet
+\item Duer ikke (uendelig mange strenge at prøve med)
+\item
+  Algoritme 1': Afprøv for alle $x$ hvor $|x|<|Q|$ om $x\in L(M)$ ved
+  hjælp af algoritmen fra membership-problemet (dette er en reduktion
+  af det emptyness-problemet til membership-problemet)
+\item
+  Algoritme 2: 
+  Undersøg om der findes en accepttilstand
+\item Duer ikke hvis accepttilstanden ikke kan opnås fra starttilstanden
+\item
+  Algoritme 2': 
+  Undersøg om der findes en accepttilstand, som er  
+  opnåelig fra starttilstanden
+
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Finiteness-problemet}
+  \begin{itemize}[<+->]
+  \item Givet en FA M, er sproget for M endeligt?  
+    (Dvs. er L(M) en endelig mængde?) 
+  \item
+    Algoritme 1: 
+    Afprøv for alle x hvor $|Q| \leq |x| < 2\cdot |Q|$ om $x\in L(M)$ ved  
+    hjælp af algoritmen fra membership-problemet.
+    $L(M)$ er endeligt hvis og kun hvis der ikke eksisterer en  
+    sådan streng 
+    (Bevis for korrekthed: se bogen p. 188.)
+  \item 
+    Algoritme 2: Ide: Udnyt at $L(M)$ er uendeligt hvis og kun hvis der i
+    tilstandsgrafen for $M$ eksisterer en cykel, der kan nås fra
+    starttilstanden, og som kan nå til en accepttilstand.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Subset-problemet}
+\begin{itemize}[<+->]
+\item Givet to FA’er, $M_1$ og $M_2$, er sproget for $M_1$ en delmængde  
+af sproget for $M_2$? (Dvs. er $L(M_1)\subseteq L(M_2)$?) 
+\item Algoritme: 
+Lav med produktkonstruktionen en FA $M_3$ som opfylder  
+$L(M_3) = L(M_1) - L(M_2)$ og afgør med en algoritme til  
+emptiness-problemet om $L(M_3)=\emptyset$ 
+\item (Bevis for korrekthed:  $L(M_1)\subseteq L(M_2)  \Leftrightarrow  L(M1) - L(M2) = \emptyset$).
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Equality-problemet}
+\begin{itemize}[<+->]
+\item Givet to FA’er, $M_1$ og $M_2$, er sproget for $M_1$ det samme som $M_2$? (Dvs. er $L(M_1)=L(M_2)$?) 
+\item Algoritme:
+  Test med subset-problemet om $L(M_1) \subseteq L(M_2)$ og $L(M_2) \subseteq L(M_1)$
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Øvelser}
+\begin{itemize}[<+->]
+\item  [Martin] 5.26 (a+e) 
+\item  [Martin] 5.28 (a+b+d+g)
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{dRegAut java pakken}
+beslutningsprocedurer for de 
+nævnte beslutningsproblemer
+\begin{itemize}
+\item  FA.accepts(String) 
+\item  FA.isEmpty() 
+\item  FA.isFinite() 
+\item  FA.subsetOf(FA) 
+\item  FA.equals(FA)
+  \pause
+\item  FA.getAShortestExample() --- finder en korteste sti fra starttilstanden til en  
+   accepttilstand (hvis sproget er ikke-tomt)  
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{getAShortestExample}
+Vi laver et bredde-først gennemløb af tilstandsgrafen.
+
+String getAShortestExample() { \\
+\ \ $pending = [ q_0 ]$ // queue of states that need to be visited\\
+\ \ $paths = [ "" ]$  // $paths[i]$ is a shortest path from $q_0$ to $pending[i]$\\
+\ \ $visited = \{ q0 \}$  /e/ set of states that have been visited \\
+\ \ while $pending\neq \emptyset \{$\\
+\ \ \ \ $q = pending.removeFirst()$\\
+\ \ \ \ $path = paths.removeFirst()$\\  
+\ \ \ \ if $q\in A$ then return path\\
+\ \ \ \ else\\
+\ \ \ \ \ \ for each $c\in\Sigma$ do \\
+\ \ \ \ \ \ \ \ $p = \delta(q, c)$\\ 
+\ \ \ \ \ \ \ \ if $p\not\in visited$\\
+\ \ \ \ \ \ \ \ \ \ pending.addToEnd($p$)\\ 
+\ \ \ \ \ \ \ \ \ \ paths.addToEnd($path\cdot c$)\\ 
+\ \ \ \ \ \ \ \ \ \ $visited = visited \cup \{p\}$\\
+\ \ $\}$
+\ \ return null      // return null if no accept state is found \\
+ }  
+\end{itemize}
+\end{frame}
+
 \section{Kontekstfrie Grammatikker}
 \section{Afrunding, og om eksamen}
+
 \end{document}
