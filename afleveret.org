@@ -14,7 +14,7 @@
 | Jesper Nielsen       |          | √         |           |           |           |           |           |
 | Kasper Bo Larsen     |          | √         |           |           | √         |           |           |
 | Martin Skov Nielsen  |          | √         |           |           | √         |           |           |
-| Allan Noe            |          | X         |           |           |           |           |           |
+| Allan Noe            |          | √         |           |           |           |           |           |
 | Brian Kvisgaard      |          | √         |           |           |           |           |           |
 | Robin Peters         |          | √         |           |           | √         |           |           |
 | Sune Riedel          |          | √         |           |           |           |           |           |
