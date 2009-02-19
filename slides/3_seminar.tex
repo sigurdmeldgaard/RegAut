@@ -412,30 +412,41 @@ nævnte beslutningsproblemer
 
 \begin{frame}
 \frametitle{getAShortestExample}
-Vi laver et bredde-først gennemløb af tilstandsgrafen.
-
-String getAShortestExample() { \\
+\small{
+getAShortestExample() // laver bredde-først gennemløb.\\
+\pause
 \ \ $pending = [ q_0 ]$ // queue of states that need to be visited\\
 \ \ $paths = [ "" ]$  // $paths[i]$ is a shortest path from $q_0$ to $pending[i]$\\
-\ \ $visited = \{ q0 \}$  /e/ set of states that have been visited \\
-\ \ while $pending\neq \emptyset \{$\\
+\ \ $visited = \{ q0 \}$  // set of states that have been visited \\
+\pause
+\ \ while $pending\neq \emptyset$ do\\
 \ \ \ \ $q = pending.removeFirst()$\\
 \ \ \ \ $path = paths.removeFirst()$\\  
 \ \ \ \ if $q\in A$ then return path\\
 \ \ \ \ else\\
+\pause
 \ \ \ \ \ \ for each $c\in\Sigma$ do \\
-\ \ \ \ \ \ \ \ $p = \delta(q, c)$\\ 
+\ \ \ \ \ \ \ \ $p = \delta(q, c)$\\
+\pause
 \ \ \ \ \ \ \ \ if $p\not\in visited$\\
 \ \ \ \ \ \ \ \ \ \ pending.addToEnd($p$)\\ 
 \ \ \ \ \ \ \ \ \ \ paths.addToEnd($path\cdot c$)\\ 
 \ \ \ \ \ \ \ \ \ \ $visited = visited \cup \{p\}$\\
-\ \ $\}$
+\pause
 \ \ return null      // return null if no accept state is found \\
- }  
-\end{itemize}
+}
 \end{frame}
 
 \section{Kontekstfrie Grammatikker}
 \section{Afrunding, og om eksamen}
-
+\begin{frame}
+\frametitle{Eksamen}
+\begin{itemize}
+\item Der er 6 eksamensspørgsmål, man trækker et når man kommer ind.
+\item Eksamen varer ca. 20 min inklusiv votering. Det er meget kort
+  tid, så det er godt at have en konkret plan til hvert emne
+\item Karakterer på den nye 7-trinsskala.
+\item Brug endelig tavlen.
+\end{itemize}
+\end{frame}
 \end{document}
