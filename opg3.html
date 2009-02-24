@@ -1,0 +1,233 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>EVU RegAut</title>
+    <link rel="shortcut icon" href="http://www.daimi.au.dk/~amoeller/au/favicon.ico"/>
+    <link href="au.css" rel="stylesheet" type="text/css"/>
+  </head>
+  <body>
+    <div id="border">
+      <div id="header"></div>
+      <div id="header-bar"></div>
+      <div id="navigation"></div>
+
+    <div id="main">
+
+      <h1>Uge 9</h1>
+
+      <h3>Følgende materiale bliver gennemgået lørdag den 28. februar 2008</h3>
+
+<!--      <h4>Minimering af automater (fortsat)</h4> 
+
+      [Martin, kap. 5.1-5.2]
+
+      <ul>
+        <li>en minimeringssalgoritme
+        Java: 
+        <tt><a href="http://www.daimi.au.dk/dRegAut/doc/dRegAut/FA.html#minimize%28%29">minimize</a></tt> metoden i 
+        <tt>dRegAut.FA</tt>
+        </li>
+      </ul>
+    </div>
+    -->
+
+<ul>
+  <li>regulære udtryk i
+  <a href="http://java.sun.com/j2se/1.5.0/docs/api/java/util/regex/package-summary.html">Java SDK 5.0</a>
+  og <a href="http://regex.info/">Unix</a>
+  </li>
+</ul>
+
+      <h4>Lukketheds- og afgørlighedsegenskaber ved regulære sprog</h4> 
+
+      [Martin, kap. 5.3-5.5]
+
+      <ul>
+        <li>lukkethedsegenskaber (∪, ∩, -, ∁, ∙, *, ...)
+
+        </li><li>"pumping"-lemmaet
+        </li><li>beslutningsproblemer: <i>membership</i>, <i>emptiness</i>, <i>finiteness</i>, <i>equality</i>, <i>subset</i>
+        </li><li>Java: <tt>dRegAut.FA</tt>metoderne <tt><a href="http://www.daimi.au.dk/dRegAut/doc/dRegAut/FA.html#isEmpty%28%29">isEmpty</a></tt>, <tt><a href="http://www.daimi.au.dk/dRegAut/doc/dRegAut/FA.html#isFinite%28%29">isFinite</a></tt>, <tt><a href="http://www.daimi.au.dk/dRegAut/doc/dRegAut/FA.html#subsetOf%28dRegAut.FA%29">subsetOf</a></tt>, <tt><a href="http://www.daimi.au.dk/dRegAut/doc/dRegAut/FA.html#equals%28java.lang.Object%29">equals</a></tt> og <tt><a href="http://www.daimi.au.dk/dRegAut/doc/dRegAut/FA.html#getAShortestExample%28%29">getAShortestExample</a></tt>
+      </li></ul>
+
+
+      <h4>Kontekstfri grammatikker</h4> 
+
+      [Martin, kap. 6.1-6.2]
+
+      <ul>
+        <li>definition af CFG'er og deres sprog</li>
+        <li>eksempler på kontekstfri grammatikker</li>
+        <li><a href="http://daimi.au.dk/dRegAut/JavaBNF.html">grammatik for Java</a></li>
+      </ul>
+
+
+      <h3>Opgaver</h3>
+
+      <h4>[Martin]:</h4>
+      <ul>
+        <!-- minimering -->
+<!--        <li>5.2 (s.191)
+        </li><li>5.7 (s.191)
+        </li><li>5.16 (a+b) (s.192)-->
+        <!-- pumping + lukkethedsegenskaber -->
+        </li><li>5.23 (a+b+e) (s.195)
+        </li><li>5.26 (a-h) (s.195)
+        </li><li>5.28 (a+b+d+g) (s.196)
+        </li><li>6.1 (a+b+e) (s.240)
+        </li><li>6.9 (a-c) (s.242)
+      </li></ul>
+
+      <!--
+      <h4>Perspektiverende opgave:</h4>
+      <ul>
+        <li>
+          Lad M<sub>1</sub> og M<sub>2</sub> være FA'er defineret ved<br/>
+          M<sub>1</sub> = ({1,2,3,4,5,6,7},{a,b},1,{1,2},δ<sub>1</sub>)<br/>
+
+          M<sub>2</sub> = ({1,2,3,4,5,6,7},{a,b},1,{2,4,6},δ<sub>2</sub>)<br/>
+          hvor δ<sub>1</sub> og δ<sub>2</sub>
+
+          er defineret ved:
+          <table border="0" cellspacing="10"><tbody><tr><td>
+            <table border="1" cellpadding="5" cellspacing="0">
+              <tbody><tr><td>δ<sub>1</sub></td><th>a</th><th>b</th></tr>
+              <tr><th>1</th><td>2</td><td>6</td></tr>
+
+              <tr><th>2</th><td>1</td><td>7</td></tr>
+              <tr><th>3</th><td>5</td><td>2</td></tr>
+              <tr><th>4</th><td>2</td><td>3</td></tr>
+              <tr><th>5</th><td>3</td><td>1</td></tr>
+
+              <tr><th>6</th><td>7</td><td>3</td></tr>
+              <tr><th>7</th><td>6</td><td>5</td></tr>
+            </tbody></table>
+            </td><td>
+            </td><td>
+            <table border="1" cellpadding="5" cellspacing="0">
+
+              <tbody><tr><td>δ<sub>2</sub></td><th>a</th><th>b</th></tr>
+              <tr><th>1</th><td>1</td><td>3</td></tr>
+              <tr><th>2</th><td>6</td><td>3</td></tr>
+              <tr><th>3</th><td>5</td><td>7</td></tr>
+
+              <tr><th>4</th><td>6</td><td>1</td></tr>
+              <tr><th>5</th><td>1</td><td>7</td></tr>
+              <tr><th>6</th><td>2</td><td>7</td></tr>
+              <tr><th>7</th><td>5</td><td>3</td></tr>
+
+            </tbody></table>
+          </td></tr></tbody></table>
+          Find for hver automat en minimal automat, der accepterer samme sprog.
+          <p>
+            </p></li><li>Virker minimeringsalgoritmen fra [Martin] også på NFA'er? Argumenter for din påstand.
+            <p>
+              </p></li><li>Vis at minimale <font color="red">N</font>FA'er ikke er unikke. (Dvs. find to
+              forskellige NFA'er der accepterer samme sprog og begge har et minimalt
+              antal tilstande.)
+              <p>
+                </p></li><li>Vi har set en (meget simpel) algoritme til, givet en FA M, at finde en komplementær FA M' hvor L(M')=(L(M))'.
+                Virker den algoritme også på NFA'er? Argumenter for din påstand.
+                <p>
+
+      </p></li></ul>
+-->
+      <h3>Programmeringsprojekt</h3>
+
+      Udleverede programdele til dRegAut pakken:
+
+      <ul>
+        <li><tt><a href="dRegAut/FA.isFinite" type="text/x-java-source">FA.isFinite</a></tt>
+        </li><li><tt><a href="dRegAut/FA.equals" type="text/x-java-source">FA.equals</a></tt>
+      </li></ul>
+
+      <p>
+        Opgaver: 
+        </p><ul>
+
+        <li><b>J9</b>:
+        Implementer flg. metoder (ialt. ca. 30 linjers programkode):
+        <ul>
+          <li>
+            <tt>FA.isEmpty</tt>&nbsp; (hint: brug <tt>findReachableStates</tt>)
+          </li>
+          <li>
+            <tt>FA.subsetOf</tt>&nbsp; (hint: kombiner 2 eksisterende metoder)
+          </li>
+          <li>
+            <tt>FA.getAShortestExample</tt>
+          </li>
+        </ul>
+
+        </li>
+        <li>
+          <b>J10:</b>
+          Vi kan nu lave et program, der sammensætter og grundigt afprøver de forskellige operationer.
+
+          <ol>
+            <li>Som input tager programmet et alfabet <i>Σ</i> (givet som mængden af tegn i en tekst-streng)
+            og et regulært udtryk <i>r</i> (i form af en tekst-streng) over <i>Σ</i>.
+            </li>
+            <li>Først oversættes <i>r</i> til en FA <i>A</i>.</li>
+            <li>Derefter oversættes <i>A</i> til et regulært udtryk <i>r'</i> (som ikke nødvendigvis er identisk med <i>r</i> !).</li>
+            <li>Til sidst oversættes <i>r'</i> til en minimal FA <i>A'</i> og der undersøges om sproget for <i>A</i> og <i>A'</i> er ens.
+            (Hvis ikke, så er der en programmeringfejl et eller andet sted!)
+            </li>
+          </ol>
+          Prøv at køre programmet på et antal forskellige input. Denne test får
+          grundigt afprøvet de fleste automatoperationer - men selv hvis denne test
+          ikke afslører nogen programmeringsfejl er der selvfølgelig stadig en risiko for at de eksisterer.
+          <p>
+            </p></li><li><b>J11</b>: 
+            Skriv følgende "gæt-et-regulært-udtryk" program:
+
+            <ol>
+              <li>Programmet tager som input et alfabet <i>Σ</i> (givet som mængden af tegn i en tekst-streng)
+              og et regulært udtryk <i>r</i> (i form af en tekst-streng) over <i>Σ</i>. 
+              </li><li>Når programmet kører vil brugeren blive bedt om at indtaste et regulært udtryk <i>r'</i>. 
+              </li><li>Programmet vil derefter undersøge om L(<i>r</i>)=L(<i>r'</i>).
+              Hvis svaret er ja udskrives "ja!" og programmet stopper, hvis ikke, så udskrives et eksempel på en streng, der ligger i
+              L(<i>r</i>) men ikke i L(<i>r'</i>) (hvis en sådan eksisterer), og omvendt, en streng, der ligger i
+              L(<i>r'</i>) men ikke i L(<i>r</i>) (hvis en sådan eksisterer), og brugeren skal indtaste et nyt regulært udtryk.
+
+            </li></ol>
+            Ideen er at "mesteren" stiller "eleven" en opgave, f.eks. "<i>skriv et regulært udtryk, der svarer til strenge med et ulige antal 1'er</i>", starter programmet med et korrekt svar som input, og lader eleven afprøve sine gæt.
+            (Hint: Brug <tt>RegExp.toNFALambda</tt>, <tt>NFALambda.removeLambdas</tt>, <tt>NFA.determinize</tt>, 
+            <tt>FA.minus</tt>, <tt>FA.isEmpty</tt> og <tt>FA.getAShortestExample</tt>.)
+
+            <p>
+            </p></li></ul>
+            <h3>Obligatorisk afleveringsopgave 3</h3>
+
+            Afleveringsfristen for tredie delopgave er:
+            <b>endnu ikke offentliggjort</b>. 
+
+            <h4>pumping-spillet</h4>
+            <p>  
+              Følgende programmer illustrerer det "kvantor-spil", der forekommer, når man prøver at bruge
+              pumping-lemmaet til at vise, at et givet sprog er ikke-regulært:
+            </p>
+            <ul>
+              <li><tt><a href="java/Pumping1.class">Pumping1.class</a></tt></li>
+              <li><tt><a href="java/Pumping2.class">Pumping2.class</a></tt></li>
+            </ul>
+            <p>
+              Hent class-filerne og kør spillene med f.eks. "<tt>java
+              Pumping1</tt>".
+            </p>
+            <p>
+              Kan det lade sig gøre at vinde i spillene Pumping1 og Pumping2? For
+              hvert spil, hvis svaret er JA skal du aflevere en sekvens af træk
+              som demonstrerer sejren, men du skal gøre det generelt, dvs. forklare
+              for hvert muligt valg computeren kan træffe, hvordan du kan besejre
+              det.
+            </p>
+            <p>
+              Hvis svaret er NEJ skal du forklare hvorfor
+              (hint: beskriv f.eks. sproget med et regulært udtryk).
+            </p>
+          </div>
+    </div>
+  </body>
+</html>
