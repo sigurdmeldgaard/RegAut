@@ -114,10 +114,10 @@ af regulære sprog er lukket under forening og homomorfi
   $L\subseteq\Sigma_2^*$ er et regulært sprog, så er $h^{-1}(L)$ også regulært
   \item Bevis: givet en FA $M=(Q, \Sigma_2, q_0, A, \delta)$ så $L(M)=L$.
     Definer en ny FA $M' = (Q, \Sigma_1, q_0, A, \delta ')$ hvor
-    $\delta '(q,a) = \delta^*(q,h(a))$
+    $\delta'(q,a) = \delta^*(q,h(a))$
   \item Bevis nu at $L(M')=h^{-1}(L)=h^{-1}(L(M))$.
   \item Brug induktion i en
-    streng $x\in L(M)$ og vis at $\delta^'^*(q_0,x) =
+    streng $x\in L(M)$ og vis at $\delta'^*(q_0,x) =
     \delta^*(q_0,h(x))$.
 \end{itemize}
 \end{frame}
