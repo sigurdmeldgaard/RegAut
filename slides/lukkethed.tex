@@ -3,7 +3,7 @@
 \begin{frame}
   \frametitle{Lukketheds og afgørlighedsegenskaber}
   \begin{itemize}
-  \item Lukkethed under $\cup, \cap, ', \cdot, *$ 
+  \item Lukkethed under $\cup, \cap, ', \cdot, {}^*$ 
   \item Lukkethed under homomorfi og invers 
     homomorfi 
   \item ``Pumping''-lemmaet 
@@ -21,7 +21,7 @@ Givet to regulære sprog $L_1, L_2$
 \item er $L_1 \cup L_2$ regulært
 \item er $L_1'$ regulært
 \item er $L_1L_2$ regulært
-\item er $L_1*$ regulært
+\item er $L_1^*$ regulært
 \end{itemize}
 Ja, det beviste vi første seminar (produktkonstruktionen)
 \end{frame}
@@ -117,7 +117,7 @@ af regulære sprog er lukket under forening og homomorfi
     $\delta '(q,a) = \delta^*(q,h(a))$
   \item Bevis nu at $L(M')=h^{-1}(L)=h^{-1}(L(M))$.
   \item Brug induktion i en
-    streng $x\in L(M)$ og vis at $\delta^*(q_0,x) =
+    streng $x\in L(M)$ og vis at $\delta^'^*(q_0,x) =
     \delta^*(q_0,h(x))$.
 \end{itemize}
 \end{frame}
@@ -200,7 +200,7 @@ så har vi vundet, dvs. bevist at $L$ er ikke-regulært.
 
 \begin{frame}
 \frametitle{Eksempel 1}
-Lad $L = \{o^i1^i | i \geq 0 \}$
+Lad $L = \{0^i1^i | i \geq 0 \}$
 
 V.h.a. pumping-lemmaet vil vi vise at $L$ ikke er regulært.
 \begin{itemize}[<+->]
@@ -233,7 +233,7 @@ V.h.a. pumping-lemmaet vil vi vise at $pal$ ikke er regulært.
 
 \begin{frame}
 \frametitle{Eksempel 3}
-Lad $L = \{o^p | p $ er et primtal $ \}$
+Lad $L = \{0^p | p $ er et primtal $ \}$
 
 V.h.a. pumping-lemmaet vil vi vise at $L$ ikke er regulært.
 
