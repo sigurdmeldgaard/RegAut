@@ -1,0 +1,106 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Regulære udtryk brugt i praksis</title>
+    <link rel="shortcut icon" href="http://www.daimi.au.dk/~amoeller/au/favicon.ico"/>
+    <link href="au.css" rel="stylesheet" type="text/css"/>
+  </head>
+  <body>
+    <div id="border">
+      <div id="header"></div>
+      <div id="header-bar"></div>
+      <div id="navigation"></div>
+      
+      <div id="main">
+        <h1>Regulære udtryk brugt i praksis</h1>
+        <h2>Generelt</h2>
+        <p>
+        Regulære udtryk er
+        enormt praktiske til mange formål når man skal søge i og
+        manipulere tekst.
+
+        
+        Den syntax vi har brugt til regulære udtryk giver god mening
+        matematisk, men er ikke helt magen til den man ser i de fleste
+        systemer (det mest standardiserede er nok <a
+        href="http://en.wikipedia.org/wiki/Regular_expression">POSIX
+        regulære udtryk)</a>. Her er en oversigt over nogle forskelle fra hvad vi har brugt:
+        </p>
+        <ul>
+        <li>
+          <em>Λ</Em> repræstenteres bare ved ingenting at skrive (evt. i en parantes)
+          Hvis man vil skrive <tt>Λ|r</tt> kan man bruge <tt>r?</tt>
+        </li>
+        <li>
+          <em>+</em> repræsenteres med en "bar" | (og et plus betyder "en eller flere")
+        </li>
+        <li>
+          Man kan bruge . (punktum) til at repræsentere et vilkårligt symbol
+        </li>
+        <li>
+          Man kan lave "klasser" af karakterer med kantede paranteser
+          ex: <tt>[0-9]</tt> matcher et enkelt ciffer. Den negative
+          klasse starter med ^: <tt>[^0-9]</tt> matcher et enkelt
+          ikke-tal.
+        </li>
+        <li>
+          <em>Ø</em> bruges sjældent, kan konstrueres kunstigt som  
+        </li>
+        <li>
+          Hvis man vil matche et special-symbol kan man "escape" det
+          med et \. For at matche en * skal man altså skrive <tt>\*</tt>
+        </li>
+        <li>
+          De regulære udtryk matcher en streng hvis det kan matche "et
+          eller andet sted" i strengen. For at matche en streng som starter med <tt>a</tt> skal man altså skrive <tt>^a</tt>
+          og for at matche netop strengen <tt>a</tt> skal man bruge <tt>^a$</tt>
+        </li>
+        </ul>
+        <p>
+        Typisk konverteres det regulære udtryk ikke helt til en FA,
+        men matchingen foregår ved hjælp af "backtracking", dvs man
+        prøver at matche så meget man kan, og hvis de ikke virker går
+        man tilbage indtil man kan prøve at matche på noget
+        andet. Derfor kan man lave udtryk som det tager exponentiel
+        lang tid at matche.
+        </p>
+        <p>
+        Det jeg beskriver her er teknisk set ikke regulære udtryk som
+        vi har lært om dem at kende, man kan for eksempel matche
+        sproget {a<sup>i</sup>ba<sup>i</sup>} med udtrykket:
+        <tt>^(a*)b\1$</tt> fordi \n (hvor n er et tal) matcher det som
+        blev matchet i den første parantes. De fleste værktøjer giver
+        også adgang til at få den del af strengen som blev matchet af
+        en bestemt parantes.
+        </p>
+        Et par eksempler:
+        <ul>
+          <li>
+            En email adresse matcher altid <tt>^[A-Za-z0-9._-]+@[[A-Za-z0-9.-]+$</tt> men faktisk er email-adresser mere præcist beskrevet med et kæmpe udtryk som <a href="http://ex-parrot.com/~pdw/Mail-RFC822-Address.html">det her</a>
+          </li>
+          <li>
+            Hvis man søger efter links i en html-fil, kan man bruge dette udtryk <tt>&gt;a +href="http://([\w\.-]+)</tt>
+            Det som bliver matchet af parantesen er domænenavnet.
+          </li>
+        </ul>
+        <h2>grep</h2>
+        <p>
+          Er et kommandolinje-program som findes på alle
+          unix-baserede operativsystemer (Mac-OS, Linux, etc.) og kan <a
+          href="http://gnuwin32.sourceforge.net/packages/grep.htm">fås
+          til windows</a>. Den finder linjer i sit input som matcher et regulært udtryk, og kan bruges til at finde ting, eller som filter. kommandoen</p>
+          
+        <tt>grep "while\(|for\(" *.java</tt>
+        <p>vil for eksempel udskrive alle linjer i java-filer
+        med enten teksten <tt>while(</tt> eller <tt>for(</tt>
+        </p>
+        <h2>Java</h2> Der er en god tutorial til at bruge regulære
+        udtryk <a
+        href="http://java.sun.com/docs/books/tutorial/essential/regex/">her</a>
+        Næsten alle programmeringssprog understøtter regulære udtryk,
+        det er bare at google efter det.
+      </div>
+    </div>
+  </body>
+</html>
