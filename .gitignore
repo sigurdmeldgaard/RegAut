@@ -1,0 +1,17 @@
+/2_seminar_2_flymake.tex
+/2_seminar_1prime.ppt
+/slides/*.aux
+/slides/*.log
+/slides/*.nav
+/slides/*.out
+/slides/*.snm
+/slides/*.toc
+/slides/*.vrb
+/slides/*.aux
+/slides/*.bbl
+/slides/*.blg
+/slides/*.dvi
+/slides/*.pdf
+.DS_Store
+
+/slides/2_seminar_kleene_1_ex_10.png
