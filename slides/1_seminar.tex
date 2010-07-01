@@ -26,8 +26,19 @@
 %\let\originaltextperiodcentered\textperiodcentered
 \renewcommand{\textperiodcentered}{\ensuremath{\cdot}}
 \newcommand{\explain}[2]{\underset{\mathclap{#2}}{\underbrace{#1}}}
+\newcommand{\putat}[3]{\begin{picture}(0,0)(0,0)\put(#1,#2){#3}\end{picture}}
 
 \def\imagetop#1{\vtop{\null\hbox{#1}}}
+
+\newenvironment<>{varblock}[2][\textwidth]{%
+  \setlength{\textwidth}{#1}
+  \begin{actionenv}#3%
+    \def\insertblocktitle{#2}%
+    \par%
+    \usebeamertemplate{block begin}}
+  {\par%
+    \usebeamertemplate{block end}%
+  \end{actionenv}}
 
 \setbeamertemplate{navigation symbols}{} 
 \setbeamertemplate{items}[circle]
@@ -54,7 +65,7 @@ Ph.d. studerende i Kryptologi}
 %\begin{frame}[plain]
 %  \titlepage
 %\end{frame}
-%\ignore{
+\ignore{
 \maketitle
 \begin{frame}
 \frametitle{Plan}
@@ -740,9 +751,9 @@ sprog $S$ er regulært?
 \begin{frame}
 \frametitle{Øvelser}
 \begin{itemize}
-\item[] [Martin] Opg. 3.2
-\item[] [Martin] Opg. 3.9 (a-e)
-\item[] [Martin] Opg. 3.10 (a-b)
+\item{} [Martin] Opg. 3.2
+\item{} [Martin] Opg. 3.9 (a-e)
+\item{} [Martin] Opg. 3.10 (a-b)
 \end{itemize}
 \end{frame}
 
@@ -1099,9 +1110,9 @@ $L(M) = ∅$ &
 \begin{frame}
   \frametitle{Øvelser}
 \begin{itemize}
-\item[] [Martin] Opg. 3.17 (e)
-\item[] [Martin] Opg. 3.18
-\item[] [Martin] Opg. 3.19 (a-c)
+\item{} [Martin] Opg. 3.17 (e)
+\item{} [Martin] Opg. 3.18
+\item{} [Martin] Opg. 3.19 (a-c)
 \end{itemize}
 \end{frame}
 
@@ -1232,7 +1243,9 @@ M2:
 \imagetop{\includegraphics[scale=.25]{images/1_seminar_union}}
 \end{tabular}  
 \end{frame}
-%} % ignore
+
+} % ignore
+
 
 \begin{frame}
   \frametitle{Produktkonstruktionen}
@@ -1325,12 +1338,221 @@ er $R’$ ($R$s komplement) også regulært?
 
 \begin{frame}
   \frametitle{Eksempel}
-  \begin{itemize}[<+->]
-  \item M:
-\imagetop{
-  \includegraphics[scale=0.2] {images/1_seminar_union}}
-\imagetop{  \includegraphics[scale=0.2] {images/1_seminar_union_inv}}
+  \begin{itemize}
+  \item $M$: (Strenge der enten har et lige antal 0'er, \\
+\textbf{eller} slutter med 0)
+
+\begin{center}
+  \includegraphics[scale=0.2] {images/1_seminar_union}
+\end{center}    
+\item $M'$: (Strenge der både har et \textbf{ulige} antal 0'er,\\
+  \textbf{og ikke} slutter med 0)
+
+\begin{center}
+\includegraphics[scale=0.2] {images/1_seminar_union_inv}
+\end{center}
   \end{itemize}
 \end{frame}
+
+\begin{frame}
+  \frametitle{Øvelse}
+  \begin{itemize}
+  \item {} [Martin] 3.33 (a-c)
+  \end{itemize}
+\end{frame}
+
+\section{dRegAut pakken}
+
+\begin{frame}
+  \frametitle{dRegAut pakken}
+  Udleverede programdele:
+  \begin{itemize}
+  \item \texttt{FA.java}:
+    \begin{itemize}
+    \item repræsentation af FA’er
+    \end{itemize}
+\item \texttt{Alphabet.java, State.java,\\
+    StateSymbolPair.java, \\AutomatonNotWellDefinedException.java}:\\
+ hjælpeklasser til \texttt{FA.java}
+
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{FA.java}
+\begin{columns}
+\begin{column}{0.7\textwidth}
+\texttt{public class FA \{ }\\
+\hspace{0.5cm}\texttt{public Set<State> states;}\hfill // Q \\
+\hspace{0.5cm}\texttt{public Alphabet alphabet;}\hfill // Σ \\
+\hspace{0.5cm}\texttt{public State initial;} \hfill // $q_0∈Q$ \\
+\hspace{0.5cm}\texttt{public Set<State> accept;} \hfill // $A⊆Q$\\
+\hspace{0.5cm}\texttt{public Map<StateSymbolPair,State>\\
+\hspace{1.0cm} transitions;} \hfill // $δ: Q×Σ→Q$\\
+\hspace{0.5cm}\texttt{...}\\
+\texttt{\}}
+\end{column}
+\end{columns}
+\begin{itemize}
+\item et \texttt{Alphabet} objekt indeholder mængde af \texttt{Character} objekter
+\item et \texttt{StateSymbolPair} objekt består af et \texttt{State} objekt og et
+\texttt{Character} objekt
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Nyttige metoder i FA.java}
+  \begin{itemize}
+  \item \texttt{FA()} — konstruerer uinitialiseret FA objekt
+  \item \texttt{FA(Alphabet a)} — konstruerer FA for det tomme sprog
+  \item \texttt{clone()} — kloner et FA objekt
+  \item \texttt{checkWellDefined()} — undersøger om FA objektet
+    repræsenterer en veldefineret FA
+  \item \texttt{getNumberOfStates()} — returnerer størrelsen af \texttt{states}
+  \item \texttt{setTransition(State q, char c, State p)} \\
+    — tilføjer en c transition fra q til p
+  \item \texttt{toDot()} — konverterer FA objekt til \\ ‘Graphviz dot’ input 
+    (til grafisk repræsentation)
+  \end{itemize}
+\end{frame}
+
+\section{Automater til modellering og verifikation}
+
+\begin{frame}
+  \frametitle{Eksempel}
+  
+\putat{250}{-60}{\includegraphics[width=0.2\textwidth]{images/1_seminar_tog_skilt}}
+
+  En jernbaneoverskæring
+  \begin{itemize}
+  \item Tre komponenter:
+    \begin{itemize}
+    \item et \textbf{tog}
+      \begin{itemize}
+      \item krydser vejen
+      \item kommunikerer med kontrolsystemet
+      \end{itemize}
+    \item et \textbf{kontrolsystem}
+      \begin{itemize}
+      \item styrer bommen
+      \end{itemize}
+    \item en \textbf{bom}
+    \end{itemize}
+  \item Sikkerhedsegenskab:
+    bommen er altid nede, når toget krydser vejen
+
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Modellering af systemet}
+\begin{tabular}{lll}
+Tog & Kontrolsystem & Bom \\
+  \includegraphics[width=0.2\textwidth]{images/1_seminar_togmodel_tog} &
+  \includegraphics[width=0.2\textwidth]{images/1_seminar_togmodel_kontrol} &
+  \includegraphics[width=0.2\textwidth]{images/1_seminar_togmodel_bom}\\
+\end{tabular}
+  \begin{itemize}
+  \item Begivenheder (alfabet):
+{\small
+\begin{itemize}
+\item \textbf{approach}: toget nærmer sig
+\item \textbf{cross}:    toget krydser vejen
+\item \textbf{exit}:     toget forlader området
+\item \textbf{lower}:    besked til bommen om at gå ned
+\item \textbf{raise}:    besked til bommen om at gå op
+\item \textbf{down}:     bommen går ned
+\item \textbf{up}:       bommen går op
+\end{itemize}
+}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Modellering som FA}
+  Eksempel:
+\imagetop{\includegraphics[scale=0.3]{images/1_seminar_togmodel_togFA}}
+  \begin{itemize}
+\item definer accepttilstande
+\item tilføj loop-transitioner så komponenterne får samme alfabet
+\item tilføj crash-tilstand og ekstra transitioner \\
+  så transitionsfunktionen bliver total
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Kombination af elementerne}
+  \begin{itemize}
+  \item  Vi er interesseret i de sekvenser af begivenheder,
+der opfylder alle komponenterne
+\item Produktkonstruktion:
+\[L(M) = L(M_{TOG}) ∩ L(M_{KONTROL}) ∩ L(M_{BOM})\]
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Modellering af sikkerhedsegenskaben}
+``Bommen er altid nede når toget krydser vejen''
+
+
+  \begin{itemize}
+  \item S:
+
+\begin{center}
+{\includegraphics[scale=0.3]{images/1_seminar_togmodel_sikkerhed}}
+\end{center}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Verifikation}
+  \begin{itemize}
+  \item  Korrekthed: $L(M) ∩ (L(S))’ = ∅$
+\item dvs. vi skal bruge
+\begin{itemize}
+\item produktkonstruktion (igen)
+\item komplement
+\item algoritme til at afgøre \\ 
+  om sproget for en given FA er
+\end{itemize}
+
+tomt (3. seminar)
+\item hvis $L(M) ∩ (L(S))’ {\color{red}≠} ∅$:
+   enhver streng i $L(M) ∩ (L(S))’$ svarer til
+   et \textbf{modeksempel} (algoritme: 3. seminar)
+
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Verifikation med dRegAut-pakken}
+  \begin{itemize}
+\item Opbyg FA-objekter svarende til
+$M_{TOG}, M_{KONTROL}, M_{BOM}$, og $S$
+\item Kombiner med \texttt{FA.intersection()} og
+\texttt{FA.complement()}
+\item Brug \texttt{FA.isEmpty()} og
+\texttt{FA.getAShortestExample()}
+\item Resultat:
+
+  modeksempel:\\
+\ \ \ \textbf{approach · lower · down · up · cross}
+
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Resume}
+  \begin{itemize}[<+->]
+  \item Definition af \textbf{endelige automater} og deres sprog
+  \item \textbf{Skelnelighed}, hvad repræsenterer tilstandene,
+    nødvendigt antal tilstande
+  \item \textbf{Produktkonstruktionen}, komplement \emph{(konstruktive beviser)}
+  \item \texttt{dRegAut.FA} klassen, Java-repræsentation af FA’er
+  \item Eksempel: automater til modellering og verifikation
+
+  \end{itemize}
+\end{frame}
+
 \end{document}
 

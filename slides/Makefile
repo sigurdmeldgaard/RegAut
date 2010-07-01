@@ -14,7 +14,12 @@ svgfigs=\
 1_seminar_union.svg\
 1_seminar_union_inv.svg\
 1_seminar_union2.svg\
-1_seminar_ends_with_zero.svg
+1_seminar_ends_with_zero.svg\
+1_seminar_togmodel_tog.svg\
+1_seminar_togmodel_kontrol.svg\
+1_seminar_togmodel_togFA.svg\
+1_seminar_togmodel_sikkerhed.svg\
+1_seminar_togmodel_bom.svg
 
 dotfigs=\
 2_seminar_lambdaelim.dot\
@@ -84,19 +89,14 @@ $(F).bbl: references.bib
 $(addsuffix .pdf, $(SEMS)): %.pdf: %.tex $(figs)
 	pdflatex $<
 
-$(addsuffix _handout.pdf, $(SEMS)): %_handout.pdf: %.tex $(figs)
+
+$(addsuffix _handout.tex, $(SEMS)): %_handout.tex: %.tex
 	sed 's_documentclass\[\]_documentclass[handout]_'\
- $(<:_handout.tex,.tex) > $(<)
-	pdflatex $<_handout.tex
+ $(<) > $(@:.pdf=.tex)
 
+$(addsuffix _handout.pdf, $(SEMS)): %_handout.pdf: %_handout.tex $(figs)
+	pdflatex --interaction=nonstopmode $(<)
+	pdflatex --interaction=nonstopmode $(<)
 
-handout2:
-	sed 's_documentclass\[\]_documentclass[handout]_' 2_seminar.tex > 2_seminar_handout.tex
-	pdflatex 2_seminar_handout.tex
-	pdflatex 2_seminar_handout.tex
-handout3:
-	sed 's_documentclass_documentclass[handout]_' 3_seminar.tex > 3_seminar_handout.tex
-	pdflatex 3_seminar_handout.tex
-	pdflatex 3_seminar_handout.tex
 
 
