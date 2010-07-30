@@ -19,6 +19,10 @@
 \usepackage{enumerate}
 \usepackage{url}
 \usepackage{mathtools}
+\usepackage{tikz}
+
+\usetikzlibrary{arrows,positioning,fit,shapes,calc,shadows}
+
 
 \newcommand{\ignore}[1]{}
 \newcommand{\f}[1]{\textcolor{red}{#1}}
@@ -45,8 +49,7 @@
 \useoutertheme{infolines} 
 \setbeamercovered{transparent=40} 
 \title{1. Seminar EVU RegAut}
-\author[S. Meldgaard]{Sigurd Meldgaard\\
-Ph.d. studerende i Kryptologi}
+\author[S. Meldgaard]{Sigurd Meldgaard}
 \date{??. ?? 2010}
 \institute[AU]{Datalogisk Institut\\
   Århus Universitet\\
@@ -65,7 +68,6 @@ Ph.d. studerende i Kryptologi}
 %\begin{frame}[plain]
 %  \titlepage
 %\end{frame}
-\ignore{
 \maketitle
 \begin{frame}
 \frametitle{Plan}
@@ -359,7 +361,15 @@ Virker toget?
 
 \begin{frame}
 \frametitle{Beregnelighed}
-% TODO Make that figure
+\begin{center}
+\begin{tikzpicture}[node distance=2.5cm,auto,>=latex']
+    \node [draw, thin, fill=blue!20, minimum size=2em,drop shadow] (c) [] {Program};
+    \node [coordinate] (end) [right of=c, node distance=3cm]{};
+    \node [coordinate] (start) [left of=c, node distance=3cm]{};
+    \path[->, thick] (start) edge node {input} (c);
+    \draw[->, thick] (c) edge node {output} (end) ;
+\end{tikzpicture}
+\end{center}
 \begin{itemize}
 \item Input og Output er strenge
 \item Program er en algoritme som kører på en maskine
@@ -370,7 +380,15 @@ beregn $N^2$ som output.
 
 \begin{frame}
 \frametitle{Beslutningsproblemer}
-% TODO Make that figure
+\begin{center}
+\begin{tikzpicture}[node distance=2.5cm,auto,>=latex']
+    \node [draw, thin, fill=blue!20, minimum size=2em,drop shadow] (c) [] {Program};
+    \node [coordinate] (end) [right of=c, node distance=3cm]{};
+    \node [coordinate] (start) [left of=c, node distance=3cm]{};
+    \path[->, thick] (start) edge node {input} (c);
+    \draw[->, thick] (c) edge node {\textbf{ja/nej}} (end) ;
+\end{tikzpicture}
+\end{center}
 \begin{itemize}
 \item Hvis vi ignorerer effektivitet, så kan alle beregningsproblemer omformuleres til beslutningsproblemer.
 \item Eksempel: Givet to naturlige tal $N,M$ i binær repræsentation som Input,
@@ -392,6 +410,7 @@ nej & \text{ellers }
 \]
 \end{itemize}
 \end{frame}
+
 
 \begin{frame}
 \frametitle{Eksempler på beslutningsproblemer}
@@ -503,11 +522,11 @@ der kan afgøre det generelle problem “givet et program P, terminerer P på al
 \frametitle{Praktiske oplysninger om kurset}
 \begin{itemize}
 \item Hjemmeside: \url{http://cs.au.dk/~stm/RegAut}
-\item Seminarer: % TODO: Find dates:
+\item Seminarer:
 \begin{itemize}
-\item XXX (i dag)
-\item XXX
-\item XXX
+\item 27/8 2010 Fredag 9-16
+\item 10/9 2010	Fredag 9-16
+\item 1/10 2010	Fredag 9-16 
 \end{itemize}
 
 \end{itemize}
@@ -801,7 +820,7 @@ Hvis L=\{Λ,123,abc\} så er
 S er regulært, så der eksisterer et regulært udtryk $r$ så $L(r)=S$
 
 Vi vil vise ved \textbf{induktion} i strukturen af $r$, at der eksisterer et
-regulært udtryk $r’$ hvor $L(r’)=reverse(L(r))$, hvilket medfører, at
+regulært udtryk $r'$ hvor $L(r')=reverse(L(r))$, hvilket medfører, at
 $reverse(S)$ er regulært
 \end{itemize}
 \end{frame}
@@ -827,7 +846,7 @@ For alle deludtryk $s$ af $r$ kan vi udnytte
 \textbf{induktionshypotesen}:
 
 Der eksisterer et regulært
-udtryk $s’$ hvor $L(s’)=Reverse(L(s))$
+udtryk $s'$ hvor $L(s')=Reverse(L(s))$
 \pause
 \begin{itemize}[<+->]
 \item \underline{$r = r₁+r₂$} hvor $r₁, r₂∈R$: vælg $r' = r₁' + r₂'$ hvor $r₁'$ of
@@ -898,22 +917,6 @@ $∀i≥0,E⊆Σ^*$:
   [Martin]), og lav induktion.
 \end{itemize}
 \end{frame}
-
-% TODO Why is this slide here???
-% \begin{frame}
-% \frametitle{dRegExp}
-% \begin{itemize}
-% \item Java-repræsentation af regulære udtryk
-
-% \item Speciel syntax:
-% \begin{itemize}
-% \item \# betyder $∅$
-% \item \% betyder $Λ$
-% \end{itemize}
-% \item Alfabetet angives som en mængde af Unicode tegn
-% \end{itemize}
-% \item Eks.: $((a+Λ)cbc)^*$ skrives som ``((a+\%))cbc)*''
-% \end{frame}
  
 \begin{frame}
 \frametitle{Løsninger}
@@ -931,15 +934,24 @@ $∀i≥0,E⊆Σ^*$:
 \begin{frame}
 \frametitle{Løsninger}
 \begin{itemize}
-% TODO check these when you find the book
+\item [] [Martin] 3.9
 \item a) $1^*01^*01^*$
 \item b) $(0+1)^*0(0+1)^*0(0+1)^*$
-\item c) $+ 1 + (0+1)^*0 + (0+1)^*11$
+\item c) $\Lambda + 0 + 1 + (0+1)^*(00+10+11)$
 \item d) $(00 + 11)(0+1)^* + (0+1)^*(00 + 11)$
-\item e) $(1 + 01)^*(0 + )$ 
-
+\item e) $(1 + 01)^*(0 + \Lambda)$ 
 \end{itemize}
 \end{frame}
+
+\begin{frame}
+\frametitle{Løsninger}
+\begin{itemize}
+\item [] [Martin] 3.10
+\item a) The language of all strings containing an odd number of 1's
+\item b) The language of all strings containing $3n$ or $3n+1$ characters for any natural number $n$
+\end{itemize}
+\end{frame}
+
 \section{Regulære automater}
 
 \begin{frame}
@@ -1212,7 +1224,7 @@ mindst $2^{42}$ tilstande
   \item Lad $pal = \{ x∈\{0,1\}^* | x=reverse(x) \}$
 \item Lad $x$ og $y$ være vilkårlige forskellige
 strenge over $\{0,1\}$
-\item $x$ og $y$ er skelnelige mht. $pal$ (bevis: se bogen...) % TODO Find chapter
+\item $x$ og $y$ er skelnelige mht. $pal$ (bevis: se bogen Theorem 3.3 side 109) 
 \item Vi kan altså finde en vilkårligt stor mængde parvist skelnelige
   strenge, så $pal$ er ikke regulært.
 
@@ -1243,9 +1255,6 @@ M2:
 \imagetop{\includegraphics[scale=.25]{images/1_seminar_union}}
 \end{tabular}  
 \end{frame}
-
-} % ignore
-
 
 \begin{frame}
   \frametitle{Produktkonstruktionen}
@@ -1318,21 +1327,21 @@ relevante for sproget!
 
 \begin{frame}
   \frametitle{Komplement}
-  \begin{itemize}
+\begin{itemize}
   \item          
-Givet et regulære sprog $R$
-er $R’$ ($R$s komplement) også regulært?
-\item Ja! (dvs. klassen af regulære sprog er lukket under komplement)
-\item Bevis 1:
-\begin{itemize}
-\item Vælg $L_1 = Σ^*$ og $L_2 = R$, hvorved $R’ = L_1-L_2$
-\end{itemize}
-\item Bevis 2:
-\begin{itemize}
-\item Givet en FA $M = (Q, Σ, q_0, A, δ)$ hvor $L(M)=R$
-\item Definer $M’ = (Q, Σ, q_0, Q-A, δ)$
-\item Derved gælder at $L(M’)=R’$ 
-\end{itemize}
+    Givet et regulære sprog $R$
+    er $R'$ ($R$s komplement) også regulært?
+  \item Ja! (dvs. klassen af regulære sprog er lukket under komplement)
+  \item Bevis 1:
+    \begin{itemize}
+    \item Vælg $L_1 = Σ^*$ og $L_2 = R$, hvorved $R’ = L_1-L_2$
+    \end{itemize}
+  \item Bevis 2:
+    \begin{itemize}
+    \item Givet en FA $M = (Q, Σ, q_0, A, δ)$ hvor $L(M)=R$
+    \item Definer $M' = (Q, Σ, q_0, Q-A, δ)$
+    \item Derved gælder at $L(M')=R'$ 
+    \end{itemize}
   \end{itemize}
 \end{frame}
 
@@ -1347,11 +1356,10 @@ er $R’$ ($R$s komplement) også regulært?
 \end{center}    
 \item $M'$: (Strenge der både har et \textbf{ulige} antal 0'er,\\
   \textbf{og ikke} slutter med 0)
-
-\begin{center}
-\includegraphics[scale=0.2] {images/1_seminar_union_inv}
-\end{center}
-  \end{itemize}
+  \begin{center}
+    \includegraphics[scale=0.2] {images/1_seminar_union_inv}
+  \end{center}
+\end{itemize}
 \end{frame}
 
 \begin{frame}
@@ -1362,6 +1370,21 @@ er $R’$ ($R$s komplement) også regulært?
 \end{frame}
 
 \section{dRegAut pakken}
+
+\begin{frame}
+\frametitle{dRegExp}
+\begin{itemize}
+\item Java-repræsentation af regulære udtryk
+
+\item Speciel syntax:
+\begin{itemize}
+\item \# betyder $∅$
+\item \% betyder $Λ$
+\end{itemize}
+\item Alfabetet angives som en mængde af Unicode tegn
+\item Eks.: $((a+Λ)cbc)^*$ skrives som ``((a+\%))cbc)*''
+\end{itemize}
+\end{frame}
 
 \begin{frame}
   \frametitle{dRegAut pakken}
@@ -1413,6 +1436,22 @@ er $R’$ ($R$s komplement) også regulært?
     — tilføjer en c transition fra q til p
   \item \texttt{toDot()} — konverterer FA objekt til \\ ‘Graphviz dot’ input 
     (til grafisk repræsentation)
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Java projektet (1. del)}
+  \begin{itemize}[<+->]
+  \item Studér udleverede programdele:
+    \begin{itemize}
+    \item repræsentation af FA’er
+    \item ekstra udleverede metoder: delta, deltaStar, complement
+    \end{itemize}
+  \item Implementér FA metoder:
+    \begin{itemize}
+    \item accepts,intersection, union, minus
+    \item Opbyg en FA og vis den grafisk
+    \end{itemize}
   \end{itemize}
 \end{frame}
 
@@ -1507,7 +1546,7 @@ der opfylder alle komponenterne
 \begin{frame}
   \frametitle{Verifikation}
   \begin{itemize}
-  \item  Korrekthed: $L(M) ∩ (L(S))’ = ∅$
+  \item  Korrekthed: $L(M) ∩ (L(S))' = ∅$
 \item dvs. vi skal bruge
 \begin{itemize}
 \item produktkonstruktion (igen)
@@ -1517,8 +1556,8 @@ der opfylder alle komponenterne
 \end{itemize}
 
 tomt (3. seminar)
-\item hvis $L(M) ∩ (L(S))’ {\color{red}≠} ∅$:
-   enhver streng i $L(M) ∩ (L(S))’$ svarer til
+\item hvis $L(M) ∩ (L(S))' {\color{red}≠} ∅$:
+   enhver streng i $L(M) ∩ (L(S))'$ svarer til
    et \textbf{modeksempel} (algoritme: 3. seminar)
 
   \end{itemize}
@@ -1553,6 +1592,9 @@ $M_{TOG}, M_{KONTROL}, M_{BOM}$, og $S$
 
   \end{itemize}
 \end{frame}
+
+\ignore{
+} % ignore
 
 \end{document}
 
