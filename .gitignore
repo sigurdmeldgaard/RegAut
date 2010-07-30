@@ -11,7 +11,7 @@
 /slides/*.bbl
 /slides/*.blg
 /slides/*.dvi
-/slides/*.pdf
+#/slides/*.pdf
 .DS_Store
 
 /slides/2_seminar_kleene_1_ex_10.png
