@@ -1,0 +1,13 @@
+    /**
+     * Performs transitions in extended transition function. [Martin, Def. 3.3]
+     * @return <img src="http://www.brics.dk/~amoeller/dRegAut/delta.gif" alt="delta">*(q,s) 
+     * @exception IllegalArgumentException if a symbol in <tt>s</tt> is not in the alphabet
+     */
+    public State deltaStar(State q, String s) throws IllegalArgumentException {
+        // (Using recursion instead of iteration would have been closer to 
+        // the mathematical definition, but this code is simpler...)
+        for (char c : s.toCharArray()) 
+            q = delta(q,c);
+        return q;
+    }
+

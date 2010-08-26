@@ -1,0 +1,13 @@
+    /** 
+     * Constructs a new automaton that accepts the complement of the language of this automaton. [Martin, p. 110] 
+     * The input automaton is unmodified.
+     */
+    public FA complement() {
+        FA f = (FA) clone();
+        Set<State> s = new HashSet<State>();
+        s.addAll(f.states);
+        s.removeAll(f.accept);
+        f.accept = s;
+        return f;
+    }
+

@@ -1,0 +1,11 @@
+    /**
+     * Looks up transition in transition function.
+     * @return <img src="http://www.brics.dk/~amoeller/dRegAut/delta.gif" alt="delta">(q,c) 
+     * @exception IllegalArgumentException if <tt>c</tt> is not in the alphabet
+     */
+    public State delta(State q, char c) throws IllegalArgumentException {
+        if (!alphabet.symbols.contains(c))
+            throw new IllegalArgumentException("symbol '"+c+"' not in alphabet");
+        return transitions.get(new StateSymbolPair(q, c));
+    }
+
