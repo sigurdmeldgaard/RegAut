@@ -274,7 +274,7 @@ Givet en streng $x$, og et regulært udtryk $r$, hvordan ved vi om $r$ matcher $
 \item $\emptyset$ matcher intet
 \item $\Lambda$ matcher kun den tomme streng.
 \item $a\in\Sigma$ matcher kun  strengen bestående af den ene karakter \f a
-\item $r_1 + r_2$ matcher hvis $r_1$ mathcer, eller $r_2$ matcher
+\item $r_1 + r_2$ matcher hvis $r_1$ matcher, eller $r_2$ matcher
 \item $r_1 \cdot r_2$ Opdel $x$ så $x=x_1\cdot x_2$ på alle mulige måder
 Og prøv om $r_1$ matcher $x_1$ og $r_2$ matcher $x_2$
 \item $r_1^{*}$ Opdel $x$ så $x=x_1\cdot x_2\cdot\ldots\cdot x_n$ på alle mulige måder. Og se om
@@ -600,18 +600,18 @@ implementation af de gennemgåede algoritmer, der udledes af konstruktive bevise
 \begin{itemize}
 \item 
 Et alfabet $Σ$ er en endelig mængde (af tegn/symboler)
-eks.:  $Σ={a,b,c}$
+eks.:  $Σ=\{a,b,c\}$
 \item
 En streng x er en endelig sekvens af tegn fra alfabetet
 eks.:  $x=abba$
 $Λ$ repræsenterer den tomme streng (strengen af længde 0), $Λ∉Σ$
 \item
 Et sprog $L$ er en (vilkårlig) mængde af strenge
-eks.:  $L={Λ,cab,abba}$
+eks.:  $L=\{Λ,cab,abba\}$
 \item
 $Σ^*$ er mængden af alle strenge over $Σ$
 dvs. $L⊆Σ^*$ hvis $L$ er et sprog over $Σ$
-eks.:  hvis $Σ={a,b,c}$ så er $Σ^*={Λ,a,b,c,aa,ab,ac,aaa,aab,...}$
+eks.:  hvis $Σ=\{a,b,c\}$ så er $Σ^*=\{Λ,a,b,c,aa,ab,ac,aaa,aab,...\}$
 \end{itemize}
 \end{frame}
 
@@ -1323,8 +1323,8 @@ relevante for sproget!
 \item Ja! (dvs. klassen af regulære sprog er lukket under snit og differens)
 \item Bevis: produktkonstruktion som ved ∪ men
 \begin{itemize}
-\item for $∩$, vælg $A = { (p, q) | p∈A_1 ∧ q∈A_2 }$
-\item for $-$, vælg $A = { (p, q) | p∈A_1 ∧ q∉A_2 }$
+\item for $∩$, vælg $A = \{ (p, q) | p∈A_1 ∧ q∈A_2 \}$
+\item for $-$, vælg $A = \{ (p, q) | p∈A_1 ∧ q∉A_2 \}$
 \end{itemize}
 \end{itemize}
 \end{frame}
