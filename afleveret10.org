@@ -1,0 +1,485 @@
+* Oversigt
+| Navn                      | Årskort | 1. opgave | 2. opgave | 3. opgave |
+|---------------------------+---------+-----------+-----------+-----------|
+| Rasmus Carlsen            |         | √         |           |           |
+| Anders Soee               |         | √         |           |           |
+| Jesper Tholstrup Pedersen |         | √         |           |           |
+| Ove Thomsen               |         | √         |           |           |
+| Troels Tolstrup           |         | √         |           |           |
+| Nikolaj Rahbek            |         | √         |           |           |
+| Jan Sørensen              |         | √         |           |           |
+| Kristian Hesselholt Munck |         | √         |           |           |
+| Arthur Newstead og Mikkel |         | √         |           |           |
+| Løvengren Sørensen        |         | √         |           |           |
+| Morten Odgaard            |         | √         |           |           |
+| Palle Pedersen            |         | √         |           |           |
+| Jesper Hansen             |         | √         |           |           |
+| Kenneth Badensø           |         | √         |           |           |
+| Carsten Sand Madsen       |         | √         |           |           |
+| Peter Haislund            |         | √         |           |           |
+| Kennet Rode Nielsen       |         | √         |           |           |
+| Mogens Habekost           |         | √         |           |           |
+| Jesper Davidsen           |         | √         |           |           |
+| Bobby Nielsen             |         | %         |           |           |
+| Jon Rune Jørgensen        |         | √         |           |           | 
+  
+* Emails
+
+bobby@bobbyz.dk,carstensandmadsen@gmail.com,hjf@danfoss.com,jan@pernillevej.dk,jesper.davidsen@gmail.com,jonrune@gmail.com,jup@ramboll.com,kenneth.oksen@hotmail.com,kenneth@badensoe.dk,kennetn@gmail.com,moh@solar.dk,morten.odgaard@gmail.com,palle.pedersen@crisplant.com,peter@haislund.com,post@familienmunck.dk,repsej74@gmail.com,stm@cs.au.dk,tnt@it.dk,voncarlsenoglotsen@hotmail.com
+* Afleveringer
+** Rasmus Carlsen
+*** 1. aflevering:
+
+Koden ser fin og forståelig ud, dog er der et par fejl:
+
+I intersection og union har du byttet rundt på betingelserne for at en
+tilstand er en accepttilstand, her er fra union:
+
+        for(StatePair pair : oldToNewStates.keySet()){
+                        if(accept.contains(pair.s1) && f.accept.contains(pair.s2)){
+                                result.accept.add(oldToNewStates.get(pair));
+                        }
+        }
+
+For at få foreningsmængden skal man jo have alle de par af tilstande
+som var i den ene _eller_ den anden automat.
+
+I eksempel-programmet har du byttet rundt de to automater, du skulle
+lave S_3 - S_2 men laver S_2 - S_3.
+
+Jeg vil bare lige sikre mig at du har forstået ordet transition, du
+skriver:
+
+            //Create new transitions
+            for(Character symbol : alphabet.symbols){
+                State transition1 = delta(pair.s1, symbol.charValue());
+
+Men tilstanden er ikke en transition. Transitionen er overgangen fra
+s1 til den når der læses et symbol.
+
+Afleveringen er godkendt.
+
+Mvh. Sigurd
+
+** Anders Soee, Jesper Tholstrup Pedersen, Ove Thomsen, Troels Tolstrup
+*** 1. aflevering:
+
+Koden er fin og forståelig
+
+Det er en fin løsning at samle alle de tilstande hvor den ene/den
+anden tilstand er accepttilstand i de oprindelige og så lave
+mængdeoperationer på dem.
+
+Selvom jeg opfordrede jer til at arbejde i grupper synes jeg dog I bør
+splitte op og lave to grupper med to i hver, ellers risikerer I at
+ikke alle er med i processen.
+
+Afleveringen er godkendt.
+
+Mvh. Sigurd
+
+** Nikolaj Rahbek
+*** 1. aflevering:
+
+Jeg synes din kode er noget rodet, men det ser ud til at virke.
+
+For eksempel er alle dine arrays af længde 3 ikke særligt
+veldokumenterede. Har du set at der er en klasse kaldet StatePair til
+netop dette formål?
+
+Det er fint med en rekursiv løsning, da dette undgår de uopnåelige
+tilstande. Men navnet på metoden er måske ikke så velvalgt, da den gør
+noget ret anderledes end delta*.  Et bedre navn kunne være
+depthFirst. Jeg ville også tjekke for null tidligere, da det gør koden
+mere overskuelig:
+
+   private void followDoubleDeltaStarAlphabet(FA f1, FA f2, State q[]) {
+       for (Character c : alphabet.symbols) {
+           State[] tp = followDoubleDelta(f1, f2, q, c);
+           if (tp != null) {
+               followDoubleDeltaStarAlphabet(f1, f2, tp);
+           }
+       }
+   }
+
+newState laver flg. gennemløb:
+
+                for (State s : states) {
+                        if (s.name.equals(name)) {
+                                return s;
+                        }
+                }
+
+Men istedet kunne du skrive:
+State s = states.get(new State(name));
+if(s!=null){return s;}
+
+Og det ville virke hurtigere.
+
+Du skriver:
+
+There is no validation on if this and f contains the same alphabets
+
+Efterfulgt af:
+
+if (!alphabet.equals(f.alphabet))
+                        throw new UnsupportedOperationException(
+                                        "The two FAs must have same alphabet");
+
+
+Men alt i alt ser det ud til at du har forstået konstruktionen.
+
+Afleveringen er godkendt.
+
+Mvh. Sigurd
+
+** Jan Sørensen
+*** 1. aflevering:
+Generelt ser koden fin ud, og er let at følge.
+
+Du har navngivet en funktion: setProductTranactions det skulle selvf. have været setProductTransitions.
+
+Og i dit testprogram har du importeret dRegAut, det er unødvendigt da det er samme pakke.
+
+Men det er detaljer.
+
+Alfeveringen er godkendt
+
+Mvh. Sigurd
+
+** Kristian Hesselholt Munck, Arthur Newstead og Mikkel Løvengren Sørensen
+*** 1. aflevering:
+
+Koden ser fin og forståelig ud.
+
+Afleveringen er godkendt.
+
+Mvh. Sigurd
+
+** Morten Odgaard
+*** 1. aflevering:
+
+Fin løsning. Det er en ok ide med en subklasse til at styre mapningen
+ml. par af tilstande og tilstande. Dog gør den aldrig noget specifikt
+ud over i sin konstruktor, så måske var det bedre at bruge en alm. FA
+og selv holde styr på mapningen. Som det er nu, bliver mapningen gemt,
+og derfor aldrig garbage collected.
+
+Men igen fin og letforståelig kode.
+
+Mht. testkoden så er det fint med unit-tests selvom jeg ikke synes det
+er særlig pænt at lade en unit-test skrive filer på den måde, det
+giver ikke en gentagelig test, det kode burde i stedet have været i en
+main-metode.
+
+Et hint:
+        assertEquals(false, b.accepts(""));
+Kan skrives:
+        assertFalse(b.accepts(""));
+
+Jeg beklager forvirringen ml. B - C og C - B. Fint at begge er lavet.
+
+Afleveringen er godkendt
+
+Mvh. Sigurd
+
+** Palle Pedersen
+*** 1. aflevering:
+
+Jeg kan godt lide at du laver en abstraktion over de mulige
+operationer. Det er nemlig kerneforskellen mellem
+union/intersection/minus, resten bør være helt ens. Det er bare
+ærgeligt at Java er så dårlig til at udtrykke denne forskel (man er
+nødt til at lave klasser og interfaces etc.)
+
+Det er også fint at du laver et gennemløb med en arbejds-kø så du kun
+får lavet de tilstande som faktisk er nødvendige. (Alternativet er at
+lave hele krydsproduktet af tilstandsmængderne).
+
+Jeg synes måske din variabelnavngivning løber lidt løbsk
+(combinedStateOfTheTwoStatePairs2 kunne være kaldet
+fx. combinedDestination) men det er ok.
+
+Test-koden ser fin ud.
+
+Afleveringen er godkendt
+
+Mvh. Sigurd
+
+** Jesper Hansen og Kenneth Badensø
+*** 1. aflevering:
+Tak for afleveringen her er nogle kommentarer:
+
+Mit største problem med koden er at de tre forskellige
+produktkonstruktioner gør det samme (bortset fra med
+accepttilstandene) derfor burde I lave en hjælpemetode der laver
+produktkonstruktionen som kan kaldes fra de tre metoder. Det ville
+gøre koden lettere at læse, forstå, ændre, teste etc.
+
+Også koden:     
+
+                if(fromState==null){
+    			fromState = new State(fromP.name+fromQ.name);
+    			newFA.states.add(fromState);
+    			//( p = A  &  q != A)
+    	    	if( accept.contains(fromP) && !f.accept.contains(fromQ)){
+    	    		newFA.accept.add(fromState);
+    			}
+    	    	createdStates.put(pq, fromState);
+    		}
+
+Gentages to gange næsten helt ens i hver af
+union/intersection/minus. Det kunne nok også betale sig at lave en
+hjælpemetode til dette.
+
+Det er en i øvrigt god ide at rydde op i sin kode før aflevering:
+	
+	public static void main(String[] args) {	
+		  System.out.println("AAAAQQQDASD");	
+	}
+
+
+Testkoden ser fin ud
+
+Afleveringen er godkendt
+
+Mvh. Sigurd
+
+** Carsten Sand Madsen 
+*** 1. aflevering:
+Din accepts er langt mere indviklet end nødvendigt:
+
+    	boolean result = false;
+        State q = deltaStar(initial, s);
+        if (accept.contains(q)) {
+        	result = true;
+        }
+        return result;
+
+Kan skrives:
+
+        return accept.contains(deltaStar(initial, s));
+
+Det er godt at du har lavet en enum til at sige hvilken af de tre
+produktkonstruktioner der skal laves, dette gør at man kan samle det
+kode som er ens for de tre eet sted.
+
+Du laver et tjek:
+
+    	if (operation == null) {
+    		throw new IllegalArgumentException("operation is null.");
+    	}
+
+Da metoden er privat, kan du selv sørge for at det aldrig sker, jeg
+vil derfor argumentere for at tjekket er unødendigt
+
+Ellers fin og forståelig kode.
+
+Afleveringen er godkendt.
+
+Mvh Sigurd
+
+** Peter Haislund
+*** 1. aflevering:
+
+Du har glemt at lave difference.png.
+
+Mit største problem med koden er at de tre forskellige
+produktkonstruktioner gør det samme (bortset fra med
+accepttilstandene) derfor burde I lave en hjælpemetode der laver
+produktkonstruktionen som kan kaldes fra de tre metoder. Det ville
+gøre koden lettere at læse, forstå, ændre, teste etc.
+
+Du har gjort det med GetProduct, men du kunne også have lavet en
+funktion til at lave transitioner etc.
+
+Du skriver:
+
+   	//Creates a Map to save all the new states in
+    	//(This has to be done since the .equal method of the State object
+    	//compares references and not the name of the States)
+    	Map<String, State> allStates = new HashMap<String, State>();
+
+Men tilstandene er netop lavet så unikke objekter repræsenterer unikke
+tilstande, uanset navn. Derimod er StatePair lavet så equality
+repræsenterer at de to undertilstande den består af er de samme. Så du kunne bruge:
+
+    	Map<StatePair, State> allStates = new HashMap<StatePair, State>();
+
+og så senere:
+
+       State transState = allStates.get(transPair);
+
+Koden:
+
+    		if (this.initial == sp.s1 && f.initial == sp.s2)
+    			newF.initial = newState;
+
+er der ingen grund til at have inden i loopet. Du kunne finde start-tilstandende i allstates.
+
+Men det ser ud til at du har forstået ideen med produktkonstruktionen, og det er det vigtigste!
+
+Testkoden er OK omend noget knudret med de sammensatte if-statements.
+
+Du kan lave en "dot-fil" ved at tilføje:
+
+		System.out.println(tmpFA_M.toDot());
+
+Og så kopiere teksten til en fil difference.dot og køre:
+
+dot difference.dot -Tpng -o difference.png
+
+
+Afleveringen er godkendt men mangelfuld.
+
+Mvh. Sigurd
+
+** Kennet Rode Nielsen
+*** 1. aflevering:
+
+God løsning, fint med et gennemløb som sørger for kun at lave de
+nødendige tilstande.
+
+Normalt har metoder, parametre og lokale variable navne med lille
+begyndelsesbogstav.
+
+
+God observation:
+
+    	// It is possible the use the same method as union and minus.
+    	// Where we loop all created states but I figured this was a bit more optimal.
+
+Testkoden kunne godt trænge til lidt oprydning, men ser fin ud.
+
+Afleveringen er godkendt.
+
+Mvh. Sigurd
+
+** Mogens Habekost
+*** 1. aflevering:
+
+Fin kode, det ser ud til at du har forstået produktkonstruktionen, jeg
+har dog et par kommentarer:
+
+Under accepts har du glemt at fjerne noget udkommenteret kode.
+
+I doMath har du en variabel count, som du ikke bruger til noget.
+
+Jeg synes dine metode-navne er lidt mærkelige (fx kunne doMath være
+kaldet product, MathType kunne hedde operation)
+
+Afleveringen er godkendt.
+
+Mvh. Sigurd
+
+** Jesper Davidsen
+*** 1. aflevering:
+
+Fint med en implementation af en  worklist-algoritme så du undgår at lave de uopnåelige tilstande 
+
+Det er lidt hemmelighedsfuldt med 1/2/3 til at angive operationen. En
+bedre mulighed ville være at bruge en enum.
+
+Derudover rigtig god kode der er let at følge.
+
+Afleveringen er godkendt.
+
+Mvh. Sigurd
+** Bobby Nielsen
+*** 1. aflevering:
+Jeg tror måske jeg har fået en forkert version af din fil FA.java? For det ser ikke ud til at virke.
+
+Når jeg starter din Martin3_33.java får jeg flg. fejl:
+
+Exception in thread "main" java.lang.NullPointerException
+	at dRegAut.StateSymbolPair.hashCode(StateSymbolPair.java:33)
+	at java.util.HashMap.get(HashMap.java:300)
+	at dRegAut.FA.delta(FA.java:194)
+	at dRegAut.FA.deltaStar(FA.java:206)
+	at dRegAut.FA.accepts(FA.java:217)
+	at projekt1j3.Martin3_33.main(Martin3_33.java:58)
+
+Fejlen ser ud til at være at der mangler et while-loop (eller lign.) omkring linje 368 hvor der står:
+
+        states.add(initialPair);
+        {
+
+Jeg har dog nogle generelle kommentarer til koden:
+
+Du har et problem med navngivning. Du kalder dine variable det samme
+som deres type i stedet for noget relateret til hvad de gør, det gør
+koden meget sværere at læse.
+
+Jeg gætter på at du lærte java med version 1.4 da der er en del
+features fra 1.5 som du kunne drage nytte af (autoboxing, generics, for-each loops):
+
+Når du skriver:
+
+            M.transitions.put(new StateSymbolPair(state1, Character.valueOf(c)), state2);
+
+Kunne du skrive:
+
+            M.transitions.put(new StateSymbolPair(state1, c), state2);
+
+Denne feature kaldes autoboxing.
+
+I en linje som:
+
+        HashMap hashMap = new HashMap();
+
+Kan skrives:
+
+        Map<StatePair, State> stateMappings = new HashMap<StatePair, State>();
+
+Dette kaldes generics og gør at man ikke kan komme til at putte noget forkert i en map.
+
+Og når du vil gennemløbe en collection kan du erstatte:
+
+          Iterator iterator = this.alphabet.symbols.iterator();
+          while (iterator.hasNext())
+          {
+            char c = ((Character)iterator.next()).charValue();
+
+med:
+
+          for(char c : this.alphabet.symbols){
+
+Læs mere på: http://cupi2.uniandes.edu.co/web/javadoc/j2se/1.5.0/docs/relnotes/features.html#lang
+
+
+Afleveringen er ikke godkendt, du kan genaflevere i løbet af de næste par uger.
+
+Mvh. Sigurd
+
+** Jon Rune Jørgensen
+
+*** 1. aflevering:
+Tak for afleveringen.
+
+Generelt synes jeg det er god kode som er let at følge.
+
+Din accepts-metode kunne bare se ud som:
+
+     return accept.contains(deltaStar(initial,s));
+
+Og din konstruktion af acceptmængden kunne gøres simplere:
+
+		for (State s1 : f1.states){
+			for (State s2 : f2.states){
+				switch (pct){
+				case INTERSECTION:
+					if(f1.accept.contains(s1) && f1.accept.contains(s2)){
+    						f.accept.add(statePairStateMap.get(new StatePair(s1,s2)));						
+					}
+					break;
+					[......]
+				}
+			}
+		}
+
+Derudover ser det fint ud.
+
+Afleveringen er godkendt.
+
+
+Mvh. Sigurd
