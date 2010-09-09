@@ -35,9 +35,9 @@
     \item En nondeterministisk automat:
     \end{itemize}
   \end{column}
-\pause
   \begin{column}{5cm}
-      \includegraphics[scale=0.4]{images/2_seminar_nondet}
+\visible<3->{
+      \includegraphics[scale=0.4]{images/2_seminar_nondet}}
   \end{column}
 \end{columns}
 \end{frame}
@@ -62,6 +62,9 @@ En nondeterministisk endelig automat (NFA) er et 5-tupel $(Q, \Sigma, q_0, A, \d
   Det betyder at $\delta(q,a)$ giver en \emph{mængde} af tilstande.
 \end{itemize}
 \end{frame}
+
+\newcommand{\sarrow}[1]{\overset{#1}{\rightarrow}}
+
 \begin{frame}
 \frametitle{Eksempel på en NFA}
 \begin{columns}
@@ -125,24 +128,22 @@ Givet en NFA $M=(Q, \Sigma, q_0, A, \delta)$:
 \column{5cm}
 \includegraphics[scale=0.4]{images/2_seminar_quiz_NFA}
 \end{columns}
-\pause
+\visible<2->{
 Ja! der findes en sti til accept:
 \[
-q_0 \rightarrow q_2 \rightarrow q_3 \rightarrow q_0 \rightarrow q_1 \rightarrow q_0 \rightarrow q_4
-\]
-\pause
-Vi kan systematisk lede efter sådan en sti:
-$\{q_0\} \pause \rightarrow \{q_1, q_2\} \pause \rightarrow 
-\{q_0, q_3\} \pause \rightarrow $\\
-$\{q_4, q_0\} \rightarrow \{q_1, q_2\} \rightarrow \{q_0, q_3\} \rightarrow 
-\{q_4, q_0\} 
+q_0 \sarrow{1} q_2 \sarrow{1} q_3 \sarrow{0} q_0 \sarrow{1} q_1 \sarrow{1} q_0 \sarrow{0} q_4 
+\]}
+\visible<3->{Vi kan systematisk lede efter sådan en sti: $\{q_0\} $}
 $
+\visible<4->{\sarrow{1} \{q_1, q_2\}}
+\visible<5->{\sarrow{1} \{q_0, q_3\}} $
+$\visible<6->{\sarrow{0} \{q_4, q_0\} \sarrow{1} \{q_1, q_2\} \sarrow{1} \{q_0, q_3\} \sarrow{0} 
+\{q_4, q_0\}}$
 \end{frame}
 \begin{frame}
 \frametitle{Øvelser:}
 \begin{itemize}
-\item [Martin]: opg. 4.2. (p. 156)
-
+\item{} [Martin]: opg. 4.2. (p. 156)
 Drawing an NFA and using the definition of $\delta^*$
 \end{itemize}
 \end{frame}
@@ -213,7 +214,7 @@ Bevis: induktion i strukturen af $x$...
 \begin{frame}
 \frametitle{Øvelser}
 \begin{itemize}
-\item [Martin] Opg. 4.10 (a+e) (p. 157)\\
+\item{} [Martin] Opg. 4.10 (a+e) (p. 157)\\
 Udfør selv delmængdekonstruktionen.
 \end{itemize}
 \end{frame}
@@ -320,6 +321,7 @@ $
 \item Der gælder nu: $L(M_1) = L(M)$
 \end{itemize}
 \end{frame}
+
 \begin{frame}
 \frametitle{Eksempel}
 \begin{itemize}[<+->]
@@ -327,6 +329,8 @@ $
   \includegraphics[scale=0.4]{images/2_seminar_lambdaelim}
 \item Find $\delta^*(q,a)$ for alle $q\in Q$ og $a\in \Sigma$
 \item Se om $\Lambda(\{q_0\})\cap A \neq \emptyset$
+\end{itemize}
+
 \begin{columns}
 \column{5cm}
 \scalebox{0.6}{
@@ -344,18 +348,17 @@ $
 \column{5cm}
 \includegraphics[scale=0.4]{images/2_seminar_lambdaelim2}
 \end{columns}
-\end{itemize}
 \end{frame}
 \begin{frame}
 \frametitle{Bevis for korrekthed af $\Lambda $-eliminering}
 \begin{itemize}[<+->]
-\item Vi skal vise:  $\forall x\in \Sigma^*: x \in L(M1) \Leftrightarrow x\in L(M)$
-  
-$x=\Lambda$ :
-brug definition af $A_1$ og $\Lambda$-lukning...
+\item Vi skal vise:  $\forall x\in \Sigma^*: x \in L(M_1) \Leftrightarrow x\in L(M)$
+$x=\Lambda$ : brug definition af $A_1$ og $\Lambda$-lukning...
+\item $x=a \in \Sigma$ : brug $A_1$, $\delta^*(q,a)=\delta_1(q,a)$ og $\Lambda$-lukning...
 \item
-$x\neq \Lambda$:
-Lemma:  $\forall x\in \Sigma^*, x\neq \Lambda :  \delta *(q_0, x) = \delta_1*(q_0, x)$
+$x = ya, y\neq \Lambda$:
+Induktionshypotese:  $\forall y\in \Sigma^*, y\neq \Lambda :  \delta^*(q_0, y) = \delta_1(q_0, y)
+\Rightarrow \delta^*(q_0, x) = \delta_1^*(q_0, x)$
 
 ...
 
@@ -366,10 +369,15 @@ Lemma:  $\forall x\in \Sigma^*, x\neq \Lambda :  \delta *(q_0, x) = \delta_1*(q_
 \begin{frame}
 \frametitle{Øvelser}
 \begin{itemize}
-\item [Martin] Opg. 4.13 (p.159)
+\item{} [Martin] Opg. 4.13 (p.159)
 Kør strenge på en NFA-$\Lambda$
-\item [Martin] Opg. 4.28 (e)
+\item{} [Martin] Opg. 4.28 (e)
 Brug algoritmen til $\Lambda$-eliminering
 \end{itemize}
 \end{frame}
 
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "2_seminar"
+%%% End: 

@@ -1,6 +1,5 @@
 \documentclass[]{beamer}
 
-\usepackage{beamerthemesplit}
 \usepackage[utf8]{inputenc}
 \usepackage[danish]{babel}
 \usepackage[T1]{fontenc}
@@ -10,6 +9,31 @@
 \usepackage{enumerate}
 \usepackage{url}
 
+
+\newcommand{\ignore}[1]{}
+\newcommand{\f}[1]{\textcolor{red}{#1}}
+
+%\let\originaltextperiodcentered\textperiodcentered
+\renewcommand{\textperiodcentered}{\ensuremath{\cdot}}
+\newcommand{\explain}[2]{\underset{\mathclap{#2}}{\underbrace{#1}}}
+\newcommand{\putat}[3]{\begin{picture}(0,0)(0,0)\put(#1,#2){#3}\end{picture}}
+
+\def\imagetop#1{\vtop{\null\hbox{#1}}}
+
+\newenvironment<>{varblock}[2][\textwidth]{%
+  \setlength{\textwidth}{#1}
+  \begin{actionenv}#3%
+    \def\insertblocktitle{#2}%
+    \par%
+    \usebeamertemplate{block begin}}
+  {\par%
+    \usebeamertemplate{block end}%
+  \end{actionenv}}
+
+\setbeamertemplate{navigation symbols}{} 
+\setbeamertemplate{items}[circle]
+\useoutertheme{infolines} 
+\setbeamercovered{transparent=40} 
 
 \title{2. Seminar EVU RegAut}
 \author{Sigurd Meldgaard}
@@ -137,17 +161,18 @@ $[x]$ er mængden af strenge, der er uskelnelige fra $x$ mht. $L$
 \frametitle{Quiz}
 $L = \{0,1\}^*\{10\}$ \\
 Beskriv ækvivalensklasserne for $I_L$
-\begin{itemize}[<+->]
-\item Hint:  der er 3 ækvivalensklasser...
+\begin{itemize}
+\item \visible<2->{Hint:  der er 3 ækvivalensklasser...}
 \includegraphics[scale=0.4]{images/2_seminar_equivclassessigma}
-\item Hint:  find en streng, der er skelnelig fra $\Lambda$ ...
-\item Hint:  find en streng, der er skelnelig 
-  fra både $\Lambda$ og 1...
+\item \visible<3->{Hint:  find en streng, der er skelnelig fra $\Lambda$ ...}
+\item \visible<4->{Hint:  find en streng, der er skelnelig 
+  fra både $\Lambda$ og 1...}
 \end{itemize}
-\pause
+\visible<5->{
 \[X:  \{\Lambda , 0\} \cup \{0,1\}^*\{00\} = [\Lambda ]\]
 \[Y:  \{0,1\}^*\{1\} = [1]\]
 \[Z:  \{0,1\}^*\{10\} = [10]\]
+}
 \end{frame}
 
 \begin{frame}
@@ -172,7 +197,7 @@ Vi kan definere en FA, hvor tilstandene er ækvivalensklasserne af $I_L$
 
 \begin{frame}
 \frametitle{Eksempel}
-\begin{itemize}[<+->]
+\begin{itemize}
 \item Ækvivalensklasserne for $I_L$ når $L = \{0,1\}^*\{10\}$ :
 \[X:  \{\Lambda , 0\} \cup \{0,1\}^*\{00\} = [\Lambda ]\]
 \[Y:  \{0,1\}^*\{1\} = [1]\]
@@ -180,7 +205,6 @@ Vi kan definere en FA, hvor tilstandene er ækvivalensklasserne af $I_L$
 \begin{columns}
 \column{5cm}
 \includegraphics[scale=0.4]{images/2_seminar_equivclassessigma}
-\pause
 \column{5cm}
 $M_L$:\includegraphics[scale=0.4]{images/2_seminar_myhillfa}
 \end{columns}
@@ -204,27 +228,26 @@ Påstand: $L(M_L) = L$
 
 \begin{frame}
 \frametitle{Quiz}
-\begin{itemize}[<+->]
+\begin{itemize}
 \item Antag ækvivalensklasserne for $I_L$ er 
 \[X = \{x\in \{0,1\}^* | \text{antal 1’er i } x \text{ er lige } \}\]
 \[Y = \{x\in \{0,1\}^* | \text{antal 1’er i } x \text{ er ulige } \}\]
 og $111\in L$
 
 Lav en FA, der accepterer L
-\item
+\end{itemize}
 \begin{columns}
 \column{5cm}
-\includegraphics[scale=0.4]{images/2_seminar_equivclassesodd}
-\column{5cm}\pause
-\includegraphics[scale=0.4]{images/2_seminar_odd1}
+\visible<2->{\includegraphics[scale=0.4]{images/2_seminar_equivclassesodd}}
+\column{5cm}
+\visible<3->{\includegraphics[scale=0.4]{images/2_seminar_odd1}}
 \end{columns}
-\end{itemize}
 \end{frame}
 
 \begin{frame}
 \frametitle{Bevis for korrekthed af konstruktionen}
 \begin{itemize}[<+->]
-\item Påstand: $L(ML) = L$
+\item Påstand: $L(M_L) = L$
 \item Lemma:  $\forall x,y\in \Sigma^*:   \delta^*([x], y) = [xy]$
 \item Bevis: induktion i strukturen af $y$...
 \item $\delta^*(q_0, x) = \delta^*([\Lambda ], x) = [x]$  (følger af lemmaet og def. af $q_0$)
@@ -239,21 +262,24 @@ Lav en FA, der accepterer L
 \begin{frame}
   \frametitle{Øvelser}
 \begin{itemize}
-\item [Martin] Opg. 5.2 (p. 191)
+\item{} [Martin] Opg. 5.2 (p. 191)
   Find selv ækvivalensklasser
-\item [Martin] Opg. 5.7
+\item{} [Martin] Opg. 5.7
   Konstruer en FA ud fra en beskrivelse af $I_L$
 \end{itemize}
 \end{frame}
 
 \begin{frame}
 \frametitle{Minimering af automater}
+\begin{center}
 \includegraphics[scale=0.4]{images/2_seminar_minimize}
-
-Man kan i visse tilfælde opnå en mindre FA 
+\end{center}
+\begin{itemize}
+\item Man kan i visse tilfælde opnå en mindre FA 
 ved at “slå tilstande sammen”...
-Kan vi gøre det systematisk?
-Vil den resulterende FA blive minimal?
+\item Kan vi gøre det systematisk?
+\item Vil den resulterende FA blive minimal?
+\end{itemize}
 \end{frame}
 
 \begin{frame}
@@ -314,8 +340,9 @@ Vi kan derfor antage at $Lq \neq  \emptyset$ for alle $q\in Q$
 \frametitle{Fixpunktsalgoritme}
 \begin{itemize}[<+->]
 \item R kan findes med en fixpunktsalgoritme:
-
+\begin{center}
   \includegraphics[scale=0.4]{images/2_seminar_fixpoint}
+\end{center}
 \item $1\in R$
 \item $\delta (1, b)=2\in R$
 \item $\delta (2, a)=4\in R$
@@ -363,16 +390,16 @@ S kan beregnes med en fixpunktsalgoritme
 \column{4cm}\only<-8>{\includegraphics[scale=0.35]{images/2_seminar_min_ex_1}}
 \only<9->{\includegraphics[scale=0.35]{images/2_seminar_min_ex_2}}
 \column{2.5cm}
-\onslide<10->{\includegraphics[scale=0.35]{images/2_seminar_min_ex_3}}
+\visible<10->{\includegraphics[scale=0.35]{images/2_seminar_min_ex_3}}
 \column{3.5cm}
 \scalebox{.5}{
 \begin{tabular}{c|c|c|c|c|c|c|}
   2 &  \\
-  3 & \onslide<7->{X} & \onslide<7->{X}  \\
-  4 &   &   & \onslide<7->{X} \\
-  5 & \onslide<7->{X} & \onslide<7->{X} &   & \onslide<7->{X} \\
-  6 & \onslide<5->{\onslide<5->{X}} & \onslide<5->{\onslide<5->{X}} & \onslide<5->{X} & \onslide<5->{X} & \onslide<5->{X} \\
-  7 & \onslide<7->{X} & \onslide<7->{X} &   & \onslide<7->{X} &   & \onslide<7->{X}  \\
+  3 & \visible<7->{X} & \visible<7->{X}  \\
+  4 &   &   & \visible<7->{X} \\
+  5 & \visible<7->{X} & \visible<7->{X} &   & \visible<7->{X} \\
+  6 & \visible<4->{\visible<4->{X}} & \visible<4->{\visible<4->{X}} & \visible<4->{X} & \visible<4->{X} & \visible<4->{X} \\
+  7 & \visible<7->{X} & \visible<7->{X} &   & \visible<7->{X} &   & \visible<7->{X}  \\
   \hline
     & 1 & 2 & 3 & 4 & 5 & 6
 \end{tabular}
@@ -381,7 +408,7 @@ S kan beregnes med en fixpunktsalgoritme
 \begin{itemize}
 \item<1-> Find alle par af tilstande
 \item<2-> Fjern uopnåelige tilstande (ingen i denne FA)
-\item<4-> Marker alle par som med/ikke med i $A$
+\item<3-> Marker alle par som med/ikke med i $A$
 \item<6-> Find $\equiv$  ved at udfylde en tabel for $S$ (fixpunktsberegning)
 \item<8-> Kombiner tilstande, der svarer til umærkede par
 \end{itemize}
@@ -406,9 +433,11 @@ Lemma:  Følgende udsagn er ækvivalente:
 \begin{itemize}[<+->]
 \item Påstand:  $p \equiv q$ hvis og kun hvis $(p, q)\not\in S$
 \item
-Iflg. lemmaet:\\
-$p \not\equiv q \Leftrightarrow (\exists z\in \Sigma^*:  (\delta^*(p, z)\in A \wedge \delta^*(q, z)\not\in A) 
-\vee  (\delta^*(p, z)\not\in A \wedge  \delta^*(q, z)\in A))$
+Iflg. lemmaet:
+\begin{align*}
+p \not\equiv q \Leftrightarrow (\exists z\in \Sigma^*:  (&\delta^*(p, z)\in A \wedge \delta^*(q, z)\not\in A) \vee \\
+ & (\delta^*(p, z)\not\in A \wedge  \delta^*(q, z)\in A))
+\end{align*}
 \item
 $p \not\equiv q \Rightarrow (p, q)\in S$    (brug lemmaet, lav induktion i $z$)
 \item
@@ -419,7 +448,7 @@ $(p, q)\in S \Rightarrow p \not\equiv q$     (brug lemmaet, lav induktion i $S$)
 \begin{frame}
 \frametitle{Øvelse}
 \begin{itemize}
-\item [Martin] 5.16 (a+e) (p.192)
+\item{} [Martin] 5.16 (a+e) (p.192)
 \end{itemize}
 \end{frame}
 
@@ -512,8 +541,7 @@ $\}$
 \frametitle{FA.findReachableStates(), version 2}
 
 Vi kan holde øje med hvilke tilstande der ikke er ``færdigbesøgt'' for
-at undgå at besøge hver tilstand flere gange
-
+at undgå at besøge hver tilstand flere gange:\\[.3cm]
 Set findReachableStates() $\{$\\
 \ \ $R = \{ \}$\\
 \ \ $pending = \{ q_0 \}$\\
@@ -529,13 +557,14 @@ $\}$\\
 
 \begin{frame}
 \frametitle{FA.minimize phase 2a}
-define some ordering on the states $Q$ \\
-declare marks: a set of pairs $(p,q)$ where $p,q\in Q$ and $p<q$\\
-$marks=\emptyset$ \\
-for each pair $p,q\in Q$ where $p<q$ do\\
-\ \ if not $(p\in A \Leftrightarrow q\in A)$ then
-\ \ \ \ add $(p,q)$ to marks
-\pause \\
+\begin{itemize}
+\item Define some ordering on the states $Q$
+\item Declare marks: a set of pairs $(p,q)$ where $p,q\in Q$ and $p<q$
+\item $marks=\emptyset$
+\item for each pair $p,q\in Q$ where $p<q$ do\\
+  \ \ if not $(p\in A \Leftrightarrow q\in A)$ then\\
+  \ \ \ \ add $(p,q)$ to marks
+\end{itemize}
 Mange muligheder for Java-representation af marks...
 \end{frame}
 
@@ -553,7 +582,7 @@ while not done do\\
 \ \ \ \ \ \ \ \ if $(r,s)\in marks$ then\\
 \ \ \ \ \ \ \ \ \ \ add $(p,q)$ to marks\\
 \ \ \ \ \ \ \ \ \ \ $done = false$
-\\ \pause Kunne gøres smartere med en pending worklist.
+\\ Kunne gøres smartere med en pending worklist.
 \end{frame}
 
 \begin{frame}
@@ -608,3 +637,8 @@ Efter: 1
 
 
 
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: t
+%%% End: 

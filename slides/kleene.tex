@@ -3,11 +3,13 @@
 \begin{frame}
 \frametitle{Status}
 \begin{itemize}[<+->]
-\item Vi har defineret 4 formalismer
-regulære udtryk
-FA,
-NFA,
-NFA-$\Lambda$
+\item Vi har defineret 4 formalismer:
+\begin{itemize}
+\item regulære udtryk
+\item FA,
+\item NFA,
+\item NFA-$\Lambda$
+\end{itemize}
 \item og er ved konstruktivt at bevise ækvivalens i udtrykskraft
 \end{itemize}
 \includegraphics[scale=0.4]{images/2_seminar_equiv}
@@ -34,38 +36,41 @@ $r=\emptyset$
 \item $r=a,$ hvor $a\in\Sigma$
 \end{itemize}
 \column{5cm}
-\begin{itemize}[<+->]
+\begin{itemize}
 \item
 \includegraphics[scale=0.4]{images/2_seminar_basis_emptyset}
 \item
-\includegraphics[scale=0.4]{images/2_seminar_basis_lambda}
+\visible<2->{\includegraphics[scale=0.4]{images/2_seminar_basis_lambda}}
 \item
-\includegraphics[scale=0.4]{images/2_seminar_basis_a}
+\visible<3->{\includegraphics[scale=0.4]{images/2_seminar_basis_a}}
 \end{itemize}
 \end{columns}
 \end{frame}
 \begin{frame}
 \frametitle{Induktionsskridt}
 \begin{itemize}[<+->]
-\item For alle deludtryk $s$ af $r$ kan vi udnytte induktionshypotesen.
-\item der eksisterer en NFA-$\Lambda$ $M_s$ hvor $L(M_s)=L(s)$
-\item 
-\begin{columns}
-\column{5cm}$r=r_1+r_2$ \pause
-\column{5cm}\includegraphics[scale=0.4]{images/2_seminar_kleene_1_add}
-\end{columns}
+\item For alle deludtryk $s$ af $r$ kan vi udnytte induktionshypotesen:
+\item Der eksisterer en NFA-$\Lambda$ $M_s$ hvor $L(M_s)=L(s)$
 \end{itemize}
+
+\begin{columns}
+\column{5cm}\visible<2->{$r=r_1+r_2$}
+\column{5cm}\visible<2->{\includegraphics[scale=0.4]{images/2_seminar_kleene_1_add}}
+\end{columns}
 \end{frame}
+
 \begin{frame}
 \frametitle{Induktionsskridt (part 2)}
-\begin{columns}
-\column{5cm}$r=r_1\cdot r_2$ \pause
-\column{5cm}\includegraphics[scale=0.4]{images/2_seminar_kleene_1_times}
-\end{columns} \pause
-\begin{columns}
-\column{5cm}$r=r_1^*$ \pause
-\column{5cm}\includegraphics[scale=0.4]{images/2_seminar_kleene_1_star}
-\end{columns}
+\begin{itemize}
+\item $r=r_1\cdot r_2$ \\
+\begin{center}
+\visible<2->{\includegraphics[scale=0.4]{images/2_seminar_kleene_1_times}}
+\end{center}
+\item \onslide<3->{$r=r_1^*$} \\
+\begin{center}
+\visible<4->{\includegraphics[scale=0.4]{images/2_seminar_kleene_1_star}}
+\end{center}
+\end{itemize}
 \end{frame}
 
 \begin{frame}
@@ -74,52 +79,64 @@ Se beviset i bogen: p. 146
 \end{frame}
 
 \begin{frame}
-\frametitle{Eksempel}
+\frametitle{Eksempel (1/3)}
 Konstruer en NFA-$\Lambda$ for det regulære udtryk $(00+1)^*(10)^*$
-\begin{itemize}[<+->]
+\begin{itemize}
 \item 0:
-  \includegraphics[scale=0.4]{images/2_seminar_kleene_1_ex_0}
+\visible<2->{\includegraphics[scale=0.4]{images/2_seminar_kleene_1_ex_0}}
 \item 1:
-  \includegraphics[scale=0.4]{images/2_seminar_kleene_1_ex_1}
+  \visible<3->{\includegraphics[scale=0.4]{images/2_seminar_kleene_1_ex_1}}
 \item 00:
-  \includegraphics[scale=0.4]{images/2_seminar_kleene_1_ex_00}
+  \visible<4->{\includegraphics[scale=0.4]{images/2_seminar_kleene_1_ex_00}}
 \item 10:
-  \includegraphics[scale=0.4]{images/2_seminar_kleene_1_ex_10}
+  \visible<5->{\includegraphics[scale=0.4]{images/2_seminar_kleene_1_ex_10}}
 \end{itemize}
 \end{frame}
+
 \begin{frame}
-\frametitle{Eksempel fortsat}
+\frametitle{Eksempel (2/3)}
 Konstruer en NFA-$\Lambda$ for det regulære udtryk $(00+1)^*(10)^*$
 \begin{itemize}[<+->]
 \item $00+1$:
-  \includegraphics[scale=0.4]{images/2_seminar_kleene_1_ex_00plus1}
+\begin{center}
+ \visible<2->{\includegraphics[scale=0.4]{images/2_seminar_kleene_1_ex_00plus1}}
+\end{center}
 \item $(00+1)^*$:
-  \includegraphics[scale=0.4]{images/2_seminar_kleene_1_ex_00plus1star}
+\begin{center}
+ \visible<3->{\includegraphics[scale=0.4]{images/2_seminar_kleene_1_ex_00plus1star}}
+\end{center}
 \end{itemize}
 \end{frame}
+
 \begin{frame}
-\frametitle{Eksempel fortsat}
+\frametitle{Eksempel (3/3)}
 Konstruer en NFA-$\Lambda$ for det regulære udtryk $(00+1)^*(10)^*$
-\begin{itemize}[<+->]
-\item $(10)^*$:
-  \includegraphics[scale=0.4]{images/2_seminar_kleene_1_ex_10star}
-\item $(00+1)^*(10)^*$:
-  \includegraphics[scale=0.4]{images/2_seminar_kleene_1_ex_00plus1star10star}
+\begin{itemize}
+\item $(10)^*$:\\
+\begin{center}
+ \visible<2->{\includegraphics[scale=0.4]{images/2_seminar_kleene_1_ex_10star}}
+\end{center}
+\item $(00+1)^*(10)^*$: \\
+\begin{center}
+  \visible<3->{\includegraphics[scale=0.4]{images/2_seminar_kleene_1_ex_00plus1star10star}}
+\end{center}
 \end{itemize}
 \end{frame}
+
 \begin{frame}
 \frametitle{Øvelser}
 \begin{itemize}
-\item [Martin] Opg. 4.35 (a) (p. 163)\\
+\item{} [Martin] Opg. 4.35 (a) (p. 163)\\
 Udfør algoritmen for konstruktion af NFA-$\Lambda$ fra regulært udtryk. 
 \end{itemize}
 \end{frame}
 \subsection{Kleenes sætning del 2}
 \begin{frame}
   \frametitle{Enhver FA kan oversættes til et regulært udtryk}
-Kleene's sætning del 2.
-
-Vi laver bevis med induktion naturligvis, men induktion i hvad?
+\begin{itemize}
+\item Kleene's sætning del 2.
+\item Vi laver bevis med induktion naturligvis, men induktion i hvad?
+\end{itemize}
 \end{frame}
 
 \begin{frame}
@@ -136,10 +153,10 @@ Vi laver bevis med induktion naturligvis, men induktion i hvad?
 \frametitle{Induktion i antal tilstande}
 \begin{itemize}[<+->]
 \item Antag tilstandene i M er nummereret $1, ..., |Q|$
-\item Definer $L(p, q, k)$ hvor $p,q\in Q$ og $k\in \{1..|Q|\}$ som
-  mængden af strenge, der fører fra p til q og kun går gennem
-  tilstande med nummer $\leq k$ (fraregnet endepunkterne)
-  \includegraphics[scale=0.2]{images/2_seminar_kleene_2_lessk}
+\item Definer $L(p, q, k)$ hvor $p,q\in Q$ og $k\in \{1..|Q|\}$ som: \\
+  Mængden af strenge, der fører fra p til q og kun går gennem
+  tilstande med nummer $\leq k$ (fraregnet endepunkterne)\\
+  \visible<2->{\includegraphics[scale=0.2]{images/2_seminar_kleene_2_lessk}}
 \item dvs.  $L(p, q) = L(p, q, |Q|)$
 \item Vi vil vise ved induktion i $k$ at $L(p, q, k)$ svarer til 
 et regulært udtryk, $r(p, q, k)$
@@ -197,21 +214,26 @@ Oversæt denne FA til et regulært udtryk
 \item $r(1,1,3) = r(1,1,2) + r(1,3,2)r(3,3,2)^*r(3,1,2)$
 \item $r(1,1,2) = r(1,1,1) + r(1,2,1)r(2,2,1)^*r(2,1,1)$
 \item $r(1,1,1) = r(1,1,0) + r(1,1,0)r(1,1,0)^*r(1,1,0)$
-\item $r(1,1,0) = a + \Lambda$
+\item $r(1,1,0) = a + \Lambda\ldots$
 \item Heldigvis kan vi sætte en computer til det!
 \end{itemize}
 \end{frame}
 \begin{frame}
 \frametitle{Eksempel fortsat}
 \begin{itemize}[<+->]
-\item \tiny{$r = ((\emptyset+(((((\emptyset +a)+\lambda)+(\emptyset (((\emptyset +\lambda )^*)$$(\emptyset +a))))+((((\emptyset +a)+\lambda )+(\emptyset (((\emptyset +\lambda )^*)(\emptyset +a) )))$$(((((\emptyset +a)+\lambda )+(\emptyset (((\emptyset +\lambda )^*)(\emptyset +a))))^*)(((\emptyset +a)+\lambda )+(\emptyset (((\emptyset +\lambda )^*)(\emptyset +a)))))))+((((\emptyset +b)+(\emptyset (((\emptyset +\lambda )^*)(\emptyset +b))))+((((\emptyset +a)+\lambda )+(\emptyset (((\emptyset +\lambda )^*)(\emptyset +a))))(((((\emptyset +a)+\lambda )+(\emptyset (((\emptyset +\lambda )^*)(\emptyset +a))))^*)((\emptyset +b)+(\emptyset (((\emptyset +\lambda )^*)(\emptyset +b)))))))(((((\emptyset +\lambda )+((\emptyset +b)(((\emptyset +\lambda )^*)(\emptyset +b))))+(((\emptyset +a)+((\emptyset +b)(((\emptyset +\lambda )^*)(\emptyset +a))))(((((\emptyset +a)+\lambda )+(\emptyset (((\emptyset +\lambda )^*)(\emptyset +a))))^*)((\emptyset +b)+(\emptyset (((\emptyset +\lambda )^*)(\emptyset +b)))))))^*)(((\emptyset +a)+((\emptyset +b)(((\emptyset +\lambda )^*)(\emptyset +a))))+(((\emptyset +a)+((\emptyset +b)(((\emptyset +\lambda )^*)(\emptyset +a))))(((((\emptyset +a)+\lambda )+(\emptyset (((\emptyset +\lambda )^*)(\emptyset +a))))^*)(((\emptyset +a)+\lambda )+(\emptyset (((\emptyset +\lambda )^*)(\emptyset +a)))))))))))+((((\emptyset +b)+(\emptyset (((\emptyset +\lambda )^*)(\emptyset +b))))+((((\emptyset +a)+\lambda )+(\emptyset (((\emptyset +\lambda )^*)(\emptyset +a))))(((((\emptyset +a)+\lambda )+(\emptyset (((\emptyset +\lambda )^*)(\emptyset +a))))^*)((\emptyset +b)+(\emptyset (((\emptyset +\lambda )^*)(\emptyset +b)))))))+((((\emptyset +b)+(\emptyset (((\emptyset +\lambda )^*)(\emptyset +b))))+((((\emptyset +a)+\lambda )+(\emptyset (((\emptyset +\lambda )^*)(\emptyset +a))))(((((\emptyset +a)+\lambda )+(\emptyset (((\emptyset +\lambda )^*)(\emptyset +a))))^*)((\emptyset +b)+(\emptyset (((\emptyset +\lambda )^*)(\emptyset +b)))))))(((((\emptyset +\lambda )+((\emptyset +b)(((\emptyset +\lambda )^*)(\emptyset +b))))+(((\emptyset +a)+((\emptyset +b)(((\emptyset +\lambda )^*)(\emptyset +a))))(((((\emptyset +a)+\lambda )+(\emptyset (((\emptyset +\lambda )^*)(\emptyset +a))))^*)((\emptyset +b)+(\emptyset (((\emptyset +\lambda )^*)(\emptyset +b)))))))^*)(((\emptyset +\lambda )+((\emptyset +b)(((\emptyset +\lambda )^*)(\emptyset +b))))+(((\emptyset +a)+((\emptyset +b)(((\emptyset +\lambda )^*)(\emptyset +a))))(((((\emptyset +a)+\lambda )+(\emptyset (((\emptyset +\lambda )^*)(\emptyset +a))))^*)((\emptyset +b)+(\emptyset (((\emptyset +\lambda )^*)(\emptyset +b))))))))))) $}
+\item \tiny{$r = ((\emptyset+(((((\emptyset +a)+\Lambda)+(\emptyset (((\emptyset +\Lambda )^*)$$(\emptyset +a))))+((((\emptyset +a)+\Lambda )+(\emptyset (((\emptyset +\Lambda )^*)(\emptyset +a) )))$$(((((\emptyset +a)+\Lambda )+(\emptyset (((\emptyset +\Lambda )^*)(\emptyset +a))))^*)(((\emptyset +a)+\Lambda )+(\emptyset (((\emptyset +\Lambda )^*)(\emptyset +a)))))))+((((\emptyset +b)+(\emptyset (((\emptyset +\Lambda )^*)(\emptyset +b))))+((((\emptyset +a)+\Lambda )+(\emptyset (((\emptyset +\Lambda )^*)(\emptyset +a))))(((((\emptyset +a)+\Lambda )+(\emptyset (((\emptyset +\Lambda )^*)(\emptyset +a))))^*)((\emptyset +b)+(\emptyset (((\emptyset +\Lambda )^*)(\emptyset +b)))))))(((((\emptyset +\Lambda )+((\emptyset +b)(((\emptyset +\Lambda )^*)(\emptyset +b))))+(((\emptyset +a)+((\emptyset +b)(((\emptyset +\Lambda )^*)(\emptyset +a))))(((((\emptyset +a)+\Lambda )+(\emptyset (((\emptyset +\Lambda )^*)(\emptyset +a))))^*)((\emptyset +b)+(\emptyset (((\emptyset +\Lambda )^*)(\emptyset +b)))))))^*)(((\emptyset +a)+((\emptyset +b)(((\emptyset +\Lambda )^*)(\emptyset +a))))+(((\emptyset +a)+((\emptyset +b)(((\emptyset +\Lambda )^*)(\emptyset +a))))(((((\emptyset +a)+\Lambda )+(\emptyset (((\emptyset +\Lambda )^*)(\emptyset +a))))^*)(((\emptyset +a)+\Lambda )+(\emptyset (((\emptyset +\Lambda )^*)(\emptyset +a)))))))))))+((((\emptyset +b)+(\emptyset (((\emptyset +\Lambda )^*)(\emptyset +b))))+((((\emptyset +a)+\Lambda )+(\emptyset (((\emptyset +\Lambda )^*)(\emptyset +a))))(((((\emptyset +a)+\Lambda )+(\emptyset (((\emptyset +\Lambda )^*)(\emptyset +a))))^*)((\emptyset +b)+(\emptyset (((\emptyset +\Lambda )^*)(\emptyset +b)))))))+((((\emptyset +b)+(\emptyset (((\emptyset +\Lambda )^*)(\emptyset +b))))+((((\emptyset +a)+\Lambda )+(\emptyset (((\emptyset +\Lambda )^*)(\emptyset +a))))(((((\emptyset +a)+\Lambda )+(\emptyset (((\emptyset +\Lambda )^*)(\emptyset +a))))^*)((\emptyset +b)+(\emptyset (((\emptyset +\Lambda )^*)(\emptyset +b)))))))(((((\emptyset +\Lambda )+((\emptyset +b)(((\emptyset +\Lambda )^*)(\emptyset +b))))+(((\emptyset +a)+((\emptyset +b)(((\emptyset +\Lambda )^*)(\emptyset +a))))(((((\emptyset +a)+\Lambda )+(\emptyset (((\emptyset +\Lambda )^*)(\emptyset +a))))^*)((\emptyset +b)+(\emptyset (((\emptyset +\Lambda )^*)(\emptyset +b)))))))^*)(((\emptyset +\Lambda )+((\emptyset +b)(((\emptyset +\Lambda )^*)(\emptyset +b))))+(((\emptyset +a)+((\emptyset +b)(((\emptyset +\Lambda )^*)(\emptyset +a))))(((((\emptyset +a)+\Lambda )+(\emptyset (((\emptyset +\Lambda )^*)(\emptyset +a))))^*)((\emptyset +b)+(\emptyset (((\emptyset +\Lambda )^*)(\emptyset +b))))))))))) $}
 \item (Hvis programmet ikke simplificerer undervejs...)
 \end{itemize}
 \end{frame}
 \begin{frame}
 \frametitle{Øvelser}
 \begin{itemize}
-\item [Martin] Opg. 4.38(b) (p. 164)\\
+\item{} [Martin] Opg. 4.38(b) (p. 164)\\
 Brug algoritmen fra Kleenes sætning del 2.
 \end{itemize}
 \end{frame}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "2_seminar"
+%%% End: 
