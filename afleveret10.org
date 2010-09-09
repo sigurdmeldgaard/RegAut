@@ -20,9 +20,10 @@
 | Kennet Rode Nielsen       |         | √         |           |           |
 | Mogens Habekost           |         | √         |           |           |
 | Jesper Davidsen           |         | √         |           |           |
-| Bobby Nielsen             |         | %         |           |           |
-| Jon Rune Jørgensen        |         | √         |           |           | 
-  
+| Bobby Nielsen             |         | √         |           |           |
+| Jon Rune Jørgensen        |         | √         |           |           |
+|---------------------------+---------+-----------+-----------+-----------|
+
 * Emails
 
 bobby@bobbyz.dk,carstensandmadsen@gmail.com,hjf@danfoss.com,jan@pernillevej.dk,jesper.davidsen@gmail.com,jonrune@gmail.com,jup@ramboll.com,kenneth.oksen@hotmail.com,kenneth@badensoe.dk,kennetn@gmail.com,moh@solar.dk,morten.odgaard@gmail.com,palle.pedersen@crisplant.com,peter@haislund.com,post@familienmunck.dk,repsej74@gmail.com,stm@cs.au.dk,tnt@it.dk,voncarlsenoglotsen@hotmail.com
