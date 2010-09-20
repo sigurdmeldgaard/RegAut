@@ -1,3 +1,30 @@
+* Eksamensplan:
+** Mandag
+Peter Haislund 8-
+Søren Olsen 9-
+Nikolaj Rahbek 10-
+Jan Sørensen 10-
+Kennet Nielsen 10-
+Arthur Newstead 10-12
+Mikkel L. Sørensen 10-12
+Kristian Munck 10-12
+Bobby Nielsen 11-13
+Jon Jørgensen 13-
+Mogens Habekost 11-
+
+** Tirsdag
+Morten Odgaard 8-
+Kenneth Badensø 9-14
+Anders Søe 9-10
+Hans J Frandsen ??
+Jesper Hansen 9-14
+Rasmus Carlsen 10-14
+Ove Thomsen 11-
+Carsten Sand Madsen 14-
+Jesper T. Pedersen 10-14
+Palle Pedersen 14-
+Troels Tolstrup 14-
+
 * Oversigt
 | Navn                      | Årskort | 1. opgave | 2. opgave | 3. opgave |
 |---------------------------+---------+-----------+-----------+-----------|
