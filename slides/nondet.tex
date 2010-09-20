@@ -37,7 +37,7 @@
   \end{column}
   \begin{column}{5cm}
 \visible<3->{
-      \includegraphics[scale=0.4]{images/2_seminar_nondet}}
+      \includegraphics[scale=0.4]{images/2_seminar_quiz_NFA}}
   \end{column}
 \end{columns}
 \end{frame}
@@ -69,7 +69,7 @@ En nondeterministisk endelig automat (NFA) er et 5-tupel $(Q, \Sigma, q_0, A, \d
 \frametitle{Eksempel på en NFA}
 \begin{columns}
 \column{9cm}Her er den grafiske representation af en automat:
-\column{3cm}\includegraphics[scale=0.3]{images/2_seminar_nondet_states}
+\column{3cm}\includegraphics[scale=0.3]{images/2_seminar_quiz_NFA}
 \end{columns}
 \begin{itemize}[<+->]
   \item Den representerer 5-tuplet:
@@ -165,7 +165,7 @@ Drawing an NFA and using the definition of $\delta^*$
 \begin{frame}
 \frametitle{Enhver NFA kan oversættes til en FA}
 \begin{center}
-  \includegraphics[scale=0.4]{images/2_seminar_convert}
+  \includegraphics[scale=0.3]{images/2_seminar_convert}
 \end{center}
 \pause
 
@@ -245,7 +245,7 @@ et 5-tupel $(Q, \Sigma, q_0, A, \delta)$ hvor
 \item $\Sigma$ er et alfabet
 \item $q_0\in Q$ er en starttilstand
 \item $A\subseteq Q$ er accepttilstande
-\item $\delta: Q\times (\Sigma \alert{\cup {\Lambda}})\rightarrow 2^Q$ er en
+\item $\delta: Q\times (\Sigma \alert{\cup \{\Lambda}\})\rightarrow 2^Q$ er en
   transitionsfunktion
 \end{itemize}
 \end{frame}
@@ -272,6 +272,7 @@ den udvidede transitionsfunktion $\delta^*: Q\times \Sigma^*\rightarrow  2^Q$ ve
     \Lambda(\bigcup_{r\in \delta^*(q, y)}\delta(r, a)) & \text{ hvis } x=y\cdot a
   \end{cases}
 \]
+\item $L(M) = \{x \in \Sigma^* | \delta^*(q_0, x)\cap A \neq \emptyset \}$
 \end{itemize}
 \end{frame}
 \begin{frame}
@@ -326,7 +327,9 @@ $
 \frametitle{Eksempel}
 \begin{itemize}[<+->]
 \item NFA-$\Lambda$:
+\begin{center}
   \includegraphics[scale=0.4]{images/2_seminar_lambdaelim}
+\end{center}
 \item Find $\delta^*(q,a)$ for alle $q\in Q$ og $a\in \Sigma$
 \item Se om $\Lambda(\{q_0\})\cap A \neq \emptyset$
 \end{itemize}
@@ -346,9 +349,10 @@ $
   \end{tabular}
   }
 \column{5cm}
-\includegraphics[scale=0.4]{images/2_seminar_lambdaelim2}
+  \includegraphics[scale=0.4]{images/2_seminar_lambdaelim2}
 \end{columns}
 \end{frame}
+
 \begin{frame}
 \frametitle{Bevis for korrekthed af $\Lambda $-eliminering}
 \begin{itemize}[<+->]
