@@ -19,10 +19,12 @@ svgfigs=\
 1_seminar_togmodel_kontrol.svg\
 1_seminar_togmodel_togFA.svg\
 1_seminar_togmodel_sikkerhed.svg\
-1_seminar_togmodel_bom.svg
+1_seminar_togmodel_bom.svg\
+2_seminar_convert.svg\
+2_seminar_quiz_NFA.svg\
+2_seminar_lambdaelim.svg
 
 dotfigs=\
-2_seminar_lambdaelim.dot\
 2_seminar_quiz_nfa_lambda.dot
 
 fromsvg=$(addprefix images/,$(svgfigs:%.svg=%.pdf))
@@ -36,7 +38,6 @@ purefigs=\
 2_seminar_basis_a.png\
 2_seminar_basis_emptyset.png\
 2_seminar_basis_lambda.png\
-2_seminar_convert.png\
 2_seminar_equivclassesodd.png\
 2_seminar_equivclasses.png\
 2_seminar_equivclassessigma.png\
@@ -56,7 +57,6 @@ purefigs=\
 2_seminar_kleene_1_times.png\
 2_seminar_kleene_2_ex.png\
 2_seminar_L42_NFA.png\
-2_seminar_lambdaelim.png\
 2_seminar_min_ex_1.png\
 2_seminar_min_ex_2.png\
 2_seminar_min_ex_3.png\
@@ -64,11 +64,8 @@ purefigs=\
 2_seminar_minimize.png\
 2_seminar_myhillfa.png\
 2_seminar_nfalambda.png\
-2_seminar_nondet.png\
-2_seminar_nondet_states.png\
 2_seminar_odd1.png\
 2_seminar_quiz_nfa_lambda.png\
-2_seminar_quiz_NFA.png\
 biblio.png\
 lunch.jpg\
 pumping.pdf\

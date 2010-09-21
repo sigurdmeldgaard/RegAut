@@ -1,19 +1,43 @@
-\documentclass{beamer}
+\documentclass[]{beamer}
 
-\usepackage{beamerthemesplit}
 \usepackage[utf8]{inputenc}
 \usepackage[danish]{babel}
 \usepackage[T1]{fontenc}
 \usepackage{graphicx}
-\usepackage{amsmath}            %
+\usepackage{amsmath}
 \usepackage{hyperref}
 \usepackage{enumerate}
 \usepackage{url}
 
+\renewcommand{\emptyset}{\varnothing}
+\newcommand{\ignore}[1]{}
+\newcommand{\f}[1]{\textcolor{red}{#1}}
+
+%\let\originaltextperiodcentered\textperiodcentered
+\renewcommand{\textperiodcentered}{\ensuremath{\cdot}}
+\newcommand{\explain}[2]{\underset{\mathclap{#2}}{\underbrace{#1}}}
+\newcommand{\putat}[3]{\begin{picture}(0,0)(0,0)\put(#1,#2){#3}\end{picture}}
+
+\def\imagetop#1{\vtop{\null\hbox{#1}}}
+
+\newenvironment<>{varblock}[2][\textwidth]{%
+  \setlength{\textwidth}{#1}
+  \begin{actionenv}#3%
+    \def\insertblocktitle{#2}%
+    \par%
+    \usebeamertemplate{block begin}}
+  {\par%
+    \usebeamertemplate{block end}%
+  \end{actionenv}}
+
+\setbeamertemplate{navigation symbols}{} 
+\setbeamertemplate{items}[circle]
+\useoutertheme{infolines} 
+\setbeamercovered{transparent=40} 
 
 \title{3. Seminar EVU RegAut}
 \author{Sigurd Meldgaard}
-\date{28. februar 2009}
+\date{1. oktober 2010}
 
 \AtBeginSection[]
 {
@@ -149,7 +173,7 @@ Sproget $pal=\{x\in \{0,1\}^* | x = reverse(x)\}$ kan beskrives af en CFG $G = (
 \begin{frame}
 \frametitle{Kontekstfri grammatik for Java}
 \begin{itemize}
-\item \url{http://www.daimi.au.dk/dRegAut/JavaBNF.html}
+\item \url{http://www.cs.au.dk/~stm/RegAut/JavaBNF.html}
 \item En tekst er et syntaktisk korrekt Java-program  
 hvis den kan deriveres af denne grammatik
 \end{itemize}
@@ -163,8 +187,8 @@ hvis den kan deriveres af denne grammatik
 \begin{frame}
   \frametitle{Øvelser}
   \begin{itemize}[<+->]
-  \item  [Martin] 6.1 (a+b+e) (p. 240)
-  \item [Martin] 6.9 (a-c) (p. 243)
+  \item{} [Martin] 6.1 (a+b+e) (p. 240)
+  \item{} [Martin] 6.9 (a-c) (p. 243)
   \end{itemize}
 \end{frame}
 
@@ -212,7 +236,7 @@ konstruere en grammatik $G=(\{S\},\Sigma, S, P)$ så $L(G) = L(r)$
   \begin{itemize}[<+->]
   \item regulære udtryk (definition, skitse af Kleenes sætning, lav konstruktion $regex \rightarrow NFA-\Lambda$ og/eller $FA\rightarrow regex$)
   \item endelige automater (definition, produktkonstruktionen, dele af Kleene's sætning)
-  \item lukkethedsegenskaber (produktkonstruktionen, pumping-lemma, homomorfier)
+  \item lukkethedsegenskaber (produktkonstruktionen, homomorfier, regulære sprog lukket under ...)
   \item nondeterministiske automater (definition af NFA'er, determinisering, lambda-eliminering)
   \item minimering af automater (Uskelnelighed, MyHill Nerode, Minimeringsalgoritmen, $L_{42}$ har $2^{42}$ ækvivalensklasser)
   \item begrænsninger af regulære sprog (pumping-lemma, eksempler på ikke-regulære sprog, kontekstfrie grammatikker, klasser af sprog)
