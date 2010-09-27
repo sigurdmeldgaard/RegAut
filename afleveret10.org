@@ -291,7 +291,7 @@ Det er forkert at sammenligne med navne som du gør i
 pynt" det er slet ikke sikkert der er nogen navne på de enkelte
 tilstande (hvis de f.eks. er lavet fra et regulært udtryk).
 
-I stedet kunne du erstatte combinedStates med med Set<State>, og så
+I stedet kunne du erstatte combinedStates med Set<State>, og så
 have et Map<Set<State>, State> som giver dig den tilstand en mængde af
 tilstande fra NFAen bliver mappet til.
 
@@ -901,7 +901,6 @@ Afleveringen er godkendt.
 Mvh. Sigurd
 
 ** Jon Rune Jørgensen
-
 *** 1. aflevering:
 Tak for afleveringen.
 
@@ -935,6 +934,22 @@ Mvh. Sigurd
 *** 2. Aflevering: 
 
 Tak for afleveringen
+
+Så vidt jeg kan se er det en helt forkert automat du bruger som input
+i dit eksempel. Det er ikke meningen at du skal bruge
+(union/kleene/concat) til at bygge automaten med, bare lave den
+explicit med tilstande transitioner og lambda-transitioner etc.
+
+Det er ok at lave determinize rekursivt når det er til
+legetøjseksempler. Java understøtter desværre ikke rekursion særlig
+godt, så man risikerer hurtigt et stack-overflow. I stedet kunne du
+bruge en "pending" liste af elementer der ikke er undersøgt endnu.
+	
+Du har et et special-tilfælde med når tempSet er tom. Den tomme mængde
+er en helt fin delmængde af NFAens tilstande. Så du behøver ikke noget
+specialtilfælde for den.
+
+Bortset fra det ser det ok ud.
 
 Afleveringen er godkendt.
 
@@ -997,3 +1012,82 @@ Tak for afleveringen
 Afleveringen er godkendt.
 
 Mvh. Sigurd
+
+** Kenneth Oksen
+
+*** 2. Aflevering: 
+
+Tak for afleveringen
+
+Der er nogle fejl med indenteringen hvis du bruger Eclipse så kan du
+markere metoden og trykke Ctrl+I så indenteres alt korrekt.
+
+Jeg synes det er grimt med
+    f.states.add(buildNewState(null));
+
+I stedet burde du skrive:
+    f.states.add(buildNewState(new Set<State>()));
+
+Men der er faktisk ingen grund til at lave "crash"-tilstanden som et
+særtilfælde, den er jo bare den tomme mængde af tilstande, som er en
+helt almindelig delmængde af NFAens tilstande.
+
+Det er forkert at sammenligne med navne som du gør når du har 
+
+    List<String> statesVisited = new LinkedList<String>();
+
+Tilstandenes navne er kun "til pynt" det er slet ikke sikkert der er
+nogen navne på de enkelte tilstande (hvis de f.eks. er lavet fra et
+regulært udtryk). Det kan også give problemer fordi et Set ikke altid
+giver elementerne i den samme rækkefølge.
+
+I stedet kunne du erstatte typen for statesVisited med
+Set<Set<State>>, og så bare bruge .contains til at se om den er set før.
+
+Det samme gælder i:
+
+private State buildNewState(Set<State> nfaStaeSet){
+    String name = "";
+    	
+    if (nfaStaeSet != null)
+        for(State s : nfaStaeSet){
+            name += s.name;
+        }
+    	
+    if(name.equals(""))
+        name = "empty";
+    	
+    return new State(name);
+}
+
+Det kunne skrives:
+
+private State buildNewState(Set<State> nfaStaeSet){
+    String name = "";
+    	
+    for(State s : nfaStaeSet){
+        name += s.name;
+    }
+    	
+    if(nfaStateSet.isEmpty())
+        name = "empty";
+    	
+    return new State(name);
+}
+
+Og endelig burde du bruge et:
+
+Map<Set<State>, State> map = new...;
+
+Så kan du bruge det til at finde den tilstand if FAen som hører til en
+mængde af tilstande i NFAen.
+
+Men grundliggende ser det ud til at du har forstået algoritmen, og det
+er jo det vigtigste.
+
+Afleveringen er mangelfuld men godkendt.
+
+Du har ikke sendt første aflevering?
+
+Mvh. Sigurd
+
