@@ -15,13 +15,14 @@ Mogens Habekost 11-
 ** Tirsdag
 Morten Odgaard 8-
 Kenneth Badensø 9-14
+Jesper Hansen 9-14
 Anders Søe 9-10
 Hans J Frandsen ??
-Jesper Hansen 9-14
 Rasmus Carlsen 10-14
 Ove Thomsen 11-
 Carsten Sand Madsen 14-
 Jesper T. Pedersen 10-14
+Kenneth Oksen
 Palle Pedersen 14-
 Troels Tolstrup 14-
 
@@ -51,6 +52,8 @@ Troels Tolstrup 14-
 | Jon Rune Jørgensen        |         | √         |           |           |
 | Hans Jørgen Frandsen      |         | √         | √         |           |
 | Kenneth Oksen             |         |           | √         |           |
+| Søren Ørding Olsen        |         | √         |           |           |
+| Ricky Lund                |         | √         |           |           |
 |---------------------------+---------+-----------+-----------+-----------|
 
 * Emails
@@ -945,5 +948,52 @@ Tak for afleveringen, det er en simpel og velfungerende løsning du har
 lavet, det ser ud til at din java-mode fungerer OK.
 
 Den er accepteret
+
+Mvh. Sigurd
+
+** Søren Ørding Olsen og Ricky Lund
+*** 1. aflevering:
+Tak for afleveringen
+
+I har ingen kommentarer i jeres kode, det kunne måske gavne nogle steder for at forklare hvad I gør.
+
+Det er ok med en rekursiv metode til denne opgave. Det er bare generelt en dårlig ide at bruge rekursivitet i java på grund af dens ret skrappe stakallokeringsbegrænsninger. (Se: http://stackoverflow.com/questions/860550/stack-overflows-from-deep-recursion-in-java ) Istedet bør man lave den samme metode iterativt, så kan man for eksempel gemme de tilstande man vil besøge senere i en "pending" datastruktur.
+
+Det ser umiddelbart ud til at I har lært Java før version 1.5 kom ud, det er en skam, der er mange nye features som I kunne bruge bla. enhanced for-statements, generics og enums, læs mere her: http://cupi2.uniandes.edu.co/web/javadoc/j2se/1.5.0/docs/relnotes/features.html#lang
+
+F.eks skriver I:
+
+           Iterator i = alphabet.symbols.iterator();
+           while(i.hasNext())
+           {
+               value = (Character) i.next();
+
+Det kan skrives
+
+            for(Character i : alphabet.symbols){
+
+I java må man aldrig skrive:
+
+                if(Operation == "Union")
+
+Strenge skal altid sammenlignes med .equals (medmindre man virkelig ved hvad man gør) det ser ud til at virke her, men en dag så kommer det tilbage og giver problemer. (læs mere på: http://devdaily.com/java/edu/qanda/pjqa00001.shtml )
+
+Men I burde i stedet bruge en enum til at skelne de forskellige tilfælde.
+
+State objekter bør ikke sammenlignes på deres navne som I gør i getState(), da man godt kan lave to State objekter med samme navn (eller tomt navn) som repræsenterer forskellige tilstande. De kan sammenlignes med objekt-referencer og man kan putte dem i en HashMap eller HashSet og så få den rigtige ud. Navnene er kun "til pynt" dvs. udskrift.
+
+For at se om et StatePair ligger i et sæt kan man lave et nyt statepair af de to gamle States og slå op med det (Se definitionen af hashValue og equals for StatePair).
+
+I har en privat feltvariabel ved navn statePairs. Hvis en FA M1 og en FA M2 bliver brugt til at lave en union: M1.union(M2), så vil M1 huske alle de tilstandspar den havde med M2. Hvis I senere laver M1.union(M3) kan de komme i karambolage. I burde i stedet have det som en lokal variabel der blev givet videre som parameter til den rekursive metode, eller i det mindste slette statePairs før I afslutter en produktkonstruktion.
+
+Afleveringen er mangelfuld men godkendt, hvis I har lyst til at lave forbedringer og at jeg skal kigge på dem så send dem endelig.
+
+Mvh. Sigurd
+
+*** 2. Aflevering: 
+
+Tak for afleveringen
+
+Afleveringen er godkendt.
 
 Mvh. Sigurd
