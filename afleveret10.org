@@ -35,12 +35,12 @@ Troels Tolstrup 14-
 | Ove Thomsen               |         | √         | √         |           |
 | Troels Tolstrup           |         | √         | √         |           |
 | Nikolaj Rahbek            |         | √         |           |           |
-| Jan Sørensen              |         | √         |           |           |
-| Kristian Hesselholt Munck |         | √         |           |           |
-| Arthur Newstead og Mikkel |         | √         |           |           |
-| Løvengren Sørensen        |         | √         |           |           |
+| Jan Sørensen              |         | √         | √         |           |
+| Kristian Hesselholt Munck |         | √         | √         |           |
+| Arthur Newstead           |         | √         | √         |           |
+| Mikkel Løvengren Sørensen |         | √         | √         |           |
 | Morten Odgaard            |         | √         | √         |           |
-| Palle Pedersen            |         | √         |           |           |
+| Palle Pedersen            |         | √         | √         |           |
 | Jesper Hansen             |         | √         | √         |           |
 | Kenneth Badensø           |         | √         | √         |           |
 | Carsten Sand Madsen       |         | √         | √         |           |
@@ -49,11 +49,11 @@ Troels Tolstrup 14-
 | Mogens Habekost           |         | √         | √         |           |
 | Jesper Davidsen           |         | √         | √         |           |
 | Bobby Nielsen             |         | √         |           |           |
-| Jon Rune Jørgensen        |         | √         |           |           |
+| Jon Rune Jørgensen        |         | √         | √         |           |
 | Hans Jørgen Frandsen      |         | √         | √         |           |
 | Kenneth Oksen             |         |           | √         |           |
 | Søren Ørding Olsen        |         | √         |           |           |
-| Ricky Lund                |         | √         |           |           |
+| Ricky Lund                |         | √         | XX        |           |
 |---------------------------+---------+-----------+-----------+-----------|
 
 * Emails
@@ -259,7 +259,66 @@ Mvh. Sigurd
 
 Tak for afleveringen
 
-Afleveringen er godkendt.
+Du har ikke sendt programmet der laver FA'en.
+
+Det billede du har sendt er forkert. Hvis man står i tilstand {1,2,4} og
+læser et 'a' skal man være i tilstand {1,2,3,4} ikke i {2,3}
+
+Det hedder transitions ikke transactions :)
+
+Det er lidt "at snyde" at lave State til et interface og så lave en ny
+implementering StateSet. Selvom det jo er det tilstandende i FA'en
+skal repræsentere, så går opgaven ud på at lave en FA som følger det
+interface som er givet.
+
+I stedet for kan du holde styr på sammenhængen mellem en mængde af
+tilstande i NFA'en og en tilstand i FA'en med et:
+
+Map<Set<State>, State> map = new ...
+
+Du kan også bruge dette map til at se om du har været ved en tilstand
+før ved at bruge .containsKey() metoden.
+
+Du behandler crash-tilstanden som et særtilfælde. Det er ikke
+nødvendigt. Det er jo bare tilstanden der repræsenterer den tomme
+mængde af tilstande i NFA'en.
+
+Du skriver:
+
+// since there's only one transition path per sybmol away from a
+// state, there is no reason to search for more transition, when
+// one has been found
+
+Måske tænker du på determiniserings-algoritmen? Det er i hvert fald
+ikke rigtigt, to tilstande i en mængde kan sagtens gå over i
+forskellige tilstande på samme symbol. FA'ens tilstand skal så gå over
+i tilstanden der repræsenterer *foreningsmængden* af disse.
+
+Jeg synes det er en rodet måde at lave en fikspunktsalgoritme på at bruge:
+
+for (int i = 0; i < tempList.size(); ++i) {
+			StateSet p = tempList.get(i);
+
+Det ligner bare et almindeligt gennemløb. Intentionen er mere tydelig hvis du skriver:
+
+while(!pending.isEmpty()){
+    Set<State> current = pending.remove(0);
+
+Men det andet virker selvf. også.
+
+Implementationerne af kleene, union, lambdaClosure er helt iorden.
+
+Afleveringen er ikke godkendt.
+
+De ting der skal til for at få den godkendt:
+
+- Programmet som laver NFALambdaen -> FA -> dot
+- Fjern brugen af StateSet
+- Fjern brugen af transitionAdded;
+- Fjern brugen af crashState
+- Lav også gerne strukturen af loopet om som jeg beskrev.
+
+Jeg tror endda koden bliver en del kortere på den måde!
 
 Mvh. Sigurd
 
@@ -935,7 +994,7 @@ Mvh. Sigurd
 
 Tak for afleveringen
 
-Så vidt jeg kan se er det en helt forkert automat du bruger som input
+Så vidt jeg kan se er det en forkert automat du bruger som input
 i dit eksempel. Det er ikke meningen at du skal bruge
 (union/kleene/concat) til at bygge automaten med, bare lave den
 explicit med tilstande transitioner og lambda-transitioner etc.
