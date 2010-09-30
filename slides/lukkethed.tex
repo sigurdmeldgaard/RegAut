@@ -27,7 +27,7 @@ Ja, det beviste vi første seminar (produktkonstruktionen)
 \end{frame}
 
 \begin{frame}
-\frametitle{Kontraponering, (Contraposition)}
+\frametitle{Kontraponering (Contraposition)}
 \begin{itemize}[<+->]
 \item Lukkethedsegenskaber kan vise at sprog \emph{ikke} er regulære.
 \item Fx: Klassen af regulære sprog er lukket under $\cap$
@@ -50,10 +50,9 @@ $P$ ikke være regulært.
 \end{cases}
    \]
 \item  h opfylder at h(xy)=h(x)h(y) og kaldes en  
-homomorfi 
+\alert{homomorfi}
 \item  Definer  $h(L) = \{ h(x) | x\in L \}$  for alle $L\subseteq\Sigma_1^*$
 \item  og $h^{-1}(L) = \{ x | h(x)\in L \}$  for alle $L\subseteq\Sigma_2^*$ 
-\item Se opg. [Martin, opg.4.46] p. 166.
 \end{itemize}
 \end{frame}
 
@@ -64,6 +63,7 @@ homomorfi
   $L\subseteq \Sigma_1^*$ er et regulært sprog, så er $h(L)$ også regulært.
 \item Hvis $h: \Sigma_1^* \rightarrow \Sigma_2^*$ er en homomorphi og
   $L\subseteq \Sigma_2^*$ er et regulært sprog, så er $h^{-1}(L)$ også regulært.
+\item Se opg. [Martin, opg.4.46] p. 166.
 \end{itemize}
 Dvs. klassen af regulære sprog er lukket både under homomorfi og
 invers homomorfi.
@@ -133,7 +133,7 @@ af regulære sprog er lukket under forening og homomorfi
     \begin{center}
     \includegraphics[scale=.40]{images/pumping}
     \end{center}
-\item Se på den første af disse tilstande, nu kan vi se at:
+\item Se på \alert{den første} af disse tilstande, nu kan vi se at:
   $\exists u,v,w\in \Sigma^*: x=uvw \wedge |uv| \leq |Q| \wedge |v|>0 \wedge
   \delta^*(q_0,u)=\delta^*(q_0,uv)$
 \end{itemize}
@@ -258,7 +258,11 @@ et givet regulært sprog er regulært
 \item L er ikke regulært, men L har pumping-egenskaben (bevis p. 185).
 (dvs. $\exists n\ldots:  \forall x\ldots:  \exists u,v,w\ldots:  \forall m\geq 0: uv^mw \in L$)
 \end{itemize}
+\begin{center}
+  \includegraphics[width=4cm]{images/pump.jpg}
+\end{center}
 \end{frame}
+
 \begin{frame}
 \frametitle{Øvelser}
 \begin{itemize}
@@ -362,8 +366,8 @@ emptiness-problemet om $L(M_3)=\emptyset$
 \begin{frame}
 \frametitle{Øvelser}
 \begin{itemize}[<+->]
-\item{}  [Martin] 5.26 (a+e) 
-\item{}  [Martin] 5.28 (a+b+d+g)
+\item{}  [Martin] 5.26 (a+e)  p. 195
+\item{}  [Martin] 5.28 (a+b+d+g) p. 196
 \end{itemize}
 \end{frame}
 

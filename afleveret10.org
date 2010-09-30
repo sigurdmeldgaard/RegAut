@@ -29,29 +29,31 @@ Troels Tolstrup 14-
 * Oversigt
 | Navn                      | Årskort | 1. opgave | 2. opgave | 3. opgave |
 |---------------------------+---------+-----------+-----------+-----------|
-| Rasmus Carlsen            |         | √         |           |           |
-| Anders Soee               |         | √         |           |           |
-| Jesper Tholstrup Pedersen |         | √         |           |           |
-| Ove Thomsen               |         | √         |           |           |
-| Troels Tolstrup           |         | √         |           |           |
+| Rasmus Carlsen            |         | √         | √         |           |
+| Anders Soee               |         | √         | √         |           |
+| Jesper Tholstrup Pedersen |         | √         | √         |           |
+| Ove Thomsen               |         | √         | √         |           |
+| Troels Tolstrup           |         | √         | √         |           |
 | Nikolaj Rahbek            |         | √         |           |           |
-| Jan Sørensen              |         | √         |           |           |
-| Kristian Hesselholt Munck |         | √         |           |           |
-| Arthur Newstead og Mikkel |         | √         |           |           |
-| Løvengren Sørensen        |         | √         |           |           |
-| Morten Odgaard            |         | √         |           |           |
-| Palle Pedersen            |         | √         |           |           |
-| Jesper Hansen             |         | √         |           |           |
-| Kenneth Badensø           |         | √         |           |           |
-| Carsten Sand Madsen       |         | √         |           |           |
-| Peter Haislund            |         | √         |           |           |
-| Kennet Rode Nielsen       |         | √         |           |           |
-| Mogens Habekost           |         | √         |           |           |
-| Jesper Davidsen           |         | √         |           |           |
+| Jan Sørensen              |         | √         | √         |           |
+| Kristian Hesselholt Munck |         | √         | √         |           |
+| Arthur Newstead           |         | √         | √         |           |
+| Mikkel Løvengren Sørensen |         | √         | √         |           |
+| Morten Odgaard            |         | √         | √         |           |
+| Palle Pedersen            |         | √         | √         |           |
+| Jesper Hansen             |         | √         | √         |           |
+| Kenneth Badensø           |         | √         | √         |           |
+| Carsten Sand Madsen       |         | √         | √         |           |
+| Peter Haislund            |         | √         | √         |           |
+| Kennet Rode Nielsen       |         | √         | √         |           |
+| Mogens Habekost           |         | √         | √         |           |
+| Jesper Davidsen           |         | √         | √         |           |
 | Bobby Nielsen             |         | √         |           |           |
-| Jon Rune Jørgensen        |         | √         |           |           |
+| Jon Rune Jørgensen        |         | √         | √         |           |
+| Hans Jørgen Frandsen      |         | √         | √         |           |
+| Kenneth Oksen             |         |           | √         |           |
 | Søren Ørding Olsen        |         | √         |           |           |
-| Ricky Lund                |         | √         |           |           |
+| Ricky Lund                |         | √         | XX        |           |
 |---------------------------+---------+-----------+-----------+-----------|
 
 * Emails
@@ -92,6 +94,83 @@ Afleveringen er godkendt.
 
 Mvh. Sigurd
 
+*** 2. Aflevering: 
+
+Tak for afleveringen
+
+Du har lavet den forkerte automat (dvs. figur b istedet for c), men du
+har (så vidt jeg kan se) lavet den rigtigt, så det gør ikke noget.
+
+Det er ok at lave determinize rekursivt når det er til
+legetøjseksempler. Java understøtter desværre ikke rekursion særlig
+godt, så man risikerer hurtigt et stack-overflow. I stedet kunne du
+bruge en "pending" liste af elementer der ikke er undersøgt endnu.
+
+numberStrToNewState er lidt fishy. Det er ikke nødvendigt at lave
+strenge ud af tilstandende for at huske hvilke der er besøgt. Du kunne
+bare lave en
+
+Set<Set<State>> visited
+
+og så bruge
+
+visited.contains(states)
+
+Fordi to Set<State> er .equals hvis de indeholder de samme elementer.
+
+Derudover er koden let at følge og ser fin ud.
+
+NFALambda.kleene():
+
+Der er nogle fejl med indenteringen hvis du bruger Eclipse så kan du
+markere metoden og trykke Ctrl+I så indenteres alt korrekt.
+
+Det havde været nemmere at klone input-automaten i stedet for at
+gennemløbe alting explicit.
+
+Så metoden kunne skrives som (pseudokode)
+
+NFALambda result = this.clone();
+State newInit = new State();
+result.addLambda(newInit, result.initial);
+result.initial = newInit;
+result.states.add(newInit);
+for i in result.accept{
+    addLambda(i, newInit);
+}
+result.accept = New Set(array.toList(newInit));
+
+Men det ser ud til at virke fint.
+
+NFALambda.union():
+
+Indenteringen igen, bortset fra det ser det ok ud, her er det sværere
+at klone fordi der er to automater som udgangspunkt, men hvis du havde taget udgangspunkt i 	
+
+public NFALambda concat(NFALambda f) throws IllegalArgumentException {
+		if (!alphabet.equals(f.alphabet))
+			throw new IllegalArgumentException("alphabets are different");
+		NFALambda f1 = (NFALambda) this.clone();
+		NFALambda f2 = (NFALambda) f.clone();
+		NFALambda n = new NFALambda();
+		n.alphabet = alphabet;
+		n.states.addAll(f1.states);
+		n.states.addAll(f2.states);
+		n.accept.addAll(f2.accept);
+		n.initial = f1.initial;
+		n.transitions.putAll(f1.transitions);
+		n.transitions.putAll(f2.transitions);
+		for (State s : f1.accept)
+			n.addLambda(s, f2.initial);
+		return n;
+	}
+
+Havde du nok kunne slippe med noget kortere kode.
+
+Afleveringen er godkendt.
+
+Mvh. Sigurd
+
 ** Anders Soee, Jesper Tholstrup Pedersen, Ove Thomsen, Troels Tolstrup
 *** 1. aflevering:
 
@@ -104,6 +183,18 @@ mængdeoperationer på dem.
 Selvom jeg opfordrede jer til at arbejde i grupper synes jeg dog I bør
 splitte op og lave to grupper med to i hver, ellers risikerer I at
 ikke alle er med i processen.
+
+Afleveringen er godkendt.
+
+Mvh. Sigurd
+
+*** 2. Aflevering:
+
+Tak for afleveringen
+
+Det eneste problem jeg har med koden er StateSet klassen. Den er
+overflødig, I kunne bare bruge Set<State> den implementerer hashcode
+korrekt (så længe State gør det) bortset fra det, fin og letforståelig kode.
 
 Afleveringen er godkendt.
 
@@ -164,6 +255,73 @@ Afleveringen er godkendt.
 
 Mvh. Sigurd
 
+*** 2. Aflevering: 
+
+Tak for afleveringen
+
+Du har ikke sendt programmet der laver FA'en.
+
+Det billede du har sendt er forkert. Hvis man står i tilstand {1,2,4} og
+læser et 'a' skal man være i tilstand {1,2,3,4} ikke i {2,3}
+
+Det hedder transitions ikke transactions :)
+
+Det er lidt "at snyde" at lave State til et interface og så lave en ny
+implementering StateSet. Selvom det jo er det tilstandende i FA'en
+skal repræsentere, så går opgaven ud på at lave en FA som følger det
+interface som er givet.
+
+I stedet for kan du holde styr på sammenhængen mellem en mængde af
+tilstande i NFA'en og en tilstand i FA'en med et:
+
+Map<Set<State>, State> map = new ...
+
+Du kan også bruge dette map til at se om du har været ved en tilstand
+før ved at bruge .containsKey() metoden.
+
+Du behandler crash-tilstanden som et særtilfælde. Det er ikke
+nødvendigt. Det er jo bare tilstanden der repræsenterer den tomme
+mængde af tilstande i NFA'en.
+
+Du skriver:
+
+// since there's only one transition path per sybmol away from a
+// state, there is no reason to search for more transition, when
+// one has been found
+
+Måske tænker du på determiniserings-algoritmen? Det er i hvert fald
+ikke rigtigt, to tilstande i en mængde kan sagtens gå over i
+forskellige tilstande på samme symbol. FA'ens tilstand skal så gå over
+i tilstanden der repræsenterer *foreningsmængden* af disse.
+
+Jeg synes det er en rodet måde at lave en fikspunktsalgoritme på at bruge:
+
+for (int i = 0; i < tempList.size(); ++i) {
+			StateSet p = tempList.get(i);
+
+Det ligner bare et almindeligt gennemløb. Intentionen er mere tydelig hvis du skriver:
+
+while(!pending.isEmpty()){
+    Set<State> current = pending.remove(0);
+
+Men det andet virker selvf. også.
+
+Implementationerne af kleene, union, lambdaClosure er helt iorden.
+
+Afleveringen er ikke godkendt.
+
+De ting der skal til for at få den godkendt:
+
+- Programmet som laver NFALambdaen -> FA -> dot
+- Fjern brugen af StateSet
+- Fjern brugen af transitionAdded;
+- Fjern brugen af crashState
+- Lav også gerne strukturen af loopet om som jeg beskrev.
+
+Jeg tror endda koden bliver en del kortere på den måde!
+
+Mvh. Sigurd
+
 ** Jan Sørensen
 *** 1. aflevering:
 Generelt ser koden fin ud, og er let at følge.
@@ -178,10 +336,87 @@ Alfeveringen er godkendt
 
 Mvh. Sigurd
 
+*** 2. Aflevering: 
+
+Tak for afleveringen
+
+Det er ok at lave determinize rekursivt når det er til
+legetøjseksempler. Java understøtter desværre ikke rekursion særlig
+godt, så man risikerer hurtigt et stack-overflow. I stedet kunne I
+bruge en "pending" liste af elementer der ikke er undersøgt endnu.
+
+Det er forkert at sammenligne med navne som du gør i
+"if(s2.name.equals(cs.nState.name))" tilstandenes navne er kun "til
+pynt" det er slet ikke sikkert der er nogen navne på de enkelte
+tilstande (hvis de f.eks. er lavet fra et regulært udtryk).
+
+I stedet kunne du erstatte combinedStates med Set<State>, og så
+have et Map<Set<State>, State> som giver dig den tilstand en mængde af
+tilstande fra NFAen bliver mappet til.
+
+Du skriver:
+
+if (!sn.isEmpty()) // we did get to a new state by symbol "al"
+....
+} // else goto crash state.
+
+Men har ikke nogen else.
+
+Der er heller ingen crash-tilstand i din M2.png (dvs. automaten er
+slet ikke en velformet FA)
+
+I stedet for at lave crash-tilstanden som et specialtilfælde kan du
+bare tænke på den som den delmængde af den oprindelige NFAs tilstande
+som er den tomme mængde, du behøver ikke tage noget specielt hensyn
+til den.
+
+I din NFALambda.union metode er der en copy-paste fejl:
+
+        n.accept.addAll(f2.accept);
+        n.accept.addAll(f2.accept);
+
+Skulle have været:
+
+        n.accept.addAll(f1.accept);
+        n.accept.addAll(f2.accept);
+
+I NFALambda.kleene glemmer du at lave den nye initial-tilstand til en
+accept-tilstand.
+
+Afleveringen er mangelfuld med godkendt.
+
+Mvh. Sigurd
+
 ** Kristian Hesselholt Munck, Arthur Newstead og Mikkel Løvengren Sørensen
 *** 1. aflevering:
 
 Koden ser fin og forståelig ud.
+
+Afleveringen er godkendt.
+
+Mvh. Sigurd
+
+*** 2. Aflevering: 
+
+Tak for afleveringen
+
+Det er ok at lave determinize rekursivt når det er til
+legetøjseksempler. Java understøtter desværre ikke rekursion særlig
+godt, så man risikerer hurtigt et stack-overflow. I stedet kunne I
+bruge en "pending" liste af elementer der ikke er undersøgt endnu.
+
+jeres "private Map<Set<State>, State> map" burde nok være en lokal
+variabel som bliver givet med som parameter til subSetConstruction,
+ellers får i problemer hvis determinize kaldes 2 gange med samme
+automat (ellers skal I i hvert fald huske at slette den).
+
+Endelig så er "findStateFromStateSet" overflødig. I kunne bare bruge:
+
+map.get(stateSet)
+
+Det ville også være meget hurtigere.
+
+Derudover ser koden fin ud, og er let at følge.
 
 Afleveringen er godkendt.
 
@@ -214,6 +449,18 @@ Afleveringen er godkendt
 
 Mvh. Sigurd
 
+*** 2. Aflevering: 
+
+Tak for afleveringen
+
+Koden ser rigtig fin ud. Det kunne måske være mere elegant at lave
+transitions samtidigt med at man laver de nye tilstande, men det er
+sådan set ikke noget problem at lave det i to faser.
+
+Afleveringen er godkendt.
+
+Mvh. Sigurd
+
 ** Palle Pedersen
 *** 1. aflevering:
 
@@ -234,6 +481,16 @@ fx. combinedDestination) men det er ok.
 Test-koden ser fin ud.
 
 Afleveringen er godkendt
+
+Mvh. Sigurd
+
+*** 2. Aflevering: 
+
+Tak for afleveringen
+
+Eksemplarisk løsning, ingen yderligere kommentarer.
+
+Afleveringen er godkendt.
 
 Mvh. Sigurd
 
@@ -276,6 +533,36 @@ Afleveringen er godkendt
 
 Mvh. Sigurd
 
+*** 2. Aflevering: 
+
+Tak for afleveringen
+
+NFALambda:
+
+Snedigt trick at basere returautomaten i NFALambda.kleene på makeEmptyString.
+
+Determinize:
+
+Der er nogle fejl med indenteringen hvis I bruger Eclipse så kan I
+markere metoden og trykke Ctrl+I så indenteres alt korrekt.
+
+Det er problematisk at bruge strenge til at genkende en mængde af
+tilstande med. I arbejder udenom javas måde at bruge hashkoder på. I
+er heldige at State's hashkode altid vil være unik, ellers ville koden
+ikke altid være korrekt. Hvorfor I konverterer den til en streng
+forstår jeg slet ikke.
+
+I stedet kunne I bruge:
+
+HashMap<Set<State>, State> nfaTOFATable = new HashMap<Set<State>, State>();
+HashMap<State, Set<State>> processedNFAWorkingSets = new HashMap<State, Set<State>>();
+
+Men det ser ud som om I har forstået grundideen i algoritmen, og det er det vigtigste.
+
+Afleveringen er godkendt.
+
+Mvh. Sigurd
+
 ** Carsten Sand Madsen 
 *** 1. aflevering:
 Din accepts er langt mere indviklet end nødvendigt:
@@ -309,6 +596,38 @@ Ellers fin og forståelig kode.
 Afleveringen er godkendt.
 
 Mvh Sigurd
+
+*** 2. Aflevering: 
+
+Tak for afleveringen
+
+God og veldokumenteret kode. Det virker tydeligt at du har fortået algoritmen.
+
+I stedet for:
+
+        	Set<Set<State>> newPending = new HashSet<Set<State>>();
+                
+                ...
+
+    		pending.addAll(newPending);
+    		// ... except for those which have already been fully resolved.
+        	pending.removeAll(resolved);
+
+Ville jeg nok have skrevet:
+
+if(!resolved.contains(setOut)){
+    pending.add(setOut);
+}
+
+Men det andet er ok.
+
+Og så er der fault-tilstanden. Den "laver sig selv", den tomme mængde
+af tilstande er jo også en tilstand, så skal du bare tage hensyn til
+den i createStateName, det ville gøre koden en anelse kortere og simplere.
+
+Afleveringen er godkendt.
+
+Mvh. Sigurd
 
 ** Peter Haislund
 *** 1. aflevering:
@@ -365,6 +684,19 @@ Afleveringen er godkendt men mangelfuld.
 
 Mvh. Sigurd
 
+*** 2. Aflevering: 
+
+Tak for afleveringen
+
+Koden ser fin ud - det er dog ikke nødvendigt at lave StateSet
+klassen. Man kan fint klare sig med et Set<State> og så bruge et
+Map<Set<State>, State> til at forbinde delmængder i NFA'en med
+tilstande i FAen. Derudover er det fin kode.
+
+Afleveringen er godkendt.
+
+Mvh. Sigurd
+
 ** Kennet Rode Nielsen
 *** 1. aflevering:
 
@@ -386,7 +718,23 @@ Afleveringen er godkendt.
 
 Mvh. Sigurd
 
-** Mogens Habekost
+*** 2. Aflevering: 
+
+Tak for afleveringen
+
+Fin implementations af "powertools"
+
+Determinize er eksemplarisk kodet, dog er indenteringen lidt rodet.
+Hvis du bruger Eclipse kan du markere koden og trykke Ctr+I for at
+indentere korrekt.
+
+union og kleene ser også ok ud.
+
+Afleveringen er godkendt.
+
+Mvh. Sigurd
+
+** Mogens Habekost, Hans Jørgen Frandsen
 *** 1. aflevering:
 
 Fin kode, det ser ud til at du har forstået produktkonstruktionen, jeg
@@ -403,6 +751,108 @@ Afleveringen er godkendt.
 
 Mvh. Sigurd
 
+*** 2. Aflevering: 
+
+Tak for afleveringen
+
+I stedet for 
+
+    	Set<Set> states =new HashSet<Set>();
+    	Set<Set> newStates =new HashSet<Set>();
+
+Kunne I skrive
+
+    	Set<Set<State>> states = new HashSet<Set<State>>();
+        Set<Set<State>> newStates = new HashSet<Set<State>>();
+
+Koden her:
+
+    	for(Character c : alphabet.symbols)
+    	{
+    		newStates.add(delta(initial, c));	
+    	}
+    	
+    	while(!states.containsAll(newStates))
+    	{
+    		states.addAll(newStates);	
+
+    	   	newStates = new HashSet<Set>();
+        	for(Character c : alphabet.symbols)
+        	{
+        		for(Set<State> s: states)
+        		{
+            		Set<State> sTemp = new HashSet<State>();
+        			for(State state : s)	
+        				sTemp.addAll(delta(state,c));
+        			
+        			newStates.add(sTemp);
+        		}
+        	}
+    	}
+    	
+Er lidt forvirrende, det er ikke helt klart for mig hvad I gør, men
+det ser faktisk ud til at I finder alle opnåelige delmængder, ved at
+blive ved med at udvide dem der er i forvejen med et enkelt
+delta-skridt, og se om der er fundet nogen nye. Det virker men er
+meget langsomt fordi I besøger alle mængder af tilstande hver eneste
+gang. Det er det samme som er forskellen I mellem slidesne
+fra 2. seminar p. 87 og p. 88
+
+I stedet for at starte med 
+
+    	for(Character c : alphabet.symbols)
+    	{
+    		newStates.add(delta(initial, c));	
+    	}
+
+Skulle I starte med:
+
+Set<State> initialSet = new HashSet<State>();
+initialSet.add(initial);
+newStates.add(initialSet)
+
+Så starter i med "basistilfældet" og behøver ikke tilføje
+initial-tilstanden senere.
+
+Her er pseudokode til hvordan metoden kunne se ud, hvis I har lyst til
+at prøve igen:
+
+result = new FA()
+result.initial = new State()
+
+// Will contain mappings from sets of original states in the NFA
+// to the states that represents those sets in the Fa
+Map<<Set<State>, State> map = new ...
+List<Set<State>> pending = new ...
+
+map.put(set containing only initial, result.initial);
+
+pending.add(Set containing only initial)
+
+while(!pending.empty()){
+   Set<State> current = pending.remove(0);
+   if current contains an acceptstate {
+       result.accept.add(map.get(current))
+   }
+   for(Character c in alphabet){
+       Set<State> union = new ...
+       for(State s in current){
+           union.addAll(delta(s,c))
+       }
+       if(map.get(union) == null){ // Not visited yet
+           pending.add(union) // We will get back to this later
+           map.put(union, new State())
+       }
+       result.transitions.put(new SymbolStatePair(c, current), union);
+    }
+}
+
+return FA;
+
+Afleveringen er mangelfuld men godkendt.
+
+Mvh. Sigurd
+
 ** Jesper Davidsen
 *** 1. aflevering:
 
@@ -416,6 +866,25 @@ Derudover rigtig god kode der er let at følge.
 Afleveringen er godkendt.
 
 Mvh. Sigurd
+*** 2. Aflevering: 
+
+Tak for afleveringen
+
+I stedet for:
+
+    Set<State> workSet = workList.iterator().next();
+    workList.remove(workSet);
+
+Kunne du bruge:
+
+    Set<State> workSet = workList.remove(0);
+
+Derudover eksemplarisk kode (også NFALambda.kleene() og NFALambda.union()).
+
+Afleveringen er godkendt.
+
+Mvh. Sigurd
+
 ** Bobby Nielsen
 *** 1. aflevering:
 Jeg tror måske jeg har fået en forkert version af din fil FA.java? For det ser ikke ud til at virke.
@@ -482,8 +951,15 @@ Afleveringen er ikke godkendt, du kan genaflevere i løbet af de næste par uger
 
 Mvh. Sigurd
 
-** Jon Rune Jørgensen
+*** 2. Aflevering: 
 
+Tak for afleveringen
+
+Afleveringen er godkendt.
+
+Mvh. Sigurd
+
+** Jon Rune Jørgensen
 *** 1. aflevering:
 Tak for afleveringen.
 
@@ -512,6 +988,40 @@ Derudover ser det fint ud.
 
 Afleveringen er godkendt.
 
+
+Mvh. Sigurd
+*** 2. Aflevering: 
+
+Tak for afleveringen
+
+Så vidt jeg kan se er det en forkert automat du bruger som input
+i dit eksempel. Det er ikke meningen at du skal bruge
+(union/kleene/concat) til at bygge automaten med, bare lave den
+explicit med tilstande transitioner og lambda-transitioner etc.
+
+Det er ok at lave determinize rekursivt når det er til
+legetøjseksempler. Java understøtter desværre ikke rekursion særlig
+godt, så man risikerer hurtigt et stack-overflow. I stedet kunne du
+bruge en "pending" liste af elementer der ikke er undersøgt endnu.
+	
+Du har et et special-tilfælde med når tempSet er tom. Den tomme mængde
+er en helt fin delmængde af NFAens tilstande. Så du behøver ikke noget
+specialtilfælde for den.
+
+Bortset fra det ser det ok ud.
+
+Afleveringen er godkendt.
+
+Mvh. Sigurd
+
+** Hans Jørgen Frandsen
+*** 1. aflevering
+Hej Hans Jørgen
+
+Tak for afleveringen, det er en simpel og velfungerende løsning du har
+lavet, det ser ud til at din java-mode fungerer OK.
+
+Den er accepteret
 
 Mvh. Sigurd
 
@@ -553,3 +1063,90 @@ I har en privat feltvariabel ved navn statePairs. Hvis en FA M1 og en FA M2 bliv
 Afleveringen er mangelfuld men godkendt, hvis I har lyst til at lave forbedringer og at jeg skal kigge på dem så send dem endelig.
 
 Mvh. Sigurd
+
+*** 2. Aflevering: 
+
+Tak for afleveringen
+
+Afleveringen er godkendt.
+
+Mvh. Sigurd
+
+** Kenneth Oksen
+
+*** 2. Aflevering: 
+
+Tak for afleveringen
+
+Der er nogle fejl med indenteringen hvis du bruger Eclipse så kan du
+markere metoden og trykke Ctrl+I så indenteres alt korrekt.
+
+Jeg synes det er grimt med
+    f.states.add(buildNewState(null));
+
+I stedet burde du skrive:
+    f.states.add(buildNewState(new Set<State>()));
+
+Men der er faktisk ingen grund til at lave "crash"-tilstanden som et
+særtilfælde, den er jo bare den tomme mængde af tilstande, som er en
+helt almindelig delmængde af NFAens tilstande.
+
+Det er forkert at sammenligne med navne som du gør når du har 
+
+    List<String> statesVisited = new LinkedList<String>();
+
+Tilstandenes navne er kun "til pynt" det er slet ikke sikkert der er
+nogen navne på de enkelte tilstande (hvis de f.eks. er lavet fra et
+regulært udtryk). Det kan også give problemer fordi et Set ikke altid
+giver elementerne i den samme rækkefølge.
+
+I stedet kunne du erstatte typen for statesVisited med
+Set<Set<State>>, og så bare bruge .contains til at se om den er set før.
+
+Det samme gælder i:
+
+private State buildNewState(Set<State> nfaStaeSet){
+    String name = "";
+    	
+    if (nfaStaeSet != null)
+        for(State s : nfaStaeSet){
+            name += s.name;
+        }
+    	
+    if(name.equals(""))
+        name = "empty";
+    	
+    return new State(name);
+}
+
+Det kunne skrives:
+
+private State buildNewState(Set<State> nfaStaeSet){
+    String name = "";
+    	
+    for(State s : nfaStaeSet){
+        name += s.name;
+    }
+    	
+    if(nfaStateSet.isEmpty())
+        name = "empty";
+    	
+    return new State(name);
+}
+
+Og endelig burde du bruge et:
+
+Map<Set<State>, State> map = new...;
+
+Så kan du bruge det til at finde den tilstand if FAen som hører til en
+mængde af tilstande i NFAen.
+
+Men grundliggende ser det ud til at du har forstået algoritmen, og det
+er jo det vigtigste.
+
+Afleveringen er mangelfuld men godkendt.
+
+Du har ikke sendt første aflevering?
+
+Mvh. Sigurd
+
