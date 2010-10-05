@@ -48,11 +48,11 @@ Troels Tolstrup 14-
 | Kennet Rode Nielsen       |         | √         | √         |           |
 | Mogens Habekost           |         | √         | √         |           |
 | Jesper Davidsen           |         | √         | √         |           |
-| Bobby Nielsen             |         | √         |           |           |
+| Bobby Nielsen             |         | √         | √         |           |
 | Jon Rune Jørgensen        |         | √         | √         |           |
 | Hans Jørgen Frandsen      |         | √         | √         |           |
-| Kenneth Oksen             |         |           | √         |           |
-| Søren Ørding Olsen        |         | √         |           |           |
+| Kenneth Oksen             |         | √         | √         |           |
+| Søren Ørding Olsen        |         | √         | √         |           |
 | Ricky Lund                |         | √         | XX        |           |
 |---------------------------+---------+-----------+-----------+-----------|
 
@@ -1073,7 +1073,7 @@ Afleveringen er godkendt.
 Mvh. Sigurd
 
 ** Kenneth Oksen
-
+   
 *** 2. Aflevering: 
 
 Tak for afleveringen
