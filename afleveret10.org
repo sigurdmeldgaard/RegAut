@@ -29,30 +29,30 @@ Troels Tolstrup 14-
 * Oversigt
 | Navn                      | Årskort | 1. opgave | 2. opgave | 3. opgave |
 |---------------------------+---------+-----------+-----------+-----------|
-| Rasmus Carlsen            |         | √         | √         |           |
-| Anders Soee               |         | √         | √         |           |
-| Jesper Tholstrup Pedersen |         | √         | √         |           |
-| Ove Thomsen               |         | √         | √         |           |
-| Troels Tolstrup           |         | √         | √         |           |
-| Nikolaj Rahbek            |         | √         |           |           |
-| Jan Sørensen              |         | √         | √         |           |
-| Kristian Hesselholt Munck |         | √         | √         |           |
-| Arthur Newstead           |         | √         | √         |           |
-| Mikkel Løvengren Sørensen |         | √         | √         |           |
-| Morten Odgaard            |         | √         | √         |           |
-| Palle Pedersen            |         | √         | √         |           |
-| Jesper Hansen             |         | √         | √         |           |
-| Kenneth Badensø           |         | √         | √         |           |
-| Carsten Sand Madsen       |         | √         | √         |           |
-| Peter Haislund            |         | √         | √         |           |
-| Kennet Rode Nielsen       |         | √         | √         |           |
-| Mogens Habekost           |         | √         | √         |           |
-| Jesper Davidsen           |         | √         | √         |           |
-| Bobby Nielsen             |         | √         | √         |           |
-| Jon Rune Jørgensen        |         | √         | √         |           |
-| Hans Jørgen Frandsen      |         | √         | √         |           |
-| Kenneth Oksen             |         | √         | √         |           |
-| Søren Ørding Olsen        |         | √         | √         |           |
+| Rasmus Carlsen            |         | √         | √         | ??        |
+| Anders Soee               |         | √         | √         | √         |
+| Jesper Tholstrup Pedersen |         | √         | √         | √         |
+| Ove Thomsen               |         | √         | √         | ()        |
+| Troels Tolstrup           |         | √         | √         | ??        |
+| Nikolaj Rahbek            |         | √         |           | √         |
+| Jan Sørensen              |         | √         | √         | √         |
+| Kristian Hesselholt Munck |         | √         | √         | √         |
+| Arthur Newstead           |         | √         | √         | √         |
+| Mikkel Løvengren Sørensen |         | √         | √         | √         |
+| Morten Odgaard            |         | √         | √         | √         |
+| Palle Pedersen            |         | √         | √         | --        |
+| Jesper Hansen             |         | √         | √         | ()        |
+| Kenneth Badensø           |         | √         | √         | ()        |
+| Carsten Sand Madsen       |         | √         | √         | √         |
+| Peter Haislund            |         | √         | √         | √         |
+| Kennet Rode Nielsen       |         | √         | √         | √         |
+| Mogens Habekost           |         | √         | √         | ??        |
+| Jesper Davidsen           |         | √         | √         | ??        |
+| Bobby Nielsen             |         | √         | √         | √         |
+| Jon Rune Jørgensen        |         | √         | √         | √         |
+| Hans Jørgen Frandsen      |         | √         | √         | √         |
+| Kenneth Oksen             |         | √         | √         | √         |
+| Søren Ørding Olsen        |         | √         | √         | ??        |
 | Ricky Lund                |         | √         | XX        |           |
 |---------------------------+---------+-----------+-----------+-----------|
 
